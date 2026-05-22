@@ -1938,3 +1938,133 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
     color: #ddd;
     font-style: italic;
 }
+
+/* ===== Minecraft inline item icons in chat ===== */
+.mc-item-inline {
+    width: 22px;
+    height: 22px;
+    image-rendering: pixelated;
+    vertical-align: middle;
+    display: inline-block;
+    margin: 0 2px;
+}
+
+/* ===== Crafting grid in chat ===== */
+.craft-chat-wrapper {
+    background: rgba(0,0,0,0.3);
+    border: 3px solid #5a5a5a;
+    padding: 10px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
+}
+
+.craft-chat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 40px);
+    grid-template-rows: repeat(3, 40px);
+    gap: 3px;
+    background: #3a3a3a;
+    border: 3px solid #4a4a4a;
+    padding: 4px;
+    flex-shrink: 0;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.5);
+}
+
+.craft-chat-cell {
+    width: 40px;
+    height: 40px;
+    background: #4a4a4a;
+    border: 2px solid #3a3a3a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: inset 2px 2px 0 rgba(255,255,255,0.08), inset -2px -2px 0 rgba(0,0,0,0.3);
+}
+
+.craft-chat-cell img {
+    width: 28px;
+    height: 28px;
+    image-rendering: pixelated;
+    object-fit: contain;
+}
+
+.craft-chat-arrow {
+    font-size: 1.5rem;
+    color: var(--gold);
+    text-shadow: 2px 2px 0 var(--gold-dark);
+    flex-shrink: 0;
+}
+
+.craft-chat-output {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+.craft-chat-output-cell {
+    width: 48px;
+    height: 48px;
+    background: #4a4a4a;
+    border: 3px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: inset 2px 2px 0 rgba(255,255,255,0.15), inset -2px -2px 0 rgba(0,0,0,0.3);
+}
+
+.craft-chat-output-cell img {
+    width: 36px;
+    height: 36px;
+    image-rendering: pixelated;
+    object-fit: contain;
+}
+
+.craft-chat-count {
+    position: absolute;
+    bottom: 1px;
+    right: 3px;
+    font-size: 0.6rem;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.craft-chat-label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-align: center;
+}
+
+.craft-chat-empty-cell {
+    width: 40px;
+    height: 40px;
+}
+
+.craft-chat-cell .cell-tip {
+    display: none;
+}
+
+.craft-chat-cell:hover .cell-tip {
+    display: block;
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a1a1a;
+    border: 2px solid var(--gold);
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    white-space: nowrap;
+    z-index: 100;
+    pointer-events: none;
+    font-family: 'Monocraft', 'Courier New', monospace;
+}

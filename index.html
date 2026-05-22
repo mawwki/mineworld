@@ -2346,14 +2346,287 @@
     const chatInput = document.getElementById('chat-input');
     const chatSendBtn = document.getElementById('chat-send');
     let chatHistory = [
-        { role: 'system', content: 'Ты дружелюбный ИИ-помощник по игре Minecraft. Отвечай на русском языке, кратко и по делу. Помогай с крафтами, мобами, биомами, строительством, редстоуном и всем что связано с Minecraft.' }
+        { role: 'system', content: 'Ты дружелюбный ИИ-помощник по игре Minecraft. Отвечай на русском языке, кратко и по делу. Помогай с крафтами, мобами, биомами, строительством, редстоуном и всем что связано с Minecraft.\n\nВАЖНО: Ты можешь использовать специальный синтаксис для показа предметов Minecraft:\n1. Чтобы показать иконку предмета в тексте, используй [название_предмета]. Например: "Возьми [алмаз] и [палка]".\n2. Чтобы показать сетку крафта 3×3, используй тег <craft> с JSON. Формат: <craft>{"r":"Название результата","c":1,"g":["item1","item2","item3","item4","item5","item6","item7","item8","item9"]}</craft>\n   Где g — это 9 ячеек сетки 3×3 (строка за строкой). Пустая строка "" = пустая ячейка.\n   Например, для каменной кирки:\n   <craft>{"r":"Каменная кирка","c":1,"g":["булыжник","булыжник","булыжник","","палка","","","палка",""]}</craft>\n   Для верстака:\n   <craft>{"r":"Верстак","c":1,"g":["доски","доски","","доски","доски","","","",""]}</craft>\n   Для алмазного меча:\n   <craft>{"r":"Алмазный меч","c":1,"g":["","алмаз","","","алмаз","","","палка",""]}</craft>\n\nИспользуй [предмет] при упоминании предметов в тексте и <craft> когда показываешь рецепт крафта.' }
     ];
+
+    // ===== Minecraft предметы (для кастомных смайликов и крафтов) =====
+    const MC_ITEMS = {
+        'алмаз': 'https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png',
+        'алмазы': 'https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png',
+        'алмазный': 'https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png',
+        'палка': 'https://minecraft.wiki/images/thumb/Stick_JE2_BE2.png/150px-Stick_JE2_BE2.png',
+        'палки': 'https://minecraft.wiki/images/thumb/Stick_JE2_BE2.png/150px-Stick_JE2_BE2.png',
+        'доски': 'https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png',
+        'доска': 'https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png',
+        'дубовые доски': 'https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png',
+        'железный слиток': 'https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png',
+        'железо': 'https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png',
+        'железные слитки': 'https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png',
+        'золотой слиток': 'https://minecraft.wiki/images/thumb/Gold_Ingot_JE2_BE2.png/150px-Gold_Ingot_JE2_BE2.png',
+        'золото': 'https://minecraft.wiki/images/thumb/Gold_Ingot_JE2_BE2.png/150px-Gold_Ingot_JE2_BE2.png',
+        'золотые слитки': 'https://minecraft.wiki/images/thumb/Gold_Ingot_JE2_BE2.png/150px-Gold_Ingot_JE2_BE2.png',
+        'булыжник': 'https://minecraft.wiki/images/thumb/Cobblestone_JE5_BE3.png/160px-Cobblestone_JE5_BE3.png',
+        'булыжники': 'https://minecraft.wiki/images/thumb/Cobblestone_JE5_BE3.png/160px-Cobblestone_JE5_BE3.png',
+        'обсидиан': 'https://minecraft.wiki/images/thumb/Obsidian_JE2_BE2.png/150px-Obsidian_JE2_BE2.png',
+        'книга': 'https://minecraft.wiki/images/thumb/Book_JE2_BE2.png/150px-Book_JE2_BE2.png',
+        'книги': 'https://minecraft.wiki/images/thumb/Book_JE2_BE2.png/150px-Book_JE2_BE2.png',
+        'нить': 'https://minecraft.wiki/images/thumb/String_JE2_BE2.png/150px-String_JE2_BE2.png',
+        'нити': 'https://minecraft.wiki/images/thumb/String_JE2_BE2.png/150px-String_JE2_BE2.png',
+        'уголь': 'https://minecraft.wiki/images/thumb/Coal_JE4_BE3.png/150px-Coal_JE4_BE3.png',
+        'древесный уголь': 'https://minecraft.wiki/images/thumb/Charcoal_JE2_BE2.png/150px-Charcoal_JE2_BE2.png',
+        'порох': 'https://minecraft.wiki/images/thumb/Gunpowder_JE2_BE2.png/150px-Gunpowder_JE2_BE2.png',
+        'песок': 'https://minecraft.wiki/images/thumb/Sand_JE5_BE3.png/160px-Sand_JE5_BE3.png',
+        'красный песок': 'https://minecraft.wiki/images/thumb/Red_Sand_JE2_BE2.png/160px-Red_Sand_JE2_BE2.png',
+        'шерсть': 'https://minecraft.wiki/images/thumb/White_Wool_JE2_BE2.png/160px-White_Wool_JE2_BE2.png',
+        'белая шерсть': 'https://minecraft.wiki/images/thumb/White_Wool_JE2_BE2.png/160px-White_Wool_JE2_BE2.png',
+        'молоко': 'https://minecraft.wiki/images/thumb/Milk_Bucket_JE2_BE2.png/150px-Milk_Bucket_JE2_BE2.png',
+        'ведро молока': 'https://minecraft.wiki/images/thumb/Milk_Bucket_JE2_BE2.png/150px-Milk_Bucket_JE2_BE2.png',
+        'сахар': 'https://minecraft.wiki/images/thumb/Sugar_JE2_BE2.png/150px-Sugar_JE2_BE2.png',
+        'яйцо': 'https://minecraft.wiki/images/thumb/Egg_JE2_BE2.png/150px-Egg_JE2_BE2.png',
+        'яйца': 'https://minecraft.wiki/images/thumb/Egg_JE2_BE2.png/150px-Egg_JE2_BE2.png',
+        'пшеница': 'https://minecraft.wiki/images/thumb/Wheat_JE2_BE2.png/150px-Wheat_JE2_BE2.png',
+        'око края': 'https://minecraft.wiki/images/thumb/Eye_of_Ender_JE2_BE2.png/150px-Eye_of_Ender_JE2_BE2.png',
+        'железный блок': 'https://minecraft.wiki/images/thumb/Block_of_Iron_JE3_BE3.png/150px-Block_of_Iron_JE3_BE3.png',
+        'золотой блок': 'https://minecraft.wiki/images/thumb/Block_of_Gold_JE3_BE3.png/150px-Block_of_Gold_JE3_BE3.png',
+        'алмазный блок': 'https://minecraft.wiki/images/thumb/Block_of_Diamond_JE4_BE3.png/150px-Block_of_Diamond_JE4_BE3.png',
+        'каменная кирка': 'https://minecraft.wiki/images/thumb/Stone_Pickaxe_JE3_BE3.png/150px-Stone_Pickaxe_JE3_BE3.png',
+        'каменные кирки': 'https://minecraft.wiki/images/thumb/Stone_Pickaxe_JE3_BE3.png/150px-Stone_Pickaxe_JE3_BE3.png',
+        'деревянная кирка': 'https://minecraft.wiki/images/thumb/Wooden_Pickaxe_JE3_BE3.png/150px-Wooden_Pickaxe_JE3_BE3.png',
+        'железная кирка': 'https://minecraft.wiki/images/thumb/Iron_Pickaxe_JE3_BE3.png/150px-Iron_Pickaxe_JE3_BE3.png',
+        'золотая кирка': 'https://minecraft.wiki/images/thumb/Golden_Pickaxe_JE3_BE3.png/150px-Golden_Pickaxe_JE3_BE3.png',
+        'алмазная кирка': 'https://minecraft.wiki/images/thumb/Diamond_Pickaxe_JE3_BE3.png/150px-Diamond_Pickaxe_JE3_BE3.png',
+        'незеритовая кирка': 'https://minecraft.wiki/images/thumb/Netherite_Pickaxe_JE2_BE2.png/150px-Netherite_Pickaxe_JE2_BE2.png',
+        'алмазный меч': 'https://minecraft.wiki/images/thumb/Diamond_Sword_JE3_BE3.png/150px-Diamond_Sword_JE3_BE3.png',
+        'деревянный меч': 'https://minecraft.wiki/images/thumb/Wooden_Sword_JE3_BE3.png/150px-Wooden_Sword_JE3_BE3.png',
+        'каменный меч': 'https://minecraft.wiki/images/thumb/Stone_Sword_JE3_BE3.png/150px-Stone_Sword_JE3_BE3.png',
+        'железный меч': 'https://minecraft.wiki/images/thumb/Iron_Sword_JE3_BE3.png/150px-Iron_Sword_JE3_BE3.png',
+        'золотой меч': 'https://minecraft.wiki/images/thumb/Golden_Sword_JE3_BE3.png/150px-Golden_Sword_JE3_BE3.png',
+        'незеритовый меч': 'https://minecraft.wiki/images/thumb/Netherite_Sword_JE2_BE2.png/150px-Netherite_Sword_JE2_BE2.png',
+        'щит': 'https://minecraft.wiki/images/thumb/Shield_JE2_BE1.png/160px-Shield_JE2_BE1.png',
+        'лук': 'https://minecraft.wiki/images/thumb/Bow_JE2_BE2.png/150px-Bow_JE2_BE2.png',
+        'арбалет': 'https://minecraft.wiki/images/thumb/Crossbow_JE3_BE2.png/150px-Crossbow_JE3_BE2.png',
+        'стрела': 'https://minecraft.wiki/images/thumb/Arrow_JE3_BE3.png/150px-Arrow_JE3_BE3.png',
+        'стрелы': 'https://minecraft.wiki/images/thumb/Arrow_JE3_BE3.png/150px-Arrow_JE3_BE3.png',
+        'факел': 'https://minecraft.wiki/images/thumb/Torch.gif/160px-Torch.gif',
+        'факелы': 'https://minecraft.wiki/images/thumb/Torch.gif/160px-Torch.gif',
+        'верстак': 'https://minecraft.wiki/images/thumb/Crafting_Table_JE2_BE2.png/150px-Crafting_Table_JE2_BE2.png',
+        'печь': 'https://minecraft.wiki/images/thumb/Furnace_JE3_BE2.png/150px-Furnace_JE3_BE2.png',
+        'тнт': 'https://minecraft.wiki/images/thumb/TNT_JE3_BE2.png/150px-TNT_JE3_BE2.png',
+        'динамит': 'https://minecraft.wiki/images/thumb/TNT_JE3_BE2.png/150px-TNT_JE3_BE2.png',
+        'кремень': 'https://minecraft.wiki/images/thumb/Flint_JE2_BE2.png/150px-Flint_JE2_BE2.png',
+        'огниво': 'https://minecraft.wiki/images/thumb/Flint_and_Steel_JE4_BE2.png/150px-Flint_and_Steel_JE4_BE2.png',
+        'ведро': 'https://minecraft.wiki/images/thumb/Bucket_JE2_BE2.png/150px-Bucket_JE2_BE2.png',
+        'ведро воды': 'https://minecraft.wiki/images/thumb/Water_Bucket_JE3_BE2.png/150px-Water_Bucket_JE3_BE2.png',
+        'ведро лавы': 'https://minecraft.wiki/images/thumb/Lava_Bucket_JE2_BE2.png/150px-Lava_Bucket_JE2_BE2.png',
+        'компас': 'https://minecraft.wiki/images/thumb/Compass_JE3_BE2.png/150px-Compass_JE3_BE2.png',
+        'часы': 'https://minecraft.wiki/images/thumb/Clock_JE2_BE2.png/150px-Clock_JE2_BE2.png',
+        'карта': 'https://minecraft.wiki/images/thumb/Map_JE3_BE2.png/150px-Map_JE3_BE2.png',
+        'ножницы': 'https://minecraft.wiki/images/thumb/Shears_JE2_BE2.png/150px-Shears_JE2_BE2.png',
+        'лопата': 'https://minecraft.wiki/images/thumb/Iron_Shovel_JE3_BE3.png/150px-Iron_Shovel_JE3_BE3.png',
+        'топор': 'https://minecraft.wiki/images/thumb/Iron_Axe_JE3_BE3.png/150px-Iron_Axe_JE3_BE3.png',
+        'мотыга': 'https://minecraft.wiki/images/thumb/Iron_Hoe_JE3_BE3.png/150px-Iron_Hoe_JE3_BE3.png',
+        'удочка': 'https://minecraft.wiki/images/thumb/Fishing_Rod_JE3_BE3.png/150px-Fishing_Rod_JE3_BE3.png',
+        'кровать': 'https://minecraft.wiki/images/thumb/White_Bed_JE2_BE2.png/150px-White_Bed_JE2_BE2.png',
+        'красная пыль': 'https://minecraft.wiki/images/thumb/Redstone_Dust_JE3_BE3.png/150px-Redstone_Dust_JE3_BE3.png',
+        'редстоун': 'https://minecraft.wiki/images/thumb/Redstone_Dust_JE3_BE3.png/150px-Redstone_Dust_JE3_BE3.png',
+        'редстоуновый факел': 'https://minecraft.wiki/images/thumb/Redstone_Torch_JE2_BE2.png/150px-Redstone_Torch_JE2_BE2.png',
+        'редстоуновый повторитель': 'https://minecraft.wiki/images/thumb/Redstone_Repeater_JE2_BE2.png/150px-Redstone_Repeater_JE2_BE2.png',
+        'редстоуновый компаратор': 'https://minecraft.wiki/images/thumb/Redstone_Comparator_JE2_BE2.png/150px-Redstone_Comparator_JE2_BE2.png',
+        'нажимная плита': 'https://minecraft.wiki/images/thumb/Stone_Pressure_Plate_JE2_BE2.png/150px-Stone_Pressure_Plate_JE2_BE2.png',
+        'рычаг': 'https://minecraft.wiki/images/thumb/Lever_JE2_BE2.png/150px-Lever_JE2_BE2.png',
+        'кнопка': 'https://minecraft.wiki/images/thumb/Stone_Button_JE2_BE2.png/150px-Stone_Button_JE2_BE2.png',
+        'дверь': 'https://minecraft.wiki/images/thumb/Oak_Door_JE3_BE2.png/150px-Oak_Door_JE3_BE2.png',
+        'люк': 'https://minecraft.wiki/images/thumb/Oak_Trapdoor_JE3_BE2.png/150px-Oak_Trapdoor_JE3_BE2.png',
+        'калитка': 'https://minecraft.wiki/images/thumb/Oak_Fence_Gate_JE2_BE2.png/150px-Oak_Fence_Gate_JE2_BE2.png',
+        'забор': 'https://minecraft.wiki/images/thumb/Oak_Fence_JE3_BE2.png/150px-Oak_Fence_JE3_BE2.png',
+        'плита': 'https://minecraft.wiki/images/thumb/Stone_Slab_JE3_BE3.png/150px-Stone_Slab_JE3_BE3.png',
+        'ступеньки': 'https://minecraft.wiki/images/thumb/Stone_Stairs_JE4_BE2.png/150px-Stone_Stairs_JE4_BE2.png',
+        'стекло': 'https://minecraft.wiki/images/thumb/Glass_JE3_BE2.png/150px-Glass_JE3_BE2.png',
+        'стеклянная панель': 'https://minecraft.wiki/images/thumb/Glass_Pane_JE3_BE2.png/150px-Glass_Pane_JE3_BE2.png',
+        'каменный кирпич': 'https://minecraft.wiki/images/thumb/Stone_Bricks_JE4_BE3.png/150px-Stone_Bricks_JE4_BE3.png',
+        'замшелый булыжник': 'https://minecraft.wiki/images/thumb/Mossy_Cobblestone_JE4_BE3.png/150px-Mossy_Cobblestone_JE4_BE3.png',
+        'адский кирпич': 'https://minecraft.wiki/images/thumb/Nether_Brick_JE2_BE2.png/150px-Nether_Brick_JE2_BE2.png',
+        'незерит': 'https://minecraft.wiki/images/thumb/Netherite_Ingot_JE2_BE2.png/150px-Netherite_Ingot_JE2_BE2.png',
+        'незеритовая броня': 'https://minecraft.wiki/images/thumb/Netherite_Chestplate_JE2_BE2.png/150px-Netherite_Chestplate_JE2_BE2.png',
+        'алмазная броня': 'https://minecraft.wiki/images/thumb/Diamond_Chestplate_JE2_BE2.png/150px-Diamond_Chestplate_JE2_BE2.png',
+        'алмазный шлем': 'https://minecraft.wiki/images/thumb/Diamond_Helmet_JE2_BE2.png/150px-Diamond_Helmet_JE2_BE2.png',
+        'алмазный нагрудник': 'https://minecraft.wiki/images/thumb/Diamond_Chestplate_JE2_BE2.png/150px-Diamond_Chestplate_JE2_BE2.png',
+        'алмазные поножи': 'https://minecraft.wiki/images/thumb/Diamond_Leggings_JE2_BE2.png/150px-Diamond_Leggings_JE2_BE2.png',
+        'алмазные ботинки': 'https://minecraft.wiki/images/thumb/Diamond_Boots_JE2_BE2.png/150px-Diamond_Boots_JE2_BE2.png',
+        'железный шлем': 'https://minecraft.wiki/images/thumb/Iron_Helmet_JE2_BE2.png/150px-Iron_Helmet_JE2_BE2.png',
+        'железный нагрудник': 'https://minecraft.wiki/images/thumb/Iron_Chestplate_JE2_BE2.png/150px-Iron_Chestplate_JE2_BE2.png',
+        'железные поножи': 'https://minecraft.wiki/images/thumb/Iron_Leggings_JE2_BE2.png/150px-Iron_Leggings_JE2_BE2.png',
+        'железные ботинки': 'https://minecraft.wiki/images/thumb/Iron_Boots_JE2_BE2.png/150px-Iron_Boots_JE2_BE2.png',
+        'золотой шлем': 'https://minecraft.wiki/images/thumb/Golden_Helmet_JE2_BE2.png/150px-Golden_Helmet_JE2_BE2.png',
+        'золотой нагрудник': 'https://minecraft.wiki/images/thumb/Golden_Chestplate_JE2_BE2.png/150px-Golden_Chestplate_JE2_BE2.png',
+        'золотые поножи': 'https://minecraft.wiki/images/thumb/Golden_Leggings_JE2_BE2.png/150px-Golden_Leggings_JE2_BE2.png',
+        'золотые ботинки': 'https://minecraft.wiki/images/thumb/Golden_Boots_JE2_BE2.png/150px-Golden_Boots_JE2_BE2.png',
+        'кожаный шлем': 'https://minecraft.wiki/images/thumb/Leather_Helmet_JE2_BE2.png/150px-Leather_Helmet_JE2_BE2.png',
+        'кожаный нагрудник': 'https://minecraft.wiki/images/thumb/Leather_Chestplate_JE2_BE2.png/150px-Leather_Chestplate_JE2_BE2.png',
+        'кожаные поножи': 'https://minecraft.wiki/images/thumb/Leather_Leggings_JE2_BE2.png/150px-Leather_Leggings_JE2_BE2.png',
+        'кожаные ботинки': 'https://minecraft.wiki/images/thumb/Leather_Boots_JE2_BE2.png/150px-Leather_Boots_JE2_BE2.png',
+        'кожа': 'https://minecraft.wiki/images/thumb/Leather_JE2_BE2.png/150px-Leather_JE2_BE2.png',
+        'кость': 'https://minecraft.wiki/images/thumb/Bone_JE3_BE3.png/150px-Bone_JE3_BE3.png',
+        'костная мука': 'https://minecraft.wiki/images/thumb/Bone_Meal_JE2_BE2.png/150px-Bone_Meal_JE2_BE2.png',
+        'перо': 'https://minecraft.wiki/images/thumb/Feather_JE2_BE2.png/150px-Feather_JE2_BE2.png',
+        'перья': 'https://minecraft.wiki/images/thumb/Feather_JE2_BE2.png/150px-Feather_JE2_BE2.png',
+        'книжная полка': 'https://minecraft.wiki/images/thumb/Bookshelf_JE4_BE2.png/150px-Bookshelf_JE4_BE2.png',
+        'полка с книгами': 'https://minecraft.wiki/images/thumb/Bookshelf_JE4_BE2.png/150px-Bookshelf_JE4_BE2.png',
+        'стол зачарований': 'https://minecraft.wiki/images/thumb/Enchanting_Table.gif/160px-Enchanting_Table.gif',
+        'наковальня': 'https://minecraft.wiki/images/thumb/Anvil_%28N%29_JE3.png/160px-Anvil_%28N%29_JE3.png',
+        'минекарт': 'https://minecraft.wiki/images/thumb/Minecart_JE4_BE2.png/150px-Minecart_JE4_BE2.png',
+        'вагонетка': 'https://minecraft.wiki/images/thumb/Minecart_JE4_BE2.png/150px-Minecart_JE4_BE2.png',
+        'рельсы': 'https://minecraft.wiki/images/thumb/Rail_JE2_BE2.png/150px-Rail_JE2_BE2.png',
+        'редкие рельсы': 'https://minecraft.wiki/images/thumb/Powered_Rail_JE2_BE2.png/150px-Powered_Rail_JE2_BE2.png',
+        'судук': 'https://minecraft.wiki/images/thumb/Chest_JE2_BE2.png/150px-Chest_JE2_BE2.png',
+        'сундук': 'https://minecraft.wiki/images/thumb/Chest_JE2_BE2.png/150px-Chest_JE2_BE2.png',
+        'большой сундук': 'https://minecraft.wiki/images/thumb/Chest_JE2_BE2.png/150px-Chest_JE2_BE2.png',
+        'сундук энда': 'https://minecraft.wiki/images/thumb/Ender_Chest_JE2_BE2.gif/160px-Ender_Chest_JE2_BE2.gif',
+        'торт': 'https://minecraft.wiki/images/thumb/Cake_JE4.png/160px-Cake_JE4.png',
+        'хлеб': 'https://minecraft.wiki/images/thumb/Bread_JE2_BE2.png/150px-Bread_JE2_BE2.png',
+        'железный голем': 'https://minecraft.wiki/images/thumb/Iron_Golem_JE2_BE2.png/150px-Iron_Golem_JE2_BE2.png',
+        'снежный голем': 'https://minecraft.wiki/images/thumb/Snow_Golem_JE2_BE2.png/150px-Snow_Golem_JE2_BE2.png',
+        'тыква': 'https://minecraft.wiki/images/thumb/Pumpkin_JE3_BE2.png/150px-Pumpkin_JE3_BE2.png',
+        'светящаяся тыква': 'https://minecraft.wiki/images/thumb/Jack_o%27Lantern_JE3_BE2.png/150px-Jack_o%27Lantern_JE3_BE2.png',
+        'арбуз': 'https://minecraft.wiki/images/thumb/Melon_Slice_JE2_BE2.png/150px-Melon_Slice_JE2_BE2.png',
+        'блок арбуза': 'https://minecraft.wiki/images/thumb/Melon_JE3_BE2.png/150px-Melon_JE3_BE2.png',
+        'кактус': 'https://minecraft.wiki/images/thumb/Cactus_JE4_BE3.png/150px-Cactus_JE4_BE3.png',
+        'тростник': 'https://minecraft.wiki/images/thumb/Sugar_Cane_JE3_BE3.png/150px-Sugar_Cane_JE3_BE3.png',
+        'бумага': 'https://minecraft.wiki/images/thumb/Paper_JE2_BE2.png/150px-Paper_JE2_BE2.png',
+        'изумруд': 'https://minecraft.wiki/images/thumb/Emerald_JE3_BE3.png/150px-Emerald_JE3_BE3.png',
+        'изумруды': 'https://minecraft.wiki/images/thumb/Emerald_JE3_BE3.png/150px-Emerald_JE3_BE3.png',
+        'слизь': 'https://minecraft.wiki/images/thumb/Slimeball_JE2_BE2.png/150px-Slimeball_JE2_BE2.png',
+        'красный гриб': 'https://minecraft.wiki/images/thumb/Red_Mushroom_JE2_BE2.png/150px-Red_Mushroom_JE2_BE2.png',
+        'коричневый гриб': 'https://minecraft.wiki/images/thumb/Brown_Mushroom_JE2_BE2.png/150px-Brown_Mushroom_JE2_BE2.png',
+        'гриб': 'https://minecraft.wiki/images/thumb/Red_Mushroom_JE2_BE2.png/150px-Red_Mushroom_JE2_BE2.png',
+        'цветок': 'https://minecraft.wiki/images/thumb/Poppy_JE2_BE2.png/150px-Poppy_JE2_BE2.png',
+        'мак': 'https://minecraft.wiki/images/thumb/Poppy_JE2_BE2.png/150px-Poppy_JE2_BE2.png',
+        'садовая земля': 'https://minecraft.wiki/images/thumb/Farmland_JE2_BE2.png/150px-Farmland_JE2_BE2.png',
+        'вода': 'https://minecraft.wiki/images/thumb/Water_Bucket_JE3_BE2.png/150px-Water_Bucket_JE3_BE2.png',
+        'лава': 'https://minecraft.wiki/images/thumb/Lava_Bucket_JE2_BE2.png/150px-Lava_Bucket_JE2_BE2.png',
+        'железная руда': 'https://minecraft.wiki/images/thumb/Iron_Ore_JE4_BE3.png/150px-Iron_Ore_JE4_BE3.png',
+        'золотая руда': 'https://minecraft.wiki/images/thumb/Gold_Ore_JE4_BE3.png/150px-Gold_Ore_JE4_BE3.png',
+        'алмазная руда': 'https://minecraft.wiki/images/thumb/Diamond_Ore_JE4_BE3.png/150px-Diamond_Ore_JE4_BE3.png',
+        'угольная руда': 'https://minecraft.wiki/images/thumb/Coal_Ore_JE4_BE3.png/150px-Coal_Ore_JE4_BE3.png',
+        'красная руда': 'https://minecraft.wiki/images/thumb/Redstone_Ore_JE4_BE3.png/150px-Redstone_Ore_JE4_BE3.png',
+        'лазурит': 'https://minecraft.wiki/images/thumb/Lapis_Lazuli_JE2_BE2.png/150px-Lapis_Lazuli_JE2_BE2.png',
+        'лазуритовая руда': 'https://minecraft.wiki/images/thumb/Lapis_Lazuli_Ore_JE3_BE3.png/150px-Lapis_Lazuli_Ore_JE3_BE3.png',
+        'изумрудная руда': 'https://minecraft.wiki/images/thumb/Emerald_Ore_JE3_BE3.png/150px-Emerald_Ore_JE3_BE3.png',
+        'незеритовая руда': 'https://minecraft.wiki/images/thumb/Nether_Quartz_Ore_JE2_BE2.png/150px-Nether_Quartz_Ore_JE2_BE2.png',
+        'кварц': 'https://minecraft.wiki/images/thumb/Nether_Quartz_JE2_BE2.png/150px-Nether_Quartz_JE2_BE2.png',
+        'огненный стержень': 'https://minecraft.wiki/images/thumb/Blaze_Rod_JE2_BE2.png/150px-Blaze_Rod_JE2_BE2.png',
+        'огненный порошок': 'https://minecraft.wiki/images/thumb/Blaze_Powder_JE2_BE2.png/150px-Blaze_Powder_JE2_BE2.png',
+        'жемчуг края': 'https://minecraft.wiki/images/thumb/Ender_Pearl_JE2_BE2.png/150px-Ender_Pearl_JE2_BE2.png',
+        'слеза гаста': 'https://minecraft.wiki/images/thumb/Ghast_Tear_JE2_BE2.png/150px-Ghast_Tear_JE2_BE2.png',
+        'золотая морковь': 'https://minecraft.wiki/images/thumb/Golden_Carrot_JE2_BE2.png/150px-Golden_Carrot_JE2_BE2.png',
+        'золотое яблоко': 'https://minecraft.wiki/images/thumb/Golden_Apple_JE2_BE2.png/150px-Golden_Apple_JE2_BE2.png',
+        'зачарованное золотое яблоко': 'https://minecraft.wiki/images/thumb/Enchanted_Golden_Apple_JE2_BE2.png/150px-Enchanted_Golden_Apple_JE2_BE2.png',
+        'морковь': 'https://minecraft.wiki/images/thumb/Carrot_JE2_BE2.png/150px-Carrot_JE2_BE2.png',
+        'картофель': 'https://minecraft.wiki/images/thumb/Potato_JE2_BE2.png/150px-Potato_JE2_BE2.png',
+        'печёный картофель': 'https://minecraft.wiki/images/thumb/Baked_Potato_JE2_BE2.png/150px-Baked_Potato_JE2_BE2.png',
+        'стейк': 'https://minecraft.wiki/images/thumb/Cooked_Beef_JE2_BE2.png/150px-Cooked_Beef_JE2_BE2.png',
+        'жареная свинина': 'https://minecraft.wiki/images/thumb/Cooked_Porkchop_JE2_BE2.png/150px-Cooked_Porkchop_JE2_BE2.png',
+        'рыба': 'https://minecraft.wiki/images/thumb/Cod_JE3_BE2.png/150px-Cod_JE3_BE2.png',
+        'жареная рыба': 'https://minecraft.wiki/images/thumb/Cooked_Cod_JE2_BE2.png/150px-Cooked_Cod_JE2_BE2.png',
+        'яблоко': 'https://minecraft.wiki/images/thumb/Apple_JE2_BE2.png/150px-Apple_JE2_BE2.png',
+        'алмазная лопата': 'https://minecraft.wiki/images/thumb/Diamond_Shovel_JE3_BE3.png/150px-Diamond_Shovel_JE3_BE3.png',
+        'алмазный топор': 'https://minecraft.wiki/images/thumb/Diamond_Axe_JE3_BE3.png/150px-Diamond_Axe_JE3_BE3.png',
+        'алмазная мотыга': 'https://minecraft.wiki/images/thumb/Diamond_Hoe_JE3_BE3.png/150px-Diamond_Hoe_JE3_BE3.png',
+        'железная лопата': 'https://minecraft.wiki/images/thumb/Iron_Shovel_JE3_BE3.png/150px-Iron_Shovel_JE3_BE3.png',
+        'железный топор': 'https://minecraft.wiki/images/thumb/Iron_Axe_JE3_BE3.png/150px-Iron_Axe_JE3_BE3.png',
+        'железная мотыга': 'https://minecraft.wiki/images/thumb/Iron_Hoe_JE3_BE3.png/150px-Iron_Hoe_JE3_BE3.png'
+    };
+
+    function findItem(name) {
+        if (!name) return null;
+        const key = name.toLowerCase().trim();
+        if (MC_ITEMS[key]) return MC_ITEMS[key];
+        for (const [k, v] of Object.entries(MC_ITEMS)) {
+            if (k.includes(key) || key.includes(k)) return v;
+        }
+        return null;
+    }
+
+    function renderCraftGrid(jsonStr) {
+        try {
+            const data = JSON.parse(jsonStr);
+            const grid = data.g || [];
+            const resultName = data.r || '';
+            const count = data.c || 1;
+            let html = '<div class="craft-chat-wrapper">';
+            html += '<div class="craft-chat-grid">';
+            for (let i = 0; i < 9; i++) {
+                const itemName = grid[i] || '';
+                const imgUrl = findItem(itemName);
+                if (imgUrl) {
+                    html += `<div class="craft-chat-cell" title="${itemName}"><img src="${imgUrl}" alt="${itemName}" loading="lazy"><span class="cell-tip">${itemName}</span></div>`;
+                } else if (itemName) {
+                    html += `<div class="craft-chat-cell" title="${itemName}"><span style="color:#888;font-size:0.6rem">${itemName}</span></div>`;
+                } else {
+                    html += '<div class="craft-chat-cell"></div>';
+                }
+            }
+            html += '</div>';
+            html += '<div class="craft-chat-arrow">➜</div>';
+            html += '<div class="craft-chat-output">';
+            const resultImg = findItem(resultName);
+            if (resultImg) {
+                html += `<div class="craft-chat-output-cell"><img src="${resultImg}" alt="${resultName}"><span class="craft-chat-count">x${count}</span></div>`;
+            } else {
+                html += `<div class="craft-chat-output-cell"><span style="color:var(--gold);font-size:0.8rem">${resultName}</span><span class="craft-chat-count">x${count}</span></div>`;
+            }
+            html += `<div class="craft-chat-label">${resultName}</div>`;
+            html += '</div></div>';
+            return html;
+        } catch (e) {
+            return '<div style="color:red;font-size:0.8rem">[Ошибка крафта]</div>';
+        }
+    }
+
+    function processInlineItems(text) {
+        return text.replace(/\[([^\]]+)\]/g, (match, itemName) => {
+            const imgUrl = findItem(itemName);
+            if (imgUrl) {
+                return `<img class="mc-item-inline" src="${imgUrl}" alt="${itemName}" title="${itemName}">`;
+            }
+            return match;
+        });
+    }
+
+    function processChatContent(text) {
+        let parts = text.split(/<craft>([\s\S]*?)<\/craft>/g);
+        let html = '';
+        for (let i = 0; i < parts.length; i++) {
+            if (i % 2 === 0) {
+                html += processInlineItems(parts[i]);
+            } else {
+                html += renderCraftGrid(parts[i]);
+            }
+        }
+        return html;
+    }
     let isSending = false;
 
     function addMessage(text, type) {
         const msg = document.createElement('div');
         msg.className = `chat-message ${type}-message`;
-        const content = type === 'ai' ? marked.parse(text) : escapeHtml(text);
+        let content;
+        if (type === 'ai') {
+            const parts = text.split(/(<craft>[\s\S]*?<\/craft>)/g);
+            let html = '';
+            for (const part of parts) {
+                if (part.startsWith('<craft>')) {
+                    const json = part.replace('<craft>', '').replace('</craft>', '').trim();
+                    html += renderCraftGrid(json);
+                } else {
+                    html += marked.parse(part);
+                }
+            }
+            content = html.replace(/<p>/g, '').replace(/<\/p>/g, '<br>');
+            content = processInlineItems(content);
+        } else {
+            content = processInlineItems(escapeHtml(text));
+        }
         const iconSvg = type === 'user'
             ? '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
             : '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>';
