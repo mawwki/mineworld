@@ -1770,12 +1770,21 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
 .msg-text {
     background: #2a2a2a;
     border: 2px solid #3a3a3a;
-    padding: 10px 14px;
+    padding: 10px 14px 16px;
     font-size: 0.85rem;
     line-height: 1.5;
     color: var(--text-dim);
     box-shadow: 3px 3px 0 var(--shadow);
     word-break: break-word;
+    position: relative;
+}
+
+.msg-footer {
+    position: absolute;
+    bottom: 3px;
+    right: 6px;
+    font-size: 0.55rem;
+    color: #444;
 }
 
 .user-message .msg-text {
