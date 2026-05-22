@@ -694,6 +694,19 @@ audio {
     text-decoration: underline;
 }
 
+.footer {
+    position: relative;
+}
+
+.footer-version {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    color: #555;
+    font-size: 0.75rem;
+    font-family: 'Monocraft', 'Courier New', monospace;
+}
+
 .hero-card {
     background: rgba(30, 30, 30, 0.9);
     border: 4px solid var(--gold);
