@@ -3045,16 +3045,29 @@
     };
 
     function makeItemUrl(enName) {
-        const p = enName.toLowerCase().replace(/\s+/g, '_').replace(/'/g, '').replace(/-/g, '_');
+        const toReg = {};
+        toReg['redstone_dust'] = 'redstone'; toReg['nether_quartz'] = 'quartz';
+        toReg['slimeball'] = 'slime_ball'; toReg['eye_of_ender'] = 'ender_eye';
+        toReg['minecart_with_chest'] = 'chest_minecart'; toReg['minecart_with_hopper'] = 'hopper_minecart';
+        toReg['minecart_with_furnace'] = 'furnace_minecart'; toReg['minecart_with_tnt'] = 'tnt_minecart';
+        toReg['empty_map'] = 'map'; toReg['book_and_quill'] = 'writable_book';
+        toReg['redstone_repeater'] = 'repeater'; toReg['redstone_comparator'] = 'comparator';
+        toReg['lapis_lazuli_ore'] = 'lapis_ore'; toReg['block_of_lapis_lazuli'] = 'lapis_block';
+        toReg['block_of_redstone'] = 'redstone_block'; toReg['turtle_shell'] = 'turtle_helmet';
+        toReg['white_carpet'] = 'white_wool'; toReg['enchanted_golden_apple'] = 'golden_apple';
+        toReg['snow_block'] = 'snow'; toReg['vines'] = 'vine'; toReg['bamboo_shoot'] = 'bamboo';
+        toReg['crossbow'] = 'crossbow_standby'; toReg['stripped_oak_wood'] = 'stripped_oak_log';
+
+        const pEng = enName.toLowerCase().replace(/\s+/g, '_').replace(/'/g, '').replace(/-/g, '_');
+        const p = toReg[pEng] || pEng;
         const base = 'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.4/assets/minecraft/textures/';
         const urls = [base + 'item/' + p + '.png', base + 'block/' + p + '.png'];
-        if (p.startsWith('block_of_')) {
-            const r = p.substring(9) + '_block';
+        if (p !== pEng) { urls.push(base + 'item/' + pEng + '.png', base + 'block/' + pEng + '.png'); }
+        if (pEng.startsWith('block_of_')) {
+            const r = pEng.substring(9) + '_block';
             urls.push(base + 'item/' + r + '.png', base + 'block/' + r + '.png');
         }
-        for (const f of ['front', 'side', 'top', 'bottom']) {
-            urls.push(base + 'block/' + p + '_' + f + '.png');
-        }
+        for (const f of ['front', 'side', 'top', 'bottom']) { urls.push(base + 'block/' + pEng + '_' + f + '.png'); }
         return urls;
     }
 
