@@ -1753,16 +1753,6 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
     height: 20px;
 }
 
-.loading-spinner {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    border: 2px solid #444;
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
 @keyframes spin {
     to { transform: rotate(360deg); }
 }

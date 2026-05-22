@@ -1840,7 +1840,7 @@
         <p>© 2026 Minecraft World | Неофициальный фанатский сайт</p>
         <p>🌲 Добывай блоки, строй замки, побеждай дракона! 🐉</p>
         <p><a onclick="scrollToTop()">Вверх ▲</a></p>
-        <span class="footer-version">v0.9.5</span>
+        <span class="footer-version">v0.9.6</span>
     </div>
 </div>
 
@@ -3176,23 +3176,6 @@
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    function addLoadingMessage() {
-        const msg = document.createElement('div');
-        msg.className = 'chat-message ai-message';
-        msg.id = 'chat-loading';
-        msg.innerHTML = `
-            <span class="msg-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg></span>
-            <div class="msg-text"><span class="loading-spinner"></span></div>
-        `;
-        chatMessages.appendChild(msg);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    function removeLoadingMessage() {
-        const loading = document.getElementById('chat-loading');
-        if (loading) loading.remove();
-    }
-
     function escapeHtml(text) {
         const div = document.createElement('div');
         div.textContent = text;
@@ -3207,10 +3190,8 @@
         // === /model command ===
         const modelMatch = text.match(/^\/model\s+(.+)/);
         if (modelMatch) {
-            const newModel = modelMatch[1].trim();
-            CHAT_MODEL = newModel;
-            lastModel = newModel;
-            addMessage(`Модель сменена на: ${newModel}`, 'ai');
+            CHAT_MODEL = modelMatch[1].trim();
+            addMessage(`Модель сменена на: ${CHAT_MODEL}`, 'ai');
             isSending = false;
             chatInput.focus();
             return;
@@ -3220,8 +3201,21 @@
         chatInput.value = '';
         chatInput.style.height = 'auto';
         chatHistory.push({ role: 'user', content: text });
-        addLoadingMessage();
+
+        // Create streaming message placeholder
+        const msg = document.createElement('div');
+        msg.className = 'chat-message ai-message';
+        const iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>';
+        msg.innerHTML = `
+            <span class="msg-icon">${iconSvg}</span>
+            <div class="msg-text"></div>
+        `;
+        chatMessages.appendChild(msg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        const contentDiv = msg.querySelector('.msg-text');
         const startTime = performance.now();
+        let fullContent = '';
+
         try {
             const res = await fetch(CHAT_ENDPOINT, {
                 method: 'POST',
@@ -3234,29 +3228,70 @@
                 body: JSON.stringify({
                     model: CHAT_MODEL,
                     messages: chatHistory,
-                    max_tokens: 256
+                    max_tokens: 256,
+                    stream: true
                 })
             });
             if (!res.ok) {
                 const errText = await res.text().catch(() => '');
-                removeLoadingMessage();
                 let detail;
                 try { const j = JSON.parse(errText); detail = j?.error?.message || j?.error?.code || JSON.stringify(j); } catch (e) { detail = errText || `Код ${res.status}`; }
                 throw new Error(detail);
             }
-            const data = await res.json();
-            removeLoadingMessage();
-            const elapsed = ((performance.now() - startTime) / 1000).toFixed(1);
-            const reply = data?.choices?.[0]?.message?.content || 'Не удалось получить ответ';
-            chatHistory.push({ role: 'assistant', content: reply });
-            if (chatHistory.length > 20) {
-                chatHistory = [chatHistory[0], ...chatHistory.slice(-18)];
+
+            const reader = res.body.getReader();
+            const decoder = new TextDecoder();
+            let buf = '';
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                buf += decoder.decode(value, { stream: true });
+                const lines = buf.split('\n');
+                buf = lines.pop() || '';
+
+                for (const line of lines) {
+                    if (!line.startsWith('data: ')) continue;
+                    const data = line.slice(6);
+                    if (data === '[DONE]') continue;
+                    try {
+                        const parsed = JSON.parse(data);
+                        const delta = parsed?.choices?.[0]?.delta?.content || '';
+                        fullContent += delta;
+                        contentDiv.innerHTML = processInlineItems(fullContent.replace(/\n/g, '<br>'));
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    } catch (e) {}
+                }
             }
-            addMessage(reply, 'ai', elapsed);
         } catch (e) {
-            removeLoadingMessage();
-            addMessage('Ошибка: ' + e.message, 'ai');
+            contentDiv.textContent = 'Ошибка: ' + e.message;
+            isSending = false;
+            chatInput.focus();
+            return;
         }
+
+        const elapsed = ((performance.now() - startTime) / 1000).toFixed(1);
+
+        const parts = fullContent.split(/(<craft>[\s\S]*?<\/craft>)/g);
+        let html = '';
+        for (const part of parts) {
+            if (part.startsWith('<craft>')) {
+                const json = part.replace('<craft>', '').replace('</craft>', '').trim();
+                html += renderCraftGrid(json);
+            } else {
+                html += marked.parse(part);
+            }
+        }
+        html = html.replace(/<p>/g, '').replace(/<\/p>/g, '<br>');
+        html = processInlineItems(html);
+        html += `<div class="msg-footer">${elapsed}s</div>`;
+        contentDiv.innerHTML = html;
+
+        chatHistory.push({ role: 'assistant', content: fullContent });
+        if (chatHistory.length > 20) {
+            chatHistory = [chatHistory[0], ...chatHistory.slice(-18)];
+        }
+
         isSending = false;
         chatInput.focus();
     }
