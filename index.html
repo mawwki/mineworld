@@ -3170,67 +3170,6 @@
         }
         await Promise.all(promises);
     }
-        return null;
-    }
-
-    function renderCraftGrid(jsonStr) {
-        try {
-            const data = JSON.parse(jsonStr);
-            const grid = data.g || [];
-            const resultName = data.r || '';
-            const count = data.c || 1;
-            let html = '<div class="craft-chat-wrapper">';
-            html += '<div class="craft-chat-grid">';
-            for (let i = 0; i < 9; i++) {
-                const itemName = grid[i] || '';
-                const imgUrl = findItem(itemName);
-                if (imgUrl) {
-                    html += `<div class="craft-chat-cell" title="${itemName}"><img src="${imgUrl}" alt="${itemName}" loading="lazy"><span class="cell-tip">${itemName}</span></div>`;
-                } else if (itemName) {
-                    html += `<div class="craft-chat-cell" title="${itemName}"><span style="color:#888;font-size:0.6rem">${itemName}</span></div>`;
-                } else {
-                    html += '<div class="craft-chat-cell"></div>';
-                }
-            }
-            html += '</div>';
-            html += '<div class="craft-chat-arrow">➜</div>';
-            html += '<div class="craft-chat-output">';
-            const resultImg = findItem(resultName);
-            if (resultImg) {
-                html += `<div class="craft-chat-output-cell"><img src="${resultImg}" alt="${resultName}"><span class="craft-chat-count">x${count}</span></div>`;
-            } else {
-                html += `<div class="craft-chat-output-cell"><span style="color:var(--gold);font-size:0.8rem">${resultName}</span><span class="craft-chat-count">x${count}</span></div>`;
-            }
-            html += `<div class="craft-chat-label">${resultName}</div>`;
-            html += '</div></div>';
-            return html;
-        } catch (e) {
-            return '<div style="color:red;font-size:0.8rem">[Ошибка крафта]</div>';
-        }
-    }
-
-    function processInlineItems(text) {
-        return text.replace(/\[([^\]]+)\]/g, (match, itemName) => {
-            const imgUrl = findItem(itemName);
-            if (imgUrl) {
-                return `<img class="mc-item-inline" src="${imgUrl}" alt="${itemName}" title="${itemName}">`;
-            }
-            return match;
-        });
-    }
-
-    function processChatContent(text) {
-        let parts = text.split(/<craft>([\s\S]*?)<\/craft>/g);
-        let html = '';
-        for (let i = 0; i < parts.length; i++) {
-            if (i % 2 === 0) {
-                html += processInlineItems(parts[i]);
-            } else {
-                html += renderCraftGrid(parts[i]);
-            }
-        }
-        return html;
-    }
     let isSending = false;
 
     function addMessage(text, type) {
