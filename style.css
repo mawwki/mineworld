@@ -1964,6 +1964,16 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
     display: inline-block;
     margin: 0 2px;
 }
+.mc-item-loading {
+    display: inline-block;
+    padding: 1px 5px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 3px;
+    font-size: 0.8em;
+    color: #aaa;
+    cursor: wait;
+}
 
 /* ===== Crafting grid in chat ===== */
 .craft-chat-wrapper {
