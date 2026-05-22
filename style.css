@@ -702,9 +702,12 @@ audio {
     position: absolute;
     bottom: 8px;
     right: 12px;
-    color: #555;
-    font-size: 0.75rem;
+    color: #888;
+    font-size: 0.8rem;
     font-family: 'Monocraft', 'Courier New', monospace;
+    background: rgba(0,0,0,0.3);
+    padding: 2px 8px;
+    border: 1px solid #333;
 }
 
 .hero-card {
