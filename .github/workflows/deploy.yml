@@ -2,13 +2,22 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -17,20 +26,14 @@ jobs:
       - name: Inject secrets
         run: sed -i 's/__OPENROUTER_API_KEY__/${{ secrets.API_KEY }}/g' index.html
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
       - name: Deploy to GitHub Pages
-        shell: bash
-        run: |
-          set -x
-          mkdir -p deploy
-          cp index.html style.css Monocraft.ttf deploy/
-          ls -la deploy/
-          cd deploy
-          git init
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git status
-          git commit -m "Deploy to GitHub Pages"
-          echo "Pushing to gh-pages..."
-          git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:gh-pages 2>&1
-          echo "Done!"
+        id: deployment
+        uses: actions/deploy-pages@v4
