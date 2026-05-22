@@ -1840,7 +1840,7 @@
         <p>© 2026 Minecraft World | Неофициальный фанатский сайт</p>
         <p>🌲 Добывай блоки, строй замки, побеждай дракона! 🐉</p>
         <p><a onclick="scrollToTop()">Вверх ▲</a></p>
-        <span class="footer-version">v0.9.4</span>
+        <span class="footer-version">v0.9.5</span>
     </div>
 </div>
 
@@ -2342,7 +2342,7 @@
     // ===== AI ЧАТ =====
     const CHAT_API_KEY = '__OPENROUTER_API_KEY__';
     const CHAT_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions';
-    let CHAT_MODEL = 'deepseek/deepseek-v4-flash:free';
+    const CHAT_MODEL = 'openai/gpt-oss-120b:free';
     const chatMessages = document.getElementById('chat-messages');
     const chatInput = document.getElementById('chat-input');
     const chatSendBtn = document.getElementById('chat-send');
@@ -3142,9 +3142,7 @@
     }
     let isSending = false;
 
-    let lastModel = CHAT_MODEL;
-
-    function addMessage(text, type, timeMs) {
+    function addMessage(text, type, timeSec) {
         const msg = document.createElement('div');
         msg.className = `chat-message ${type}-message`;
         let content;
@@ -3167,8 +3165,8 @@
         const iconSvg = type === 'user'
             ? '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
             : '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>';
-        const footer = type === 'ai' && timeMs != null
-            ? `<div class="msg-footer">${lastModel} · ${timeMs}ms</div>`
+        const footer = type === 'ai' && timeSec != null
+            ? `<div class="msg-footer">${timeSec}s</div>`
             : '';
         msg.innerHTML = `
             <span class="msg-icon">${iconSvg}</span>
@@ -3240,13 +3238,15 @@
                 })
             });
             if (!res.ok) {
-                const errData = await res.json().catch(() => ({}));
+                const errText = await res.text().catch(() => '');
                 removeLoadingMessage();
-                throw new Error(errData?.error?.message || `Ошибка ${res.status}`);
+                let detail;
+                try { const j = JSON.parse(errText); detail = j?.error?.message || j?.error?.code || JSON.stringify(j); } catch (e) { detail = errText || `Код ${res.status}`; }
+                throw new Error(detail);
             }
             const data = await res.json();
             removeLoadingMessage();
-            const elapsed = Math.round(performance.now() - startTime);
+            const elapsed = ((performance.now() - startTime) / 1000).toFixed(1);
             const reply = data?.choices?.[0]?.message?.content || 'Не удалось получить ответ';
             chatHistory.push({ role: 'assistant', content: reply });
             if (chatHistory.length > 20) {

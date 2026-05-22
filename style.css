@@ -1785,11 +1785,10 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
 }
 
 .msg-footer {
-    margin-top: 6px;
-    padding-top: 4px;
-    border-top: 1px solid #3a3a3a;
+    margin-top: 4px;
     font-size: 0.65rem;
     color: #666;
+    text-align: right;
 }
 
 .chat-input-area {
