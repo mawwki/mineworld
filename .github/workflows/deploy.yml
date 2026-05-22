@@ -17,8 +17,16 @@ jobs:
       - name: Inject secrets
         run: sed -i 's/__OPENROUTER_API_KEY__/${{ secrets.API_KEY }}/g' index.html
 
+      - name: Copy files to temp
+        run: |
+          mkdir -p /tmp/publish
+          cp index.html style.css Monocraft.ttf /tmp/publish/
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: '.'
+          publish_dir: /tmp/publish
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
