@@ -1840,7 +1840,7 @@
         <p>© 2026 Minecraft World | Неофициальный фанатский сайт</p>
         <p>🌲 Добывай блоки, строй замки, побеждай дракона! 🐉</p>
         <p><a onclick="scrollToTop()">Вверх ▲</a></p>
-        <span class="footer-version">v0.9.6</span>
+        <span class="footer-version">v0.9.7</span>
     </div>
 </div>
 
@@ -3208,13 +3208,14 @@
         const iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>';
         msg.innerHTML = `
             <span class="msg-icon">${iconSvg}</span>
-            <div class="msg-text"></div>
+            <div class="msg-text"><span class="loading-spinner"></span></div>
         `;
         chatMessages.appendChild(msg);
         chatMessages.scrollTop = chatMessages.scrollHeight;
         const contentDiv = msg.querySelector('.msg-text');
         const startTime = performance.now();
         let fullContent = '';
+        let gotFirstToken = false;
 
         try {
             const res = await fetch(CHAT_ENDPOINT, {
@@ -3257,6 +3258,11 @@
                     try {
                         const parsed = JSON.parse(data);
                         const delta = parsed?.choices?.[0]?.delta?.content || '';
+                        if (!delta) continue;
+                        if (!gotFirstToken) {
+                            gotFirstToken = true;
+                            contentDiv.innerHTML = '';
+                        }
                         fullContent += delta;
                         contentDiv.innerHTML = processInlineItems(fullContent.replace(/\n/g, '<br>'));
                         chatMessages.scrollTop = chatMessages.scrollHeight;
