@@ -1,0 +1,2449 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft World | Твой блоковый мир</title>
+
+    <meta property="og:title" content="Minecraft World">
+    <meta property="og:description" content="Добро пожаловать в мир блоков и приключений!">
+    <meta property="og:image" content="https://minecraft.wiki/images/thumb/Grass_Block_JE5_BE3.png/1200px-Grass_Block_JE5_BE3.png">
+    <meta property="og:url" content="https://minecraft-website.example">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>⛏️ MINECRAFT WORLD ⛏️</h1>
+        <p>Твой блоковый мир ждёт!</p>
+        <div class="nav">
+            <ul>
+                <li><a data-page="home" class="active">🏠 Главная</a></li>
+                <li><a data-page="mobs">⚔️ Мобы</a></li>
+                <li><a data-page="crafts">🧱 Крафты</a></li>
+                <li><a data-page="biomes">🗺️ Биомы</a></li>
+                <li><a data-page="dungeons">🏚️ Данжи</a></li>
+                <li><a data-page="music">🎵 Музыка</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ===== ГЛАВНАЯ ===== -->
+    <div id="home-page" class="page active-page">
+
+        <!-- Чат с ИИ -->
+        <div class="card ai-chat-card">
+            <h2>Чат с ИИ-помощником</h2>
+            <p class="chat-subtitle">Спроси что угодно о Minecraft — мобы, крафты, биомы, советы по выживанию</p>
+            <div class="chat-container">
+                <div id="chat-messages" class="chat-messages">
+                    <div class="chat-message ai-message">
+                        <span class="msg-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg></span>
+                        <div class="msg-text">Привет! Я ИИ-помощник по Minecraft. Задай мне любой вопрос!</div>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <textarea id="chat-input" class="chat-input" rows="2" placeholder="Введи вопрос о Minecraft..."></textarea>
+                    <button id="chat-send" class="chat-send-btn"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="m22 2-11 11"/></svg></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== МОБЫ ===== -->
+    <div id="mobs-page" class="page">
+        <div class="card">
+            <h2>⚔️ Все мобы Minecraft</h2>
+            <p>В мире Minecraft обитают более 70 существ! Вот самые известные:</p>
+        </div>
+        <div class="mobs-grid">
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Jellie_Cat.png/128px-Jellie_Cat.png" alt="Кошка">
+                </div>
+                <h3>🐱 Кошка</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 10</span><span>🐟 Приручение</span></div>
+                <p class="mob-desc">Приручается рыбой. Отпугивает криперов! Поднимает настроение.</p>
+                <button class="mob-btn" onclick="alert('🐱 Кошка: Мяу!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Creamy_Horse.png/128px-Creamy_Horse.png" alt="Лошадь">
+                </div>
+                <h3>🐴 Лошадь</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 15-30</span><span>🏇 Скорость</span></div>
+                <p class="mob-desc">Быстрый транспорт! Можно приручить, оседлать и надеть броню.</p>
+                <button class="mob-btn" onclick="alert('🐴 Лошадь: И-го-го!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Squid_JE2_BE2.gif/128px-Squid_JE2_BE2.gif" alt="Кальмар">
+                </div>
+                <h3>🦑 Кальмар</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 10</span><span>🖋️ 1-3</span></div>
+                <p class="mob-desc">Живёт в воде. Роняет чернильные мешки. Всплывает на поверхность.</p>
+                <button class="mob-btn" onclick="alert('🦑 Кальмар: Подводный житель!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Red_Parrot_JE1_BE1.png/128px-Red_Parrot_JE1_BE1.png" alt="Попугай">
+                </div>
+                <h3>🦜 Попугай</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 6</span><span>🎵 Танцы</span></div>
+                <p class="mob-desc">Танцует под музыку! Повторяет звуки других мобов. Садится на плечо.</p>
+                <button class="mob-btn" onclick="alert('🦜 Попугай: Чирик!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Red_Mooshroom_JE5_BE3.png/128px-Red_Mooshroom_JE5_BE3.png" alt="Муухомор">
+                </div>
+                <h3>🍄 Муухомор</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 10</span><span>🍲 Суп</span></div>
+                <p class="mob-desc">Грибная корова! Миской даёт тушёные грибы. Живёт на грибном острове.</p>
+                <button class="mob-btn" onclick="alert('🍄 Муухомор: Грибная корова!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Chicken_JE2_BE2.png/128px-Chicken_JE2_BE2.png" alt="Курица">
+                </div>
+                <h3>🐔 Курица</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 4</span><span>🥚 Яйца</span></div>
+                <p class="mob-desc">Несёт яйца и роняет перья. Падает медленно!</p>
+                <button class="mob-btn" onclick="alert('🐔 Курица: Ко-ко-ко!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Turtle_JE3_BE1.png/128px-Turtle_JE3_BE1.png" alt="Черепаха">
+                </div>
+                <h3>🐢 Черепаха</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 12</span><span>🛡️ 2</span></div>
+                <p class="mob-desc">Живёт на пляже. Из её панциря делают шлем! Очень медленная.</p>
+                <button class="mob-btn" onclick="alert('🐢 Черепаха: Медленно, но верно!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Cow_JE7_BE4.png/128px-Cow_JE7_BE4.png" alt="Корова">
+                </div>
+                <h3>🐮 Корова</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 10</span><span>🥛 Доится</span></div>
+                <p class="mob-desc">Даёт молоко, кожу и говядину! Незаменимый источник еды.</p>
+                <button class="mob-btn" onclick="alert('🐮 Корова: Му-у-у!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Brown_Rabbit_BE4.png/128px-Brown_Rabbit_BE4.png" alt="Кролик">
+                </div>
+                <h3>🐰 Кролик</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 3</span><span>🥕 Прыжок</span></div>
+                <p class="mob-desc">Прыгает высоко! Роняет кроличью лапку и шкурку.</p>
+                <button class="mob-btn" onclick="alert('🐰 Кролик: Прыг-скок!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/White_Sheep_JE4_BE7.png/128px-White_Sheep_JE4_BE7.png" alt="Овца">
+                </div>
+                <h3>🐑 Овца</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 8</span><span>✂️ 1-3</span></div>
+                <p class="mob-desc">Даёт шерсть и баранину. Можно покрасить в любой цвет!</p>
+                <button class="mob-btn" onclick="alert('🐑 Овца: Б-е-е!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Sniffer_sniffsniff.gif/128px-Sniffer_sniffsniff.gif" alt="Нюхач">
+                </div>
+                <h3>🌸 Нюхач</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 14</span><span>🌿 Нюх</span></div>
+                <p class="mob-desc">Нюхает землю и находит древние семена! Огромный древний зверь.</p>
+                <button class="mob-btn" onclick="alert('🌸 Нюхач: Археолог!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Camel_Idle.gif/128px-Camel_Idle.gif" alt="Верблюд">
+                </div>
+                <h3>🐪 Верблюд</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 32</span><span>👥 Вдвоём</span></div>
+                <p class="mob-desc">На нём могут ехать двое! Высокий и медленный. Живёт в пустыне.</p>
+                <button class="mob-btn" onclick="alert('🐪 Верблюд: Корабль пустыни!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Armadillo_JE2_BE2.png/128px-Armadillo_JE2_BE2.png" alt="Броненосец">
+                </div>
+                <h3>🛡️ Броненосец</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 12</span><span>🔵 Щиток</span></div>
+                <p class="mob-desc">Сворачивается в клубок! Роняет щитки для волчьей брони.</p>
+                <button class="mob-btn" onclick="alert('🛡️ Броненосец: Клубок!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Mule_JE5.png/128px-Mule_JE5.png" alt="Мул">
+                </div>
+                <h3>🐴 Мул</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 15-30</span><span>📦 Сундук</span></div>
+                <p class="mob-desc">Помесь лошади и осла. Носит сундук. Не размножается.</p>
+                <button class="mob-btn" onclick="alert('🐴 Мул: Вьючный!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Glow_Squid_JE1.gif/128px-Glow_Squid_JE1.gif" alt="Светящийся кальмар">
+                </div>
+                <h3>✨ Светящийся кальмар</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 10</span><span>🌟 Свет</span></div>
+                <p class="mob-desc">Светится в темноте! Живёт в глубоких водах. Чернила не светятся.</p>
+                <button class="mob-btn" onclick="alert('✨ Светящийся кальмар: Красиво!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Strider_JE2_BE2.gif/128px-Strider_JE2_BE2.gif" alt="Страйдер">
+                </div>
+                <h3>🏜️ Страйдер</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>🌋 Лава</span></div>
+                <p class="mob-desc">Ходит по лаве! Управляется грибом. Транспорт по Аду.</p>
+                <button class="mob-btn" onclick="alert('🏜️ Страйдер: Ходит по лаве!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Snow_Golem_JE2_BE2.png/128px-Snow_Golem_JE2_BE2.png" alt="Снежный голем">
+                </div>
+                <h3>⛄ Снежный голем</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 4</span><span>❄️ Снежки</span></div>
+                <p class="mob-desc">Создай из снега и тыквы! Атакует врагов снежками. Тает в жаре.</p>
+                <button class="mob-btn" onclick="alert('⛄ Снежный голем: Лепит снежки!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Bat_JE4_BE3.gif/128px-Bat_JE4_BE3.gif" alt="Летучая мышь">
+                </div>
+                <h3>🦇 Летучая мышь</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 6</span><span>🌙 Полёт</span></div>
+                <p class="mob-desc">Летает в пещерах. Безобидная. Виснет вниз головой.</p>
+                <button class="mob-btn" onclick="alert('🦇 Летучая мышь: Пи-пи-пи!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Wandering_Trader_JE1_BE1.png/128px-Wandering_Trader_JE1_BE1.png" alt="Бродячий торговец">
+                </div>
+                <h3>🧳 Бродячий торговец</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>🛒 Торговля</span></div>
+                <p class="mob-desc">Появляется случайно с ламами. Продаёт редкие товары. Исчезает через время.</p>
+                <button class="mob-btn" onclick="alert('🧳 Бродячий торговец: Скупка!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Ocelot_JE2_BE2.png/128px-Ocelot_JE2_BE2.png" alt="Оцелот">
+                </div>
+                <h3>🐆 Оцелот</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 10</span><span>🏃 Быстрый</span></div>
+                <p class="mob-desc">Дикая кошка джунглей! Больше не приручается, но доверяет.</p>
+                <button class="mob-btn" onclick="alert('🐆 Оцелот: Хищник джунглей!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Temperate_Pig_JE4_BE2.png/160px-Temperate_Pig_JE4_BE2.png" alt="Свинья">
+                </div>
+                <h3>🐷 Свинья</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 10</span><span>🍖 1-3</span></div>
+                <p class="mob-desc">Даёт свинину. С седлом — транспорт!</p>
+                <button class="mob-btn" onclick="alert('🐷 Свинья: Хрю!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Axolotl_Idle_Floor_Underwater.gif/128px-Axolotl_Idle_Floor_Underwater.gif" alt="Аксолотль">
+                </div>
+                <h3>🦎 Аксолотль</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 14</span><span>🐟 2</span></div>
+                <p class="mob-desc">Водное существо. Помогает в бою под водой! Притворяется мёртвым.</p>
+                <button class="mob-btn" onclick="alert('🦎 Аксолотль: Лучший подводный друг!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Plains_Villager_Base_JE2.png/128px-Plains_Villager_Base_JE2.png" alt="Житель">
+                </div>
+                <h3>🧑‍🌾 Житель</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>🛒 Торговля</span></div>
+                <p class="mob-desc">Живёт в деревнях. Торгуйся с ними за изумруды!</p>
+                <button class="mob-btn" onclick="alert('🧑‍🌾 Житель: Торговля — путь к богатству!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Panda_JE1_BE1.png/128px-Panda_JE1_BE1.png" alt="Панда">
+                </div>
+                <h3>🐼 Панда</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>🍃 6</span></div>
+                <p class="mob-desc">Ленивый зверь из бамбуковых джунглей. Чихает! Ест бамбук.</p>
+                <button class="mob-btn" onclick="alert('🐼 Панда: Бамбук — её любовь!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Temperate_Frog_JE1_BE1.gif/128px-Temperate_Frog_JE1_BE1.gif" alt="Лягушка">
+                </div>
+                <h3>🐸 Лягушка</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 6</span><span>👅 3</span></div>
+                <p class="mob-desc">Прыгает по болотам. Ест слизней и даёт светящийся шар!</p>
+                <button class="mob-btn" onclick="alert('🐸 Лягушка: Ква-ква!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Donkey_JE5.png/128px-Donkey_JE5.png" alt="Осёл">
+                </div>
+                <h3>🐴 Осёл</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 15-30</span><span>📦 Сундук</span></div>
+                <p class="mob-desc">Носит сундук с вещами! Медленнее лошади, но вместительный.</p>
+                <button class="mob-btn" onclick="alert('🐴 Осёл: И-а, и-а!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Allay_JE2_BE2.gif/128px-Allay_JE2_BE2.gif" alt="Аллай">
+                </div>
+                <h3>✨ Аллай</h3>
+                <span class="mob-type friendly">Дружелюбный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>🎵 Полёт</span></div>
+                <p class="mob-desc">Летающий помощник. Собирает предметы под музыку! Очень редкий.</p>
+                <button class="mob-btn" onclick="alert('✨ Аллай: Дайте ноту — соберёт всё!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Dolphin.gif/128px-Dolphin.gif" alt="Дельфин">
+                </div>
+                <h3>🐬 Дельфин</h3>
+                <span class="mob-type neutral">Нейтральный</span>
+                <div class="mob-stats"><span>❤️ 10</span><span>🐬 3-4</span></div>
+                <p class="mob-desc">Ускоряет плавание! Любит играть. Не бей — атакует стаей!</p>
+                <button class="mob-btn" onclick="alert('🐬 Дельфин: Плыви за мной!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Creamy_Llama_JE2_BE2.png/128px-Creamy_Llama_JE2_BE2.png" alt="Лама">
+                </div>
+                <h3>🦙 Лама</h3>
+                <span class="mob-type neutral">Нейтральный</span>
+                <div class="mob-stats"><span>❤️ 15-30</span><span>🤮 Плевок</span></div>
+                <p class="mob-desc">Плюётся в врагов! Носит сундук. Водит караваны.</p>
+                <button class="mob-btn" onclick="alert('🦙 Лама: Плююсь!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Spider_JE5_BE4.png/160px-Spider_JE5_BE4.png" alt="Паук">
+                </div>
+                <h3>🕷️ Паук</h3>
+                <span class="mob-type neutral">Нейтральный</span>
+                <div class="mob-stats"><span>❤️ 16</span><span>💪 2</span></div>
+                <p class="mob-desc">Днём нейтрален, ночью агрессивен. Лазает по стенам!</p>
+                <button class="mob-btn" onclick="alert('🕷️ Паук: Ночью берегись!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Polar_Bear_JE2_BE2.png/128px-Polar_Bear_JE2_BE2.png" alt="Белый медведь">
+                </div>
+                <h3>🐻‍❄️ Белый медведь</h3>
+                <span class="mob-type neutral">Нейтральный</span>
+                <div class="mob-stats"><span>❤️ 30</span><span>💪 6-10</span></div>
+                <p class="mob-desc">Защищает детёнышей. Живёт в ледяных биомах. Огромный и сильный.</p>
+                <button class="mob-btn" onclick="alert('🐻‍❄️ Белый медведь: Не тронь детей!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Drowned_BE2.png/128px-Drowned_BE2.png" alt="Утопленник">
+                </div>
+                <h3>🌊 Утопленник</h3>
+                <span class="mob-type neutral">Нейтральный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>🔱 6-9</span></div>
+                <p class="mob-desc">Выходит из воды с трезубцем! Топит игроков. Ночной зомби в океане.</p>
+                <button class="mob-btn" onclick="alert('🌊 Утопленник: Буль-буль!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Cave_Spider_JE3_BE3.png/128px-Cave_Spider_JE3_BE3.png" alt="Пещерный паук">
+                </div>
+                <h3>🕸️ Пещерный паук</h3>
+                <span class="mob-type neutral">Нейтральный</span>
+                <div class="mob-stats"><span>❤️ 12</span><span>☠️ 2+яд</span></div>
+                <p class="mob-desc">Ядовитый! Маленький, пролазит в щели. Живёт в заброшенных шахтах.</p>
+                <button class="mob-btn" onclick="alert('🕸️ Пещерный паук: Яд!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Piglin_JE1.png/128px-Piglin_JE1.png" alt="Пиглин">
+                </div>
+                <h3>🐷 Пиглин</h3>
+                <span class="mob-type neutral">Нейтральный</span>
+                <div class="mob-stats"><span>❤️ 16</span><span>🏹 4-6</span></div>
+                <p class="mob-desc">Житель Ада. Меняется на золото! Не носи золото рядом — нападут.</p>
+                <button class="mob-btn" onclick="alert('🐷 Пиглин: Золото давай!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Zombified_Piglin_BE6.png/128px-Zombified_Piglin_BE6.png" alt="Зомбифицированный пиглин">
+                </div>
+                <h3>🐽 Зомби-пиглин</h3>
+                <span class="mob-type neutral">Нейтральный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>🗡️ 5-7</span></div>
+                <p class="mob-desc">Нейтрален, пока не ударишь. Атакует всей толпой! Живёт в Аду.</p>
+                <button class="mob-btn" onclick="alert('🐽 Зомби-пиглин: Не зли!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://ru.minecraft.wiki/images/thumb/Странник_Края_с_блоком.png/106px-Странник_Края_с_блоком.png" alt="Эндермен">
+                </div>
+                <h3>👾 Эндермен</h3>
+                <span class="mob-type neutral">Нейтральный</span>
+                <div class="mob-stats"><span>❤️ 40</span><span>💪 7</span></div>
+                <p class="mob-desc">Телепортируется. Не смотри в глаза! Боится воды.</p>
+                <button class="mob-btn" onclick="alert('👾 Эндермен: Не смотри в глаза!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Iron_Golem_JE2_BE2.png/128px-Iron_Golem_JE2_BE2.png" alt="Железный голем">
+                </div>
+                <h3>🗿 Железный голем</h3>
+                <span class="mob-type neutral">Нейтральный</span>
+                <div class="mob-stats"><span>❤️ 100</span><span>💪 7-21</span></div>
+                <p class="mob-desc">Защищает жителей. Создай сам из блоков железа!</p>
+                <button class="mob-btn" onclick="alert('🗿 Железный голем: Защитник деревни!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Wolf_JE2_BE2.png/160px-Wolf_JE2_BE2.png" alt="Волк">
+                </div>
+                <h3>🐺 Волк</h3>
+                <span class="mob-type neutral">Нейтральный</span>
+                <div class="mob-stats"><span>❤️ 8</span><span>💪 3-6</span></div>
+                <p class="mob-desc">Можно приручить костью! Верный питомец.</p>
+                <button class="mob-btn" onclick="alert('🐺 Волк: Дай кость — получи друга!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Fox_JE1_BE1.png/128px-Fox_JE1_BE1.png" alt="Лиса">
+                </div>
+                <h3>🦊 Лиса</h3>
+                <span class="mob-type neutral">Нейтральный</span>
+                <div class="mob-stats"><span>❤️ 10</span><span>💪 2</span></div>
+                <p class="mob-desc">Ночное животное. Ворует еду и атакует кур! Можно приручить сладкими ягодами.</p>
+                <button class="mob-btn" onclick="alert('🦊 Лиса: Хитрая плутовка!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Baby_Bee_JE2.gif/128px-Baby_Bee_JE2.gif" alt="Пчела">
+                </div>
+                <h3>🐝 Пчела</h3>
+                <span class="mob-type neutral">Нейтральный</span>
+                <div class="mob-stats"><span>❤️ 10</span><span>⚡ 2</span></div>
+                <p class="mob-desc">Собирает нектар с цветов. Не трогай улей — атакует роем!</p>
+                <button class="mob-btn" onclick="alert('🐝 Пчела: Даёт мёд и воск!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Goat_%28two_horns%29_JE1_BE1.png/190px-Goat_%28two_horns%29_JE1_BE1.png" alt="Коза">
+                </div>
+                <h3>🐐 Коза</h3>
+                <span class="mob-type neutral">Нейтральный</span>
+                <div class="mob-stats"><span>❤️ 10</span><span>💪 1-7</span></div>
+                <p class="mob-desc">Бодается! Может сбросить тебя с горы.</p>
+                <button class="mob-btn" onclick="alert('🐐 Коза: Дерзкая горная жительница!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Plains_Zombie_Villager_Base_JE1_BE1.png/128px-Plains_Zombie_Villager_Base_JE1_BE1.png" alt="Зомби-житель">
+                </div>
+                <h3>🧟 Зомби-житель</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>💪 3</span></div>
+                <p class="mob-desc">Укушенный житель деревни! Можно вылечить зельем и яблоком.</p>
+                <button class="mob-btn" onclick="alert('🧟 Зомби-житель: Лечи!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Pillager_JE3.png/128px-Pillager_JE3.png" alt="Разбойник">
+                </div>
+                <h3>🏹 Разбойник</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 24</span><span>🏹 4-6</span></div>
+                <p class="mob-desc">Грабитель с арбалетом! Водит рейды на деревни.</p>
+                <button class="mob-btn" onclick="alert('🏹 Разбойник: Рейд!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Wither_Skeleton_JE4_BE3.png/128px-Wither_Skeleton_JE4_BE3.png" alt="Скелет-иссушитель">
+                </div>
+                <h3>💀 Скелет-иссушитель</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>🗡️ 5-8</span></div>
+                <p class="mob-desc">Чёрный скелет из крепости Ада! Оставляет иссушение. Роняет черепа.</p>
+                <button class="mob-btn" onclick="alert('💀 Скелет-иссушитель: Опасен!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Phantom_JE2.gif/128px-Phantom_JE2.gif" alt="Фантом">
+                </div>
+                <h3>😴 Фантом</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>💪 4-8</span></div>
+                <p class="mob-desc">Атакует, если не спать! Скелет из ночных кошмаров. Спи хоть иногда!</p>
+                <button class="mob-btn" onclick="alert('😴 Фантом: Ложись спать!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Husk_JE2_BE2.png/128px-Husk_JE2_BE2.png" alt="Кадавр">
+                </div>
+                <h3>🏜️ Кадавр</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>💪 3-5</span></div>
+                <p class="mob-desc">Пустынный зомби! Не горит на солнце. Наводит голод.</p>
+                <button class="mob-btn" onclick="alert('🏜️ Кадавр: Знойный зомби!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Stray_JE2_BE4.png/128px-Stray_JE2_BE4.png" alt="Зимогор">
+                </div>
+                <h3>❄️ Зимогор</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>🏹 3-5</span></div>
+                <p class="mob-desc">Ледяной скелет! Стрелы замедляют. Живёт в заснеженных биомах.</p>
+                <button class="mob-btn" onclick="alert('❄️ Зимогор: Морозный выстрел!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Evoker_Summoning_Vexes.png/128px-Evoker_Summoning_Vexes.png" alt="Заклинатель">
+                </div>
+                <h3>🔮 Заклинатель</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 24</span><span>🌀 6-11</span></div>
+                <p class="mob-desc">Лидер рейда! Призывает зубы из земли и летающих прислужников.</p>
+                <button class="mob-btn" onclick="alert('🔮 Заклинатель: Магия!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Ravager_JE1.png/128px-Ravager_JE1.png" alt="Разоритель">
+                </div>
+                <h3>🐂 Разоритель</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 100</span><span>💪 7-12</span></div>
+                <p class="mob-desc">Огромный зверь рейда! Крушит всё на пути. Ломает урожай.</p>
+                <button class="mob-btn" onclick="alert('🐂 Разоритель: Круши!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Piglin_Brute_JE1.png/128px-Piglin_Brute_JE1.png" alt="Брутальный пиглин">
+                </div>
+                <h3>🗡️ Брутальный пиглин</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 50</span><span>🗡️ 7-13</span></div>
+                <p class="mob-desc">Элитный пиглин из остатков бастиона. Не отвлекается на золото — атакует сразу!</p>
+                <button class="mob-btn" onclick="alert('🗡️ Брутальный пиглин: Не подкупить!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Hoglin_JE3.png/128px-Hoglin_JE3.png" alt="Хоглин">
+                </div>
+                <h3>🐗 Хоглин</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 40</span><span>💪 4-10</span></div>
+                <p class="mob-desc">Свинья из багрового леса Ада! Подбрасывает игрока в воздух.</p>
+                <button class="mob-btn" onclick="alert('🐗 Хоглин: Мясо Ада!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Vindicator_attacking.png/128px-Vindicator_attacking.png" alt="Мститель">
+                </div>
+                <h3>🪓 Мститель</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 24</span><span>🪓 7-13</span></div>
+                <p class="mob-desc">Агрессивный иллюзорник с топором! Ломает двери.</p>
+                <button class="mob-btn" onclick="alert('🪓 Мститель: Джонни!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Creeper_JE3_BE1.png/128px-Creeper_JE3_BE1.png" alt="Крипер">
+                </div>
+                <h3>💚 Крипер</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>💥 49</span></div>
+                <p class="mob-desc">Тихий зелёный монстр, который взрывается рядом с игроком. SSSSS...</p>
+                <button class="mob-btn" onclick="alert('💥 Крипер: «SSSSS... БУМ!»')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Vex_JE4.gif/128px-Vex_JE4.gif" alt="Векс">
+                </div>
+                <h3>👿 Векс</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 14</span><span>🗡️ 5-9</span></div>
+                <p class="mob-desc">Призванный дух заклинателя. Пролетает сквозь стены! Быстрый и агрессивный.</p>
+                <button class="mob-btn" onclick="alert('👿 Векс: Сквозь стены!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Witch_JE3.png/128px-Witch_JE3.png" alt="Ведьма">
+                </div>
+                <h3>🧪 Ведьма</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 26</span><span>🧪 6</span></div>
+                <p class="mob-desc">Бросает зелья урона, замедления и слабости. Живёт в болоте.</p>
+                <button class="mob-btn" onclick="alert('🧪 Ведьма: Пьёт зелья лечения!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Ghast_JE3_BE3.gif/128px-Ghast_JE3_BE3.gif" alt="Гаст">
+                </div>
+                <h3>👻 Гаст</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 10</span><span>🔥 6-17</span></div>
+                <p class="mob-desc">Летает в Аду. Стреляет огненными шарами! Плачет на расстоянии.</p>
+                <button class="mob-btn" onclick="alert('👻 Гаст: Отбей шар!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Slime_JE3_BE2.png/128px-Slime_JE3_BE2.png" alt="Слизень">
+                </div>
+                <h3>🟢 Слизень</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 16</span><span>💪 3-4</span></div>
+                <p class="mob-desc">Делится на маленьких! Прыгает. Живёт в болотах и глубоких пещерах.</p>
+                <button class="mob-btn" onclick="alert('🟢 Слизень: Чавк-чавк!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Skeleton_Aiming_JE2_BE3.png/160px-Skeleton_Aiming_JE2_BE3.png" alt="Скелет">
+                </div>
+                <h3>🏹 Скелет</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>🏹 3-4</span></div>
+                <p class="mob-desc">Стреляет из лука. Очень меткий — бери щит!</p>
+                <button class="mob-btn" onclick="alert('🏹 Скелет: Держись подальше!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Zombie_JE3_BE2.png/100px-Zombie_JE3_BE2.png" alt="Зомби">
+                </div>
+                <h3>🧟 Зомби</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>💪 3</span></div>
+                <p class="mob-desc">Медленный, но опасный толпой. Горит на солнце!</p>
+                <button class="mob-btn" onclick="alert('🧟 Зомби: Появляется ночью!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Blaze_JE2.gif/150px-Blaze_JE2.gif" alt="Ифрит">
+                </div>
+                <h3>🔥 Ифрит</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 20</span><span>🔥 5-6</span></div>
+                <p class="mob-desc">Живёт в Аду. Летает и стреляет огнём!</p>
+                <button class="mob-btn" onclick="alert('🔥 Ифрит: Осторожно в Незере!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Guardian_JE2_BE2.gif/128px-Guardian_JE2_BE2.gif" alt="Страж">
+                </div>
+                <h3>🐟 Страж</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 30</span><span>🔫 6-12</span></div>
+                <p class="mob-desc">Охраняет подводные храмы! Стреляет лазером. Шипастый.</p>
+                <button class="mob-btn" onclick="alert('🐟 Страж: Лазер!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Shulker_JE1_BE1.png/128px-Shulker_JE1_BE1.png" alt="Шалкер">
+                </div>
+                <h3>📦 Шалкер</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 30</span><span>🎯 4-5</span></div>
+                <p class="mob-desc">Живёт в Крае. Стреляет снарядами — заставляют левитировать!</p>
+                <button class="mob-btn" onclick="alert('📦 Шалкер: Летает!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Elder_Guardian_JE2_BE2.gif/128px-Elder_Guardian_JE2_BE2.gif" alt="Старший страж">
+                </div>
+                <h3>👁️ Старший страж</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 80</span><span>🔫 8-14</span></div>
+                <p class="mob-desc">Босс подводного храма! Даёт усталость — копать нельзя.</p>
+                <button class="mob-btn" onclick="alert('👁️ Старший страж: Хранитель храма!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Magma_Cube_JE2_BE2.png/128px-Magma_Cube_JE2_BE2.png" alt="Магмовый куб">
+                </div>
+                <h3>🔥 Магмовый куб</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 16</span><span>🔥 3-7</span></div>
+                <p class="mob-desc">Огненный слизень Ада! Не горит в лаве. Прыгает выше обычного.</p>
+                <button class="mob-btn" onclick="alert('🔥 Магмовый куб: Огненный!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Silverfish_JE1_BE1.gif/128px-Silverfish_JE1_BE1.gif" alt="Чешуйница">
+                </div>
+                <h3>🐛 Чешуйница</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 8</span><span>💪 1</span></div>
+                <p class="mob-desc">Вылезает из блоков! Зовёт подмогу. Живёт в крепости.</p>
+                <button class="mob-btn" onclick="alert('🐛 Чешуйница: Беги!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Endermite.gif/128px-Endermite.gif" alt="Эндермит">
+                </div>
+                <h3>🐜 Эндермит</h3>
+                <span class="mob-type hostile">Враждебный</span>
+                <div class="mob-stats"><span>❤️ 8</span><span>💪 2</span></div>
+                <p class="mob-desc">Маленький вредитель Края! Эндермены его ненавидят и атакуют.</p>
+                <button class="mob-btn" onclick="alert('🐜 Эндермит: Мелочь!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Wither_JE2_BE2.png/128px-Wither_JE2_BE2.png" alt="Иссушитель">
+                </div>
+                <h3>💀 Иссушитель</h3>
+                <span class="mob-type boss">Босс</span>
+                <div class="mob-stats"><span>❤️ 300</span><span>💀 6-12</span></div>
+                <p class="mob-desc">Создай сам из песка и черепов! Стреляет взрывными черепами.</p>
+                <button class="mob-btn" onclick="alert('💀 Иссушитель: Главный босс Ада!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Warden.gif/128px-Warden.gif" alt="Хранитель">
+                </div>
+                <h3>👁️ Хранитель</h3>
+                <span class="mob-type boss">Босс</span>
+                <div class="mob-stats"><span>❤️ 500</span><span>💪 45</span></div>
+                <p class="mob-desc">Слепой монстр из глубины. Слышит каждый шаг! Беги или замри.</p>
+                <button class="mob-btn" onclick="alert('👁️ Хранитель: Не издавай звуков!')">📖 Подробнее</button>
+            </div>
+            <div class="mob-card">
+                <div class="mob-image-container">
+                    <img src="https://minecraft.wiki/images/thumb/Ender_Dragon.gif/250px-Ender_Dragon.gif" alt="Дракон">
+                </div>
+                <h3>🐉 Дракон Края</h3>
+                <span class="mob-type boss">Босс</span>
+                <div class="mob-stats"><span>❤️ 200</span><span>💪 6-10</span></div>
+                <p class="mob-desc">Финальный босс! Уничтожь кристаллы Края!</p>
+                <button class="mob-btn" onclick="alert('🐉 Дракон: Готовь алмазную броню!')">📖 Подробнее</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== КРАФТЫ ===== -->
+    <div id="crafts-page" class="page">
+        <div class="card">
+            <h2>🧱 Стол крафта</h2>
+            <p>Наведи курсор на ячейку, чтобы узнать ингредиент. Используй фильтры для поиска нужного рецепта!</p>
+        </div>
+
+        <!-- Фильтры -->
+        <div class="craft-filters">
+            <button class="filter-btn active" data-filter="all">🔍 Все</button>
+            <button class="filter-btn" data-filter="tools">⛏️ Инструменты</button>
+            <button class="filter-btn" data-filter="weapons">⚔️ Оружие</button>
+            <button class="filter-btn" data-filter="armor">🛡️ Броня</button>
+            <button class="filter-btn" data-filter="blocks">🧱 Блоки</button>
+            <button class="filter-btn" data-filter="magic">✨ Магия</button>
+            <button class="filter-btn" data-filter="utility">🔧 Утилиты</button>
+            <button class="filter-btn" data-filter="food">🍔 Еда</button>
+            <button class="filter-btn" data-filter="transport">🚂 Транспорт</button>
+        </div>
+
+        <div class="crafts-grid" id="craftsGrid">
+
+            <!-- Алмазная кирка -->
+            <div class="craft-card" data-category="tools">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://minecraft.wiki/images/thumb/Diamond_Pickaxe_JE3_BE3.png/150px-Diamond_Pickaxe_JE3_BE3.png" alt="Алмазная кирка">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>⛏️ Алмазная кирка</h3>
+                        <span class="craft-category tools">Инструменты</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell filled" data-tip="Алмаз"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="Алмаз"></div>
+                        <div class="craft-cell filled" data-tip="Алмаз"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="Алмаз"></div>
+                        <div class="craft-cell filled" data-tip="Алмаз"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="Алмаз"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Палка"><img src="https://ru.minecraft.wiki/images/Палка_JE1_BE1.png?0e578" alt="Палка"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Палка"><img src="https://ru.minecraft.wiki/images/Палка_JE1_BE1.png?0e578" alt="Палка"></div>
+                        <div class="craft-cell"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://minecraft.wiki/images/thumb/Diamond_Pickaxe_JE3_BE3.png/150px-Diamond_Pickaxe_JE3_BE3.png" alt="Кирка">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Алмазная кирка</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Самая эффективная кирка! Добывает любые блоки, включая обсидиан. Прочность: 1561 использование.</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="">Алмаз ×3</span>
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Stick_JE2_BE2.png/150px-Stick_JE2_BE2.png" alt="">Палка ×2</span>
+                </div>
+            </div>
+
+            <!-- Алмазный меч -->
+            <div class="craft-card" data-category="weapons">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://minecraft.wiki/images/thumb/Diamond_Sword_JE3_BE3.png/150px-Diamond_Sword_JE3_BE3.png" alt="Меч">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>⚔️ Алмазный меч</h3>
+                        <span class="craft-category weapons">Оружие</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Алмаз"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="Алмаз"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Алмаз"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="Алмаз"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Палка"><img src="https://ru.minecraft.wiki/images/Палка_JE1_BE1.png?0e578" alt="Палка"></div>
+                        <div class="craft-cell"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://minecraft.wiki/images/thumb/Diamond_Sword_JE3_BE3.png/150px-Diamond_Sword_JE3_BE3.png" alt="Меч">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Алмазный меч</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Наносит 7 урона за удар. Лучший меч до появления незеритового. Прочность: 1561.</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="">Алмаз ×2</span>
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Stick_JE2_BE2.png/150px-Stick_JE2_BE2.png" alt="">Палка ×1</span>
+                </div>
+            </div>
+
+            <!-- Щит -->
+            <div class="craft-card" data-category="armor">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://minecraft.wiki/images/thumb/Shield_JE2_BE1.png/160px-Shield_JE2_BE1.png?4837d" alt="Щит">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>🛡️ Щит</h3>
+                        <span class="craft-category armor">Броня</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://minecraft.wiki/images/thumb/Shield_JE2_BE1.png/160px-Shield_JE2_BE1.png?4837d" alt="Щит">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Щит</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Блокирует атаки врагов. Незаменим против скелетов и криперов! Можно украсить баннером.</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="">Доски ×6</span>
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="">Железный слиток ×1</span>
+                </div>
+            </div>
+
+            <!-- Стол зачарований -->
+            <div class="craft-card" data-category="magic">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://minecraft.wiki/images/thumb/Enchanting_Table.gif/160px-Enchanting_Table.gif?904a7" alt="Стол зачарований">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>✨ Стол зачарований</h3>
+                        <span class="craft-category magic">Магия</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Книга"><img src="https://minecraft.wiki/images/thumb/Book_JE2_BE2.png/150px-Book_JE2_BE2.png" alt="Книга"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Алмаз"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="Алмаз"></div>
+                        <div class="craft-cell filled" data-tip="Обсидиан"><img src="https://ru.minecraft.wiki/images/thumb/Обсидиан_JE3_BE2.png/160px-Обсидиан_JE3_BE2.png?5f03f" alt="Обсидиан"></div>
+                        <div class="craft-cell filled" data-tip="Алмаз"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="Алмаз"></div>
+                        <div class="craft-cell filled" data-tip="Обсидиан"><img src="https://ru.minecraft.wiki/images/thumb/Обсидиан_JE3_BE2.png/160px-Обсидиан_JE3_BE2.png?5f03f" alt="Обсидиан"></div>
+                        <div class="craft-cell filled" data-tip="Обсидиан"><img src="https://ru.minecraft.wiki/images/thumb/Обсидиан_JE3_BE2.png/160px-Обсидиан_JE3_BE2.png?5f03f" alt="Обсидиан"></div>
+                        <div class="craft-cell filled" data-tip="Обсидиан"><img src="https://ru.minecraft.wiki/images/thumb/Обсидиан_JE3_BE2.png/160px-Обсидиан_JE3_BE2.png?5f03f" alt="Обсидиан"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://minecraft.wiki/images/thumb/Enchanting_Table.gif/160px-Enchanting_Table.gif?904a7" alt="Стол">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Стол зачарований</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Позволяет зачаровывать предметы за уровни опыта. Окружи полками с книгами для максимального уровня (30)!</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Book_JE2_BE2.png/150px-Book_JE2_BE2.png" alt="">Книга ×1</span>
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="">Алмаз ×2</span>
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Obsidian_JE2_BE2.png/150px-Obsidian_JE2_BE2.png" alt="">Обсидиан ×4</span>
+                </div>
+            </div>
+
+            <!-- Алмазный шлем -->
+            <div class="craft-card" data-category="armor">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://minecraft.wiki/images/thumb/Diamond_Helmet_JE2_BE2.png/150px-Diamond_Helmet_JE2_BE2.png" alt="Шлем">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>⛑️ Алмазный шлем</h3>
+                        <span class="craft-category armor">Броня</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell filled" data-tip="Алмаз"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="Алмаз"></div>
+                        <div class="craft-cell filled" data-tip="Алмаз"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="Алмаз"></div>
+                        <div class="craft-cell filled" data-tip="Алмаз"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="Алмаз"></div>
+                        <div class="craft-cell filled" data-tip="Алмаз"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="Алмаз"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Алмаз"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="Алмаз"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://minecraft.wiki/images/thumb/Diamond_Helmet_JE2_BE2.png/150px-Diamond_Helmet_JE2_BE2.png" alt="Шлем">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Алмазный шлем</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Даёт 3 единицы защиты. Обязателен для боя с Драконом Края и в Незере!</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/150px-Diamond_JE3_BE3.png" alt="">Алмаз ×5</span>
+                </div>
+            </div>
+
+            <!-- Лук -->
+            <div class="craft-card" data-category="weapons">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://ru.minecraft.wiki/images/Анимация_лука.gif?499e9" alt="Лук">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>🏹 Лук</h3>
+                        <span class="craft-category weapons">Оружие</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Палка"><img src="https://ru.minecraft.wiki/images/Палка_JE1_BE1.png?0e578" alt="Палка"></div>
+                        <div class="craft-cell filled" data-tip="Нить"><img src="https://ru.minecraft.wiki/images/Нить_JE2_BE2.png?ea61d" alt="Нить"></div>
+                        <div class="craft-cell filled" data-tip="Палка"><img src="https://ru.minecraft.wiki/images/Палка_JE1_BE1.png?0e578" alt="Палка"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Нить"><img src="https://ru.minecraft.wiki/images/Нить_JE2_BE2.png?ea61d" alt="Нить"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Палка"><img src="https://ru.minecraft.wiki/images/Палка_JE1_BE1.png?0e578" alt="Палка"></div>
+                        <div class="craft-cell filled" data-tip="Нить"><img src="https://ru.minecraft.wiki/images/Нить_JE2_BE2.png?ea61d" alt="Нить"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://ru.minecraft.wiki/images/Анимация_лука.gif?499e9" alt="Лук">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Лук</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Дальнобойное оружие. При полной зарядке наносит до 9 урона! Можно зачаровать на бесконечность.</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Stick_JE2_BE2.png/150px-Stick_JE2_BE2.png" alt="">Палка ×3</span>
+                    <span class="ingredient-tag"><img src="https://ru.minecraft.wiki/images/%D0%9D%D0%B8%D1%82%D1%8C_JE2_BE2.png?ea61d" alt="">Нить ×3</span>
+                </div>
+            </div>
+
+            <!-- Факел -->
+            <div class="craft-card" data-category="utility">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://minecraft.wiki/images/thumb/Torch.gif/160px-Torch.gif?8e1d4" alt="Факел">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>🔦 Факел</h3>
+                        <span class="craft-category utility">Утилиты</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Уголь"><img src="https://minecraft.wiki/images/thumb/Coal_JE4_BE3.png/150px-Coal_JE4_BE3.png" alt="Уголь"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Палка"><img src="https://ru.minecraft.wiki/images/Палка_JE1_BE1.png?0e578" alt="Палка"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://minecraft.wiki/images/thumb/Torch.gif/160px-Torch.gif?8e1d4" alt="Факел">
+                            <span class="cell-count">x4</span>
+                        </div>
+                        <div class="craft-output-label">Факел ×4</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Первое что нужно скрафтить! Освещает пещеры и не даёт монстрам спавниться рядом.</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Coal_JE4_BE3.png/150px-Coal_JE4_BE3.png" alt="">Уголь ×1</span>
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Stick_JE2_BE2.png/150px-Stick_JE2_BE2.png" alt="">Палка ×1</span>
+                </div>
+            </div>
+
+            <!-- Верстак -->
+            <div class="craft-card" data-category="utility">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://ru.minecraft.wiki/images/thumb/Верстак_JE4_BE3.png/160px-Верстак_JE4_BE3.png?71ce5" alt="Верстак">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>🔨 Верстак</h3>
+                        <span class="craft-category utility">Утилиты</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://ru.minecraft.wiki/images/thumb/Верстак_JE4_BE3.png/160px-Верстак_JE4_BE3.png?71ce5" alt="Верстак">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Верстак</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Самый первый и важный крафт в игре! Открывает сетку 3×3 для создания всех остальных предметов.</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="">Доски ×4</span>
+                </div>
+            </div>
+
+            <!-- Минекарт -->
+            <div class="craft-card" data-category="transport">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://minecraft.wiki/images/thumb/Minecart_JE4_BE2.png/150px-Minecart_JE4_BE2.png" alt="Минекарт">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>🚂 Минекарт</h3>
+                        <span class="craft-category transport">Транспорт</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://minecraft.wiki/images/thumb/Minecart_JE4_BE2.png/150px-Minecart_JE4_BE2.png" alt="Минекарт">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Минекарт</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Быстрый транспорт по рельсам! Используй с powered rails для максимальной скорости.</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="">Железный слиток ×5</span>
+                </div>
+            </div>
+
+            <!-- Полка с книгами -->
+            <div class="craft-card" data-category="blocks">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://minecraft.wiki/images/thumb/Bookshelf_JE4_BE2.png/150px-Bookshelf_JE4_BE2.png" alt="Полка">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>📚 Полка с книгами</h3>
+                        <span class="craft-category blocks">Блоки</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell filled" data-tip="Книга"><img src="https://minecraft.wiki/images/thumb/Book_JE2_BE2.png/150px-Book_JE2_BE2.png" alt="Книга"></div>
+                        <div class="craft-cell filled" data-tip="Книга"><img src="https://minecraft.wiki/images/thumb/Book_JE2_BE2.png/150px-Book_JE2_BE2.png" alt="Книга"></div>
+                        <div class="craft-cell filled" data-tip="Книга"><img src="https://minecraft.wiki/images/thumb/Book_JE2_BE2.png/150px-Book_JE2_BE2.png" alt="Книга"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://minecraft.wiki/images/thumb/Bookshelf_JE4_BE2.png/150px-Bookshelf_JE4_BE2.png" alt="Полка">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Полка с книгами</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Усиливает стол зачарований! 15 полок вокруг стола = максимальный уровень зачарования 30.</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="">Доски ×6</span>
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Book_JE2_BE2.png/150px-Book_JE2_BE2.png" alt="">Книга ×3</span>
+                </div>
+            </div>
+
+            <!-- Кровать -->
+            <div class="craft-card" data-category="blocks">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://minecraft.wiki/images/thumb/White_Bed_JE2_BE2.png/150px-White_Bed_JE2_BE2.png" alt="Кровать">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>🛏️ Кровать</h3>
+                        <span class="craft-category blocks">Блоки</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Шерсть"><img src="https://minecraft.wiki/images/thumb/White_Wool_JE2_BE2.png/160px-White_Wool_JE2_BE2.png?2bcdc" alt="Шерсть"></div>
+                        <div class="craft-cell filled" data-tip="Шерсть"><img src="https://minecraft.wiki/images/thumb/White_Wool_JE2_BE2.png/160px-White_Wool_JE2_BE2.png?2bcdc" alt="Шерсть"></div>
+                        <div class="craft-cell filled" data-tip="Шерсть"><img src="https://minecraft.wiki/images/thumb/White_Wool_JE2_BE2.png/160px-White_Wool_JE2_BE2.png?2bcdc" alt="Шерсть"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                        <div class="craft-cell filled" data-tip="Доски"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="Доски"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://minecraft.wiki/images/thumb/White_Bed_JE2_BE2.png/150px-White_Bed_JE2_BE2.png" alt="Кровать">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Кровать</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Пропусти ночь! Спи в кровати, чтобы установить точку возрождения. Не взрывается в Аду!</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/White_Wool_JE2_BE2.png/160px-White_Wool_JE2_BE2.png?2bcdc" alt="">Шерсть ×3</span>
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Oak_Planks.png/160px-Oak_Planks.png?d9efa" alt="">Доски ×3</span>
+                </div>
+            </div>
+
+            <!-- Железный блок -->
+            <div class="craft-card" data-category="blocks">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://ru.minecraft.wiki/images/%D0%96%D0%B5%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B9_%D0%B1%D0%BB%D0%BE%D0%BA_JE4_BE3.png?41bce" alt="Железный блок">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>🧱 Железный блок</h3>
+                        <span class="craft-category blocks">Блоки</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://ru.minecraft.wiki/images/%D0%96%D0%B5%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B9_%D0%B1%D0%BB%D0%BE%D0%BA_JE4_BE3.png?41bce" alt="Железный блок">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Железный блок</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Компактное хранение железа! Используется для создания наковальни и железного голема. Обратно разбирается на 9 слитков в верстаке.</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="">Железный слиток ×9</span>
+                </div>
+            </div>
+
+            <!-- Шерсть -->
+            <div class="craft-card" data-category="blocks">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://minecraft.wiki/images/thumb/White_Wool_JE2_BE2.png/160px-White_Wool_JE2_BE2.png?2bcdc" alt="Шерсть">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>🧶 Шерсть</h3>
+                        <span class="craft-category blocks">Блоки</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell filled" data-tip="Нить"><img src="https://ru.minecraft.wiki/images/%D0%9D%D0%B8%D1%82%D1%8C_JE2_BE2.png?ea61d" alt="Нить"></div>
+                        <div class="craft-cell filled" data-tip="Нить"><img src="https://ru.minecraft.wiki/images/%D0%9D%D0%B8%D1%82%D1%8C_JE2_BE2.png?ea61d" alt="Нить"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Нить"><img src="https://ru.minecraft.wiki/images/%D0%9D%D0%B8%D1%82%D1%8C_JE2_BE2.png?ea61d" alt="Нить"></div>
+                        <div class="craft-cell filled" data-tip="Нить"><img src="https://ru.minecraft.wiki/images/%D0%9D%D0%B8%D1%82%D1%8C_JE2_BE2.png?ea61d" alt="Нить"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://minecraft.wiki/images/thumb/White_Wool_JE2_BE2.png/160px-White_Wool_JE2_BE2.png?2bcdc" alt="Шерсть">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Шерсть</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Крафтится из нитей или стрижется с овец ножницами. Используется для кроватей, ковров, картин и украшений!</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://ru.minecraft.wiki/images/%D0%9D%D0%B8%D1%82%D1%8C_JE2_BE2.png?ea61d" alt="">Нить ×4</span>
+                </div>
+            </div>
+
+            <!-- Печь -->
+            <div class="craft-card" data-category="utility">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://ru.minecraft.wiki/images/thumb/%D0%9F%D0%B5%D1%87%D1%8C_JE4.png/160px-%D0%9F%D0%B5%D1%87%D1%8C_JE4.png?824e0" alt="Печь">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>🔥 Печь</h3>
+                        <span class="craft-category utility">Утилиты</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell filled" data-tip="Булыжник"><img src="https://minecraft.wiki/images/thumb/Cobblestone_JE5_BE3.png/160px-Cobblestone_JE5_BE3.png?25024" alt="Булыжник"></div>
+                        <div class="craft-cell filled" data-tip="Булыжник"><img src="https://minecraft.wiki/images/thumb/Cobblestone_JE5_BE3.png/160px-Cobblestone_JE5_BE3.png?25024" alt="Булыжник"></div>
+                        <div class="craft-cell filled" data-tip="Булыжник"><img src="https://minecraft.wiki/images/thumb/Cobblestone_JE5_BE3.png/160px-Cobblestone_JE5_BE3.png?25024" alt="Булыжник"></div>
+                        <div class="craft-cell filled" data-tip="Булыжник"><img src="https://minecraft.wiki/images/thumb/Cobblestone_JE5_BE3.png/160px-Cobblestone_JE5_BE3.png?25024" alt="Булыжник"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Булыжник"><img src="https://minecraft.wiki/images/thumb/Cobblestone_JE5_BE3.png/160px-Cobblestone_JE5_BE3.png?25024" alt="Булыжник"></div>
+                        <div class="craft-cell filled" data-tip="Булыжник"><img src="https://minecraft.wiki/images/thumb/Cobblestone_JE5_BE3.png/160px-Cobblestone_JE5_BE3.png?25024" alt="Булыжник"></div>
+                        <div class="craft-cell filled" data-tip="Булыжник"><img src="https://minecraft.wiki/images/thumb/Cobblestone_JE5_BE3.png/160px-Cobblestone_JE5_BE3.png?25024" alt="Булыжник"></div>
+                        <div class="craft-cell filled" data-tip="Булыжник"><img src="https://minecraft.wiki/images/thumb/Cobblestone_JE5_BE3.png/160px-Cobblestone_JE5_BE3.png?25024" alt="Булыжник"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://ru.minecraft.wiki/images/thumb/%D0%9F%D0%B5%D1%87%D1%8C_JE4.png/160px-%D0%9F%D0%B5%D1%87%D1%8C_JE4.png?824e0" alt="Печь">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Печь</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Плавит руду, готовит еду и обжигает блоки. Топливо: уголь, дерево, лава.</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Cobblestone_JE5_BE3.png/160px-Cobblestone_JE5_BE3.png?25024" alt="">Булыжник ×8</span>
+                </div>
+            </div>
+
+            <!-- ТНТ -->
+            <div class="craft-card" data-category="utility">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://ru.minecraft.wiki/images/%D0%A2%D0%9D%D0%A2_JE3_BE2.png?a673a" alt="ТНТ">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>💥 ТНТ</h3>
+                        <span class="craft-category utility">Утилиты</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell filled" data-tip="Порох"><img src="https://minecraft.wiki/images/thumb/Gunpowder_JE2_BE2.png/150px-Gunpowder_JE2_BE2.png" alt="Порох"></div>
+                        <div class="craft-cell filled" data-tip="Песок"><img src="https://ru.minecraft.wiki/images/%D0%9F%D0%B5%D1%81%D0%BE%D0%BA_JE5_BE3.png?cea72" alt="Песок"></div>
+                        <div class="craft-cell filled" data-tip="Порох"><img src="https://minecraft.wiki/images/thumb/Gunpowder_JE2_BE2.png/150px-Gunpowder_JE2_BE2.png" alt="Порох"></div>
+                        <div class="craft-cell filled" data-tip="Песок"><img src="https://ru.minecraft.wiki/images/%D0%9F%D0%B5%D1%81%D0%BE%D0%BA_JE5_BE3.png?cea72" alt="Песок"></div>
+                        <div class="craft-cell filled" data-tip="Порох"><img src="https://minecraft.wiki/images/thumb/Gunpowder_JE2_BE2.png/150px-Gunpowder_JE2_BE2.png" alt="Порох"></div>
+                        <div class="craft-cell filled" data-tip="Песок"><img src="https://ru.minecraft.wiki/images/%D0%9F%D0%B5%D1%81%D0%BE%D0%BA_JE5_BE3.png?cea72" alt="Песок"></div>
+                        <div class="craft-cell filled" data-tip="Порох"><img src="https://minecraft.wiki/images/thumb/Gunpowder_JE2_BE2.png/150px-Gunpowder_JE2_BE2.png" alt="Порох"></div>
+                        <div class="craft-cell filled" data-tip="Песок"><img src="https://ru.minecraft.wiki/images/%D0%9F%D0%B5%D1%81%D0%BE%D0%BA_JE5_BE3.png?cea72" alt="Песок"></div>
+                        <div class="craft-cell filled" data-tip="Порох"><img src="https://minecraft.wiki/images/thumb/Gunpowder_JE2_BE2.png/150px-Gunpowder_JE2_BE2.png" alt="Порох"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://ru.minecraft.wiki/images/%D0%A2%D0%9D%D0%A2_JE3_BE2.png?a673a" alt="ТНТ">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">ТНТ</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Взрывчатка для добычи и веселья! Активируется огнивом или редстоуном.</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Gunpowder_JE2_BE2.png/150px-Gunpowder_JE2_BE2.png" alt="">Порох ×5</span>
+                    <span class="ingredient-tag"><img src="https://ru.minecraft.wiki/images/%D0%9F%D0%B5%D1%81%D0%BE%D0%BA_JE5_BE3.png?cea72" alt="">Песок ×4</span>
+                </div>
+            </div>
+
+            <!-- Сундук Энда -->
+            <div class="craft-card" data-category="magic">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://minecraft.wiki/images/thumb/Ender_Chest_JE2_BE2.gif/160px-Ender_Chest_JE2_BE2.gif?90e80" alt="Сундук Энда">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>🔮 Сундук Энда</h3>
+                        <span class="craft-category magic">Магия</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell filled" data-tip="Обсидиан"><img src="https://ru.minecraft.wiki/images/thumb/Обсидиан_JE3_BE2.png/160px-Обсидиан_JE3_BE2.png?5f03f" alt="Обсидиан"></div>
+                        <div class="craft-cell filled" data-tip="Обсидиан"><img src="https://ru.minecraft.wiki/images/thumb/Обсидиан_JE3_BE2.png/160px-Обсидиан_JE3_BE2.png?5f03f" alt="Обсидиан"></div>
+                        <div class="craft-cell filled" data-tip="Обсидиан"><img src="https://ru.minecraft.wiki/images/thumb/Обсидиан_JE3_BE2.png/160px-Обсидиан_JE3_BE2.png?5f03f" alt="Обсидиан"></div>
+                        <div class="craft-cell filled" data-tip="Обсидиан"><img src="https://ru.minecraft.wiki/images/thumb/Обсидиан_JE3_BE2.png/160px-Обсидиан_JE3_BE2.png?5f03f" alt="Обсидиан"></div>
+                        <div class="craft-cell filled" data-tip="Око Края"><img src="https://minecraft.wiki/images/thumb/Eye_of_Ender_JE2_BE2.png/150px-Eye_of_Ender_JE2_BE2.png" alt="Око"></div>
+                        <div class="craft-cell filled" data-tip="Обсидиан"><img src="https://ru.minecraft.wiki/images/thumb/Обсидиан_JE3_BE2.png/160px-Обсидиан_JE3_BE2.png?5f03f" alt="Обсидиан"></div>
+                        <div class="craft-cell filled" data-tip="Обсидиан"><img src="https://ru.minecraft.wiki/images/thumb/Обсидиан_JE3_BE2.png/160px-Обсидиан_JE3_BE2.png?5f03f" alt="Обсидиан"></div>
+                        <div class="craft-cell filled" data-tip="Обсидиан"><img src="https://ru.minecraft.wiki/images/thumb/Обсидиан_JE3_BE2.png/160px-Обсидиан_JE3_BE2.png?5f03f" alt="Обсидиан"></div>
+                        <div class="craft-cell filled" data-tip="Обсидиан"><img src="https://ru.minecraft.wiki/images/thumb/Обсидиан_JE3_BE2.png/160px-Обсидиан_JE3_BE2.png?5f03f" alt="Обсидиан"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://minecraft.wiki/images/thumb/Ender_Chest_JE2_BE2.gif/160px-Ender_Chest_JE2_BE2.gif?90e80" alt="Сундук Энда">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Сундук Энда</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Личный сундук, доступный из любого места в мире! Инвентарь един для всех сундуков Энда.</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Obsidian_JE2_BE2.png/150px-Obsidian_JE2_BE2.png" alt="">Обсидиан ×8</span>
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Eye_of_Ender_JE2_BE2.png/150px-Eye_of_Ender_JE2_BE2.png" alt="">Око Края ×1</span>
+                </div>
+            </div>
+
+            <!-- Наковальня -->
+            <div class="craft-card" data-category="tools">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://minecraft.wiki/images/thumb/Anvil_%28N%29_JE3.png/160px-Anvil_%28N%29_JE3.png?d438e" alt="Наковальня">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>🔨 Наковальня</h3>
+                        <span class="craft-category tools">Инструменты</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell filled" data-tip="Железный блок"><img src="https://ru.minecraft.wiki/images/%D0%96%D0%B5%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B9_%D0%B1%D0%BB%D0%BE%D0%BA_JE4_BE3.png?41bce" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Железный блок"><img src="https://ru.minecraft.wiki/images/%D0%96%D0%B5%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B9_%D0%B1%D0%BB%D0%BE%D0%BA_JE4_BE3.png?41bce" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Железный блок"><img src="https://ru.minecraft.wiki/images/%D0%96%D0%B5%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B9_%D0%B1%D0%BB%D0%BE%D0%BA_JE4_BE3.png?41bce" alt="Железо"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                        <div class="craft-cell filled" data-tip="Железный слиток"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="Железо"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                        <img src="https://minecraft.wiki/images/thumb/Anvil_%28N%29_JE3.png/160px-Anvil_%28N%29_JE3.png?d438e" alt="Наковальня">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Наковальня</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Чини и переименовывай предметы. Соединяет чары! Падает и повреждается при использовании.</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://ru.minecraft.wiki/images/%D0%96%D0%B5%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B9_%D0%B1%D0%BB%D0%BE%D0%BA_JE4_BE3.png?41bce" alt="">Железный блок ×3</span>
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Iron_Ingot_JE3_BE2.png/150px-Iron_Ingot_JE3_BE2.png" alt="">Железный слиток ×4</span>
+                </div>
+            </div>
+
+            <!-- Торт -->
+            <div class="craft-card" data-category="food">
+                <div class="craft-header">
+                    <div class="craft-result-icon">
+                        <img src="https://minecraft.wiki/images/thumb/Cake_JE4.png/160px-Cake_JE4.png?7c59e" alt="Торт">
+                    </div>
+                    <div class="craft-title-block">
+                        <h3>🎂 Торт</h3>
+                        <span class="craft-category food">Еда</span>
+                    </div>
+                </div>
+                <div class="craft-table-wrapper">
+                    <div class="craft-table">
+                        <div class="craft-cell filled" data-tip="Молоко"><img src="https://minecraft.wiki/images/thumb/Milk_Bucket_JE2_BE2.png/150px-Milk_Bucket_JE2_BE2.png" alt="Молоко"></div>
+                        <div class="craft-cell filled" data-tip="Молоко"><img src="https://minecraft.wiki/images/thumb/Milk_Bucket_JE2_BE2.png/150px-Milk_Bucket_JE2_BE2.png" alt="Молоко"></div>
+                        <div class="craft-cell filled" data-tip="Молоко"><img src="https://minecraft.wiki/images/thumb/Milk_Bucket_JE2_BE2.png/150px-Milk_Bucket_JE2_BE2.png" alt="Молоко"></div>
+                        <div class="craft-cell filled" data-tip="Сахар"><img src="https://minecraft.wiki/images/thumb/Sugar_JE2_BE2.png/150px-Sugar_JE2_BE2.png" alt="Сахар"></div>
+                        <div class="craft-cell filled" data-tip="Яйцо"><img src="https://minecraft.wiki/images/thumb/Egg_JE2_BE2.png/150px-Egg_JE2_BE2.png" alt="Яйцо"></div>
+                        <div class="craft-cell filled" data-tip="Сахар"><img src="https://minecraft.wiki/images/thumb/Sugar_JE2_BE2.png/150px-Sugar_JE2_BE2.png" alt="Сахар"></div>
+                        <div class="craft-cell filled" data-tip="Пшеница"><img src="https://minecraft.wiki/images/thumb/Wheat_JE2_BE2.png/150px-Wheat_JE2_BE2.png" alt="Пшеница"></div>
+                        <div class="craft-cell filled" data-tip="Пшеница"><img src="https://minecraft.wiki/images/thumb/Wheat_JE2_BE2.png/150px-Wheat_JE2_BE2.png" alt="Пшеница"></div>
+                        <div class="craft-cell filled" data-tip="Пшеница"><img src="https://minecraft.wiki/images/thumb/Wheat_JE2_BE2.png/150px-Wheat_JE2_BE2.png" alt="Пшеница"></div>
+                    </div>
+                    <div class="craft-arrow">➜</div>
+                    <div class="craft-output">
+                        <div class="craft-output-cell">
+                            <img src="https://minecraft.wiki/images/thumb/Cake_JE4.png/160px-Cake_JE4.png?7c59e" alt="Торт">
+                            <span class="cell-count">x1</span>
+                        </div>
+                        <div class="craft-output-label">Торт</div>
+                    </div>
+                </div>
+                <p class="craft-desc">Вкуснейший десерт! Ставится на блок и съедается по кусочкам. 7 кусков, 2 голода за кусок.</p>
+                <div class="craft-ingredients">
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Milk_Bucket_JE2_BE2.png/150px-Milk_Bucket_JE2_BE2.png" alt="">Молоко ×3</span>
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Sugar_JE2_BE2.png/150px-Sugar_JE2_BE2.png" alt="">Сахар ×2</span>
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Egg_JE2_BE2.png/150px-Egg_JE2_BE2.png" alt="">Яйцо ×1</span>
+                    <span class="ingredient-tag"><img src="https://minecraft.wiki/images/thumb/Wheat_JE2_BE2.png/150px-Wheat_JE2_BE2.png" alt="">Пшеница ×3</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== БИОМЫ ===== -->
+    <div id="biomes-page" class="page">
+        <div class="card">
+            <h2>🗺️ Биомы Minecraft</h2>
+            <p>Исследуй удивительные биомы мира Minecraft!</p>
+        </div>
+        <div class="biome-grid">
+
+            <div class="biome-card">
+                <div class="biome-card-header" style="background: linear-gradient(135deg, #2d5a27, #4a8c3f);">
+                    <img src="https://minecraft.wiki/images/thumb/Grass_Block_JE7_BE6.png/160px-Grass_Block_JE7_BE6.png" alt="Равнины" class="biome-card-img">
+                    <h3>🌲 Равнинные и лесные</h3>
+                </div>
+                <ul>
+                    <li><strong>Равнины</strong> — просторные травянистые равнины, много цветов. Лошади, ослы, овцы.</li>
+                    <li><strong>Лес</strong> — густые дубы и берёзы, много грибов. Волки, лисы, овцы.</li>
+                    <li><strong>Тёмный лес</strong> — плотный лес из тёмных дубов, почти всегда темно. Ведьмы.</li>
+                    <li><strong>Берёзовый лес</strong> — только берёзы, высокая плотность деревьев.</li>
+                    <li><strong>Тайга</strong> — ели и папоротники, возможен снег. Волки, лисы, кролики.</li>
+                    <li><strong>Джунгли</strong> — тропические деревья, лианы. Попугаи, панды, оцелоты.</li>
+                    <li><strong>Вишнёвая роща</strong> — розовые вишнёвые деревья, пчёлы.</li>
+                    <li><strong>Луга</strong> — холмистые луга с цветами. Пчёлы, ослы.</li>
+                    <li><strong>Бамбуковые джунгли</strong> — бамбук, панды.</li>
+                </ul>
+            </div>
+
+            <div class="biome-card">
+                <div class="biome-card-header" style="background: linear-gradient(135deg, #8a6a2a, #c4a040);">
+                    <img src="https://ru.minecraft.wiki/images/%D0%9F%D0%B5%D1%81%D0%BE%D0%BA_JE5_BE3.png?cea72" alt="Пустыня" class="biome-card-img">
+                    <h3>🏜️ Сухие / засушливые</h3>
+                </div>
+                <ul>
+                    <li><strong>Пустыня</strong> — песок, кактусы, колодцы, пустынные храмы.</li>
+                    <li><strong>Плоскогорье (Badlands)</strong> — цветные терракотовые слои, золото.</li>
+                    <li><strong>Саванна</strong> — жёлтая трава, акации. Лошади.</li>
+                    <li><strong>Эродированное плоскогорье</strong> — причудливые башни из терракоты.</li>
+                    <li><strong>Пустоши (Windswept Savanna)</strong> — эродированная саванна.</li>
+                </ul>
+            </div>
+
+            <div class="biome-card">
+                <div class="biome-card-header" style="background: linear-gradient(135deg, #2a4a6a, #5a8aaa);">
+                    <img src="https://minecraft.wiki/images/thumb/Snow_JE3_BE2.png/150px-Snow_JE3_BE2.png" alt="Снег" class="biome-card-img">
+                    <h3>❄️ Холодные / снежные</h3>
+                </div>
+                <ul>
+                    <li><strong>Снежная равнина</strong> — заснеженная равнина, белые медведи, иглу.</li>
+                    <li><strong>Ледяные шипы</strong> — гигантские иглы из льда.</li>
+                    <li><strong>Замёрзшая река</strong> — река с ледяной поверхностью.</li>
+                    <li><strong>Замёрзший океан</strong> — айсберги, белые медведи.</li>
+                    <li><strong>Снежные склоны</strong> — заснеженные склоны гор, козы.</li>
+                    <li><strong>Замёрзшие вершины</strong> — снежные и ледяные вершины.</li>
+                </ul>
+            </div>
+
+            <div class="biome-card">
+                <div class="biome-card-header" style="background: linear-gradient(135deg, #1a4a6a, #3a8aba);">
+                    <img src="https://minecraft.wiki/images/thumb/Water_Bucket_JE3_BE2.png/150px-Water_Bucket_JE3_BE2.png" alt="Океан" class="biome-card-img">
+                    <h3>🌊 Океаны и пляжи</h3>
+                </div>
+                <ul>
+                    <li><strong>Океан</strong> — кальмары, дельфины, треска, лосось.</li>
+                    <li><strong>Глубокий океан</strong> — подводные руины, монументы.</li>
+                    <li><strong>Тёплый океан</strong> — коралловые рифы, тропические рыбы.</li>
+                    <li><strong>Пляж</strong> — песчаный берег, черепахи.</li>
+                    <li><strong>Каменистый берег</strong> — каменистый берег.</li>
+                </ul>
+            </div>
+
+            <div class="biome-card">
+                <div class="biome-card-header" style="background: linear-gradient(135deg, #2a4a2a, #3a6a3a);">
+                    <img src="https://minecraft.wiki/images/thumb/Lily_Pad_JE2_BE2.png/150px-Lily_Pad_JE2_BE2.png" alt="Болото" class="biome-card-img">
+                    <h3>🌿 Болотистые и речные</h3>
+                </div>
+                <ul>
+                    <li><strong>Болото</strong> — тёмная вода, лианы, огни болот. Лягушки, ведьмы.</li>
+                    <li><strong>Мангровое болото</strong> — мангровые деревья, лягушки.</li>
+                    <li><strong>Река</strong> — пресная вода. Лосось, кальмары.</li>
+                </ul>
+            </div>
+
+            <div class="biome-card">
+                <div class="biome-card-header" style="background: linear-gradient(135deg, #1a1a2a, #3a3a4a);">
+                    <img src="https://minecraft.wiki/images/thumb/Cobblestone_JE5_BE3.png/160px-Cobblestone_JE5_BE3.png?25024" alt="Пещера" class="biome-card-img">
+                    <h3>🕳️ Подземные биомы</h3>
+                </div>
+                <ul>
+                    <li><strong>Капельниковые пещеры</strong> — сталактиты и сталагмиты.</li>
+                    <li><strong>Пышные пещеры</strong> — азорея, светящиеся ягоды. Аксолотли.</li>
+                    <li><strong>Глубинная тьма</strong> — скалк, Хранитель (Warden).</li>
+                </ul>
+            </div>
+
+            <div class="biome-card">
+                <div class="biome-card-header" style="background: linear-gradient(135deg, #1a0a2a, #3a1a5a);">
+                    <img src="https://minecraft.wiki/images/thumb/Eye_of_Ender_JE2_BE2.png/150px-Eye_of_Ender_JE2_BE2.png" alt="Энд" class="biome-card-img">
+                    <h3>🚀 Энд</h3>
+                </div>
+                <ul>
+                    <li><strong>Энд</strong> — главный остров с драконом, эндермены.</li>
+                    <li><strong>Внешние острова</strong> — хорусовые леса, шалкеры.</li>
+                </ul>
+            </div>
+
+            <div class="biome-card">
+                <div class="biome-card-header" style="background: linear-gradient(135deg, #2a0a0a, #5a1a1a);">
+                    <img src="https://minecraft.wiki/images/thumb/Netherrack_JE3_BE2.png/150px-Netherrack_JE3_BE2.png" alt="Незер" class="biome-card-img">
+                    <h3>🔥 Нижний мир (Незер)</h3>
+                </div>
+                <ul>
+                    <li><strong>Искажённый лес</strong> — сине-зелёные тона, эндермены.</li>
+                    <li><strong>Багровый лес</strong> — красные тона, хоглины, пиглины.</li>
+                    <li><strong>Долина душ</strong> — души песок, скелеты, гасты.</li>
+                    <li><strong>Базальтовые дельты</strong> — чёрный базальт, магма кубы.</li>
+                    <li><strong>Незерские пустоши</strong> — классический ад.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="biome-note">
+            <strong>Примечание:</strong> Всего в Minecraft около 60 биомов (включая редкие вариации). Используй команду <code>/locate biome &lt;название&gt;</code> для поиска.
+        </div>
+        </div>
+        </div>
+
+    <!-- ===== ДАНЖИ ===== -->
+    <div id="dungeons-page" class="page">
+        <div class="card">
+            <h2>🏚️ Структуры и данжи Minecraft</h2>
+            <p>В мире Minecraft можно найти множество уникальных сооружений — от простых пещер до величественных храмов. Исследуй их все!</p>
+        </div>
+        <div class="dungeons-grid" id="dungeonsGrid"></div>
+    </div>
+
+    <!-- ===== МОДАЛ ДАНЖЕЙ ===== -->
+    <div class="dungeon-overlay" id="dungeonOverlay">
+        <div class="dungeon-modal" id="dungeonModal">
+            <button class="dungeon-close" id="dungeonClose">&times;</button>
+            <div class="dungeon-modal-img-wrap">
+                <img id="dungeonModalImg" src="" alt="">
+            </div>
+            <div class="dungeon-modal-body">
+                <h2 id="dungeonModalTitle"></h2>
+                <span class="dungeon-badge" id="dungeonModalBadge"></span>
+                <div class="dungeon-modal-section">
+                    <h3>📝 Описание</h3>
+                    <p id="dungeonModalDesc"></p>
+                </div>
+                <div class="dungeon-modal-section">
+                    <h3>📍 Расположение</h3>
+                    <p id="dungeonModalLocation"></p>
+                </div>
+                <div class="dungeon-modal-section">
+                    <h3>🎒 Возможный лут</h3>
+                    <p id="dungeonModalLoot"></p>
+                </div>
+                <div class="dungeon-modal-section">
+                    <h3>⚠️ Опасность</h3>
+                    <p id="dungeonModalDanger"></p>
+                </div>
+                <div class="dungeon-modal-section">
+                    <h3>💡 Советы</h3>
+                    <p id="dungeonModalTips"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== МУЗЫКА ===== -->
+    <div id="music-page" class="page">
+        <div class="card">
+            <h2>🎵 Музыка Minecraft</h2>
+            <p>Оригинальный саундтрек игры, созданный композитором C418, а также музыкальные пластинки.</p>
+        </div>
+
+        <div class="card">
+            <h2>💿 Музыкальные пластинки</h2>
+            <p>Пластинки, которые можно найти в мире Minecraft и проиграть на проигрывателе</p>
+            <div class="discs-grid">
+                <div class="disc-card">
+                    <img src="https://minecraft.wiki/images/Music_Disc_13_JE1_BE1.png" alt="13">
+                    <h3>13</h3>
+                    <p class="disc-author">C418 — Thirteen</p>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/13.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="disc-card">
+                    <img src="https://minecraft.wiki/images/Music_Disc_cat_JE1_BE1.png" alt="cat">
+                    <h3>cat</h3>
+                    <p class="disc-author">C418 — Cat</p>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Cat.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="disc-card">
+                    <img src="https://minecraft.wiki/images/Music_Disc_blocks_JE1_BE1.png" alt="blocks">
+                    <h3>blocks</h3>
+                    <p class="disc-author">C418 — Blocks</p>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Blocks.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="disc-card">
+                    <img src="https://minecraft.wiki/images/Music_Disc_chirp_JE1_BE1.png" alt="chirp">
+                    <h3>chirp</h3>
+                    <p class="disc-author">C418 — Chirp</p>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Chirp.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="disc-card">
+                    <img src="https://minecraft.wiki/images/Music_Disc_far_JE1_BE1.png" alt="far">
+                    <h3>far</h3>
+                    <p class="disc-author">C418 — Far</p>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Far.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="disc-card">
+                    <img src="https://minecraft.wiki/images/Music_Disc_mall_JE1_BE1.png" alt="mall">
+                    <h3>mall</h3>
+                    <p class="disc-author">C418 — Mall</p>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Mall.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="disc-card">
+                    <img src="https://minecraft.wiki/images/Music_Disc_mellohi_JE1_BE1.png" alt="mellohi">
+                    <h3>mellohi</h3>
+                    <p class="disc-author">C418 — Mellohi</p>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Mellohi.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="disc-card">
+                    <img src="https://minecraft.wiki/images/Music_Disc_stal_JE1_BE1.png" alt="stal">
+                    <h3>stal</h3>
+                    <p class="disc-author">C418 — Stal</p>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Stal.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="disc-card">
+                    <img src="https://minecraft.wiki/images/Music_Disc_strad_JE1_BE1.png" alt="strad">
+                    <h3>strad</h3>
+                    <p class="disc-author">C418 — Strad</p>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Strad.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="disc-card">
+                    <img src="https://minecraft.wiki/images/Music_Disc_ward_JE1_BE1.png" alt="ward">
+                    <h3>ward</h3>
+                    <p class="disc-author">C418 — Ward</p>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Ward.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="disc-card">
+                    <img src="https://minecraft.wiki/images/Music_Disc_11_JE1_BE1.png" alt="11">
+                    <h3>11</h3>
+                    <p class="disc-author">C418 — Eleven</p>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/11.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="disc-card">
+                    <img src="https://minecraft.wiki/images/Music_Disc_wait_JE1_BE1.png" alt="wait">
+                    <h3>wait</h3>
+                    <p class="disc-author">C418 — Wait</p>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Where_are_we_now.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🎶 Фоновая музыка</h2>
+            <p>Классические треки C418, играющие в мире Minecraft</p>
+            <div class="music-grid">
+                <div class="music-track">
+                    <span class="track-name">C418 — Sweden</span>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Sweden.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="music-track">
+                    <span class="track-name">C418 — Subwoofer Lullaby</span>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Subwoofer_lullaby.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="music-track">
+                    <span class="track-name">C418 — Mice on Venus</span>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Mice_on_venus.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="music-track">
+                    <span class="track-name">C418 — Minecraft</span>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Minecraft.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="music-track">
+                    <span class="track-name">C418 — Wet Hands</span>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Wet_hands.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="music-track">
+                    <span class="track-name">C418 — Dry Hands</span>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Dry_hands.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="music-track">
+                    <span class="track-name">C418 — Clark</span>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Clark.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="music-track">
+                    <span class="track-name">C418 — Haggstrom</span>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Haggstrom.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="music-track">
+                    <span class="track-name">C418 — Living Mice</span>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Living_mice.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="music-track">
+                    <span class="track-name">C418 — Danny</span>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Danny.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="music-track">
+                    <span class="track-name">C418 — Key</span>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Key.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+                <div class="music-track">
+                    <span class="track-name">C418 — Door</span>
+                    <audio controls preload="none">
+                        <source src="https://minecraft.wiki/images/Door.ogg" type="audio/ogg">
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2026 Minecraft World | Неофициальный фанатский сайт</p>
+        <p>🌲 Добывай блоки, строй замки, побеждай дракона! 🐉</p>
+        <p><a onclick="scrollToTop()">Вверх ▲</a></p>
+    </div>
+</div>
+
+<div class="biome-popup" id="biomePopup">
+    <img id="popupImage" src="" alt="">
+    <div class="popup-title" id="popupTitle"></div>
+</div>
+
+<script>
+    // Переключение страниц
+    const pages = {
+        home:   document.getElementById('home-page'),
+        mobs:   document.getElementById('mobs-page'),
+        crafts: document.getElementById('crafts-page'),
+        biomes: document.getElementById('biomes-page'),
+        dungeons: document.getElementById('dungeons-page'),
+        music: document.getElementById('music-page')
+    };
+
+    const navLinks = document.querySelectorAll('.nav ul li a');
+
+    function switchPage(pageId) {
+        Object.values(pages).forEach(p => p && p.classList.remove('active-page'));
+        if (pages[pageId]) pages[pageId].classList.add('active-page');
+        navLinks.forEach(l => {
+            l.classList.remove('active');
+            if (l.getAttribute('data-page') === pageId) l.classList.add('active');
+        });
+    }
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            const id = link.getAttribute('data-page');
+            if (id) switchPage(id);
+        });
+    });
+
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+    // Информация
+    const infoBtn = document.getElementById('infoBtn');
+    if (infoBtn) {
+        infoBtn.addEventListener('click', () => {
+            alert('🎮 Minecraft был создан Нотчем (Маркусом Перссоном) в 2011 году.\nПродано более 300 миллионов копий!\nMinecraft — самая продаваемая игра в истории.');
+        });
+    }
+
+    // Быстрая навигация на главной
+    document.querySelectorAll('.quick-link').forEach(link => {
+        link.addEventListener('click', () => {
+            const id = link.getAttribute('data-page');
+            if (id) switchPage(id);
+        });
+    });
+    // Фильтр крафтов
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const craftCards = document.querySelectorAll('.craft-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.getAttribute('data-filter');
+            craftCards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // Биомы — открытие картинки по клику
+    const biomeImages = {
+        'Равнины': 'Plains',
+        'Лес': 'Forest',
+        'Тёмный лес': 'Dark_Forest',
+        'Берёзовый лес': 'Birch_Forest',
+        'Тайга': 'Taiga',
+        'Джунгли': 'Jungle',
+        'Вишнёвая роща': 'Cherry_Grove',
+        'Луга': 'Meadow',
+        'Бамбуковые джунгли': 'Bamboo_Jungle',
+        'Пустыня': 'Desert',
+        'Плоскогорье (Badlands)': 'Badlands',
+        'Саванна': 'Savanna',
+        'Эродированное плоскогорье': 'Eroded_Badlands',
+        'Пустоши (Windswept Savanna)': 'Windswept_Savanna',
+        'Снежная равнина': 'Snowy_Plains',
+        'Ледяные шипы': 'Ice_Spikes',
+        'Замёрзшая река': 'Frozen_River',
+        'Замёрзший океан': 'Frozen_Ocean',
+        'Снежные склоны': 'Snowy_Slopes',
+        'Замёрзшие вершины': 'Frozen_Peaks',
+        'Океан': 'Ocean',
+        'Глубокий океан': 'Deep_Ocean',
+        'Тёплый океан': 'Warm_Ocean',
+        'Пляж': 'Beach',
+        'Каменистый берег': 'Stony_Shore',
+        'Болото': 'Swamp',
+        'Мангровое болото': 'Mangrove_Swamp',
+        'Река': 'River',
+        'Капельниковые пещеры': 'Dripstone_Caves',
+        'Пышные пещеры': 'Lush_Caves',
+        'Глубинная тьма': 'Deep_Dark',
+        'Энд': 'The_End',
+        'Внешние острова': 'End_Highlands',
+        'Искажённый лес': 'Warped_Forest',
+        'Багровый лес': 'Crimson_Forest',
+        'Долина душ': 'Soul_Sand_Valley',
+        'Базальтовые дельты': 'Basalt_Deltas',
+        'Незерские пустоши': 'Nether_Wastes'
+    };
+
+    const popup = document.getElementById('biomePopup');
+    const popupImg = document.getElementById('popupImage');
+    const popupTitle = document.getElementById('popupTitle');
+
+    // Предзагрузка всех картинок биомов
+    Object.values(biomeImages).forEach(name => {
+        const img = new Image();
+        img.src = `https://minecraft.wiki/images/thumb/${name}.png/1200px-${name}.png`;
+    });
+
+    document.querySelectorAll('.biome-card li').forEach(el => {
+        el.addEventListener('mouseenter', (e) => {
+            const strong = el.querySelector('strong');
+            if (!strong) return;
+            const name = strong.textContent.trim();
+            const engName = biomeImages[name];
+            if (engName) {
+                popupImg.src = `https://minecraft.wiki/images/thumb/${engName}.png/1200px-${engName}.png`;
+                popupTitle.textContent = name;
+                popup.style.display = 'block';
+                positionPopup(e);
+            }
+        });
+
+        el.addEventListener('mousemove', positionPopup);
+
+        el.addEventListener('mouseleave', () => {
+            popup.style.display = 'none';
+        });
+    });
+
+    function positionPopup(e) {
+        const w = popup.offsetWidth;
+        const h = popup.offsetHeight;
+        let x = e.clientX + 15;
+        let y = e.clientY + 15;
+
+        if (x + w > window.innerWidth - 10) x = e.clientX - w - 15;
+        if (y + h > window.innerHeight - 10) y = e.clientY - h - 15;
+        if (x < 10) x = 10;
+        if (y < 10) y = 10;
+
+        popup.style.left = x + 'px';
+        popup.style.top = y + 'px';
+    }
+
+    // ===== ДАНЖИ =====
+    const dungeonData = [
+        {
+            id: 'pillager-outpost',
+            name: 'Аванпост разбойников',
+            img: 'https://minecraft.wiki/images/thumb/Pillager_Outpost.png/1200px-Pillager_Outpost.png',
+            badge: 'overworld',
+            badgeText: 'Верхний мир',
+            short: 'Башня с разбойниками и сундуком наверху.',
+            desc: 'Аванпост разбойников — это сторожевая башня из дерева и булыжника, окружённая меньшими постройками: палатками, мишенями и клетками. В клетках иногда заперты железный голем или аллаи. На верхнем этаже башни находится сундук с добычей.',
+            location: 'Генерируется в равнинах, пустынях, саваннах, тайге, снежных равнинах, лугах, вишнёвых рощах и горных биомах.',
+            loot: 'Арбалет, пшеница, морковь, картофель, стрелы, железные слитки, нити, крючки, зелья опыта, рог козы, шаблон кузнеца (дозорный).',
+            danger: 'Средняя. Разбойники атакуют издалека из арбалетов. Капитан даёт эффект «Дурное предзнаменование».',
+            tips: 'Убей капитана, чтобы получить «Дурное предзнаменование» — затем войди в деревню для начала рейда. Забери сундук на верхушке башни.'
+        },
+        {
+            id: 'nether-fortress',
+            name: 'Адская крепость',
+            img: 'https://minecraft.wiki/images/thumb/Nether_Fortress.png/1200px-Nether_Fortress.png',
+            badge: 'nether',
+            badgeText: 'Незер',
+            short: 'Огромный замок из адского кирпича в Незере.',
+            desc: 'Адская крепость — большое сооружение из незерского кирпича с башнями, мостами и коридорами. Внутри находятся спаунеры ифритов и скелетов-иссушителей. Сундуки с ценным лутом спрятаны в разных частях крепости.',
+            location: 'Генерируется во всех биомах Незера (Нижнего мира).',
+            loot: 'Золотые слитки, алмазы, незеритский скрап, седла, алмазная конская броня, огненные стержни, костяной уголь, мечи и броня с чарами.',
+            danger: 'Высокая. Ифриты атакуют огненными шарами, скелеты-иссушители накладывают эффект иссушения. Много лавы.',
+            tips: 'Возьми огнеупорное зелье и хорошую броню. Убивай ифритов для получения огненных стержней — они нужны для варки зелий и портала в Край.'
+        },
+        {
+            id: 'nether-fossil',
+            name: 'Адские ископаемые останки',
+            img: 'https://minecraft.wiki/images/thumb/Nether_fossil_1.png/1200px-Nether_fossil_1.png',
+            badge: 'nether',
+            badgeText: 'Незер',
+            short: 'Останки древних существ из костяных блоков.',
+            desc: 'Адские ископаемые останки — структура, напоминающая скелет древнего существа, полностью состоящая из костяных блоков. Встречается только в Незере. Может быть различной формы и размера.',
+            location: 'Генерируется только в долине песка душ (Soul Sand Valley) в Незере.',
+            loot: 'Костяные блоки (можно переделать в костную муку).',
+            danger: 'Низкая. Сама структура не опасна, но долина песка душ населена скелетами и гастами.',
+            tips: 'Костяные блоки — отличный источник костной муки для ферм. Возьми кирку для быстрой добычи.'
+        },
+        {
+            id: 'amethyst-geode',
+            name: 'Аметистовая жеода',
+            img: 'https://minecraft.wiki/images/thumb/Amethyst_Geode_JE4_BE1.png/1200px-Amethyst_Geode_JE4_BE1.png',
+            badge: 'feature',
+            badgeText: 'Декорация',
+            short: 'Большая полая сфера с аметистами внутри.',
+            desc: 'Аметистовая жеода — круглая полая структура, состоящая из трёх слоёв: внешний — базальт или туф, средний — каламит, внутренний — аметистовый блок. Внутри растут бутоны и друзы аметиста.',
+            location: 'Генерируется под землёй в любых биомах Верхнего мира (часто на уровне Y=0-70).',
+            loot: 'Осколки аметиста, аметистовые блоки, каламит.',
+            danger: 'Низкая. Внутри могут быть небольшие пещеры с мобами.',
+            tips: 'Собирай осколки аметиста для создания подзорной трубы и тонированного стекла. Используй кирку с Шёлковым касанием для добычи друз.'
+        },
+        {
+            id: 'mineshaft',
+            name: 'Заброшенная шахта',
+            img: 'https://minecraft.wiki/images/thumb/Mineshaft.png/1200px-Mineshaft.png',
+            badge: 'overworld',
+            badgeText: 'Верхний мир',
+            short: 'Сеть туннелей с рельсами и сундуками.',
+            desc: 'Заброшенная шахта — сеть подземных туннелей с деревянными опорами и ржавыми рельсами. Везде висят паутины, а в некоторых местах стоят вагонетки с сундуками. Можно найти спаунер пещерных пауков.',
+            location: 'Генерируется под землёй в любых биомах Верхнего мира, кроме тёмных глубин. В пустошах — ближе к поверхности.',
+            loot: 'Золотые и железные слитки, алмазы, хлеб, факелы, красная пыль, уголь, железные кирки.',
+            danger: 'Средняя. Пещерные пауки (ядовитые!) в спаунерах. Много паутины, замедляющей движение.',
+            tips: 'Будь осторожен с паутиной — используй меч для быстрого уничтожения. Найди спаунер пещерных пауков для фермы опыта. Осматривай вагонетки — там ценный лут.'
+        },
+        {
+            id: 'shipwreck',
+            name: 'Затонувший корабль',
+            img: 'https://minecraft.wiki/images/thumb/Shipwreck_Oak_(With_Mast).png/1200px-Shipwreck_Oak_(With_Mast).png',
+            badge: 'overworld',
+            badgeText: 'Верхний мир',
+            short: 'Разбитый корабль на дне океана.',
+            desc: 'Затонувший корабль — деревянное судно, лежащее на дне океана или на пляже. Состоит из носовой, кормовой части и мачты. Содержит до 3 сундуков с добычей в разных частях.',
+            location: 'Генерируется во всех типах океанов, а иногда на пляжах и каменистых берегах.',
+            loot: 'Карта сокровищ, золотые и железные слитки, алмазы, изумруды, уголь, мясо, зелья, кожа, перья, ведро лавы.',
+            danger: 'Низкая. Нужно задерживать дыхание под водой. Иногда рядом нерестятся утопленники.',
+            tips: 'Используй зелье подводного дыхания или построй пузырьковый лифт. Карта сокровищ приведёт тебя к зарытому кладу!'
+        },
+        {
+            id: 'igloo',
+            name: 'Иглу',
+            img: 'https://minecraft.wiki/images/thumb/Igloo_top.png/1200px-Igloo_top.png',
+            badge: 'overworld',
+            badgeText: 'Верхний мир',
+            short: 'Снежный дом с тайной лабораторией.',
+            desc: 'Иглу — небольшое снежное жилище с ковром, печью и кроватью внутри. В 50% случаев под иглу находится подземная комната со столом зельеварения, зельем слабости и золотым яблоком, а также клетка с жителем и зомби-жителем.',
+            location: 'Генерируется в снежных равнинах, снежной тайге и на снежных склонах.',
+            loot: 'Зелье слабости, золотое яблоко, сундук с ништяками.',
+            danger: 'Низкая. В подземелье может быть зомби-житель.',
+            tips: 'Используй зелье слабости и золотое яблоко, чтобы вылечить зомби-жителя — получишь обычного жителя, которого можно отвести в деревню.'
+        },
+        {
+            id: 'fossil',
+            name: 'Ископаемые останки',
+            img: 'https://minecraft.wiki/images/thumb/Fossil_Skull_1.png/1200px-Fossil_Skull_1.png',
+            badge: 'feature',
+            badgeText: 'Декорация',
+            short: 'Скелет древнего животного под землёй.',
+            desc: 'Ископаемые останки — структура, напоминающая скелет гигантского доисторического животного. Состоят из костяных блоков и каменного угля. Могут быть четырёх разных форм: череп, спина, тело или скелет.',
+            location: 'Генерируются под землёй в пустынях, болотах, дубовых и тёмных лесах (Y=40-70).',
+            loot: 'Костяные блоки, каменный уголь.',
+            danger: 'Низкая. Просто декорация.',
+            tips: 'Костяные блоки — отличный источник костной муки. Вокруг часто генерируются пещеры.'
+        },
+        {
+            id: 'well',
+            name: 'Источник',
+            img: 'https://minecraft.wiki/images/thumb/Desert_Well_JE2_BE2.png/1200px-Desert_Well_JE2_BE2.png',
+            badge: 'feature',
+            badgeText: 'Декорация',
+            short: 'Пустынный колодец с водой.',
+            desc: 'Источник (пустынный колодец) — небольшое сооружение из песчаника, появляющееся в пустыне. Состоит из колодца с водой в центре, окружённого четырьмя столбами с перекрытием. Под ним может быть скрытая пещера.',
+            location: 'Генерируется на поверхности в пустыне.',
+            loot: 'Вода, под колодцем иногда — пещеры с рудой.',
+            danger: 'Низкая.',
+            tips: 'Хороший источник воды в пустыне. Под колодцем иногда бывают пещеры с полезными ресурсами.'
+        },
+        {
+            id: 'obsidian-pillar',
+            name: 'Обсидиановый столб',
+            img: 'https://minecraft.wiki/images/thumb/End_spike.png/1200px-End_spike.png',
+            badge: 'end',
+            badgeText: 'Край',
+            short: 'Чёрные столбы с кристаллами в Крае.',
+            desc: 'Обсидиановые столбы — высокие колонны из обсидиана, расположенные на главном острове Края вокруг центрального портала. На вершине каждого столба находится кристалл Края, который восстанавливает здоровье Дракона Края.',
+            location: 'Генерируются на центральном острове Края.',
+            loot: 'Обсидиан (после уничтожения дракона), кристаллы Края (нужно разбить).',
+            danger: 'Высокая. На столбах сидят кристаллы, которые нужно разбить до битвы с драконом.',
+            tips: 'Разбей все кристаллы до начала битвы с Драконом Края, иначе он будет восстанавливать здоровье. Используй лук и стрелы или заберись на столб.'
+        },
+        {
+            id: 'huge-mushroom',
+            name: 'Огромный гриб',
+            img: 'https://minecraft.wiki/images/thumb/Huge_Red_Mushroom.png/1200px-Huge_Red_Mushroom.png',
+            badge: 'feature',
+            badgeText: 'Декорация',
+            short: 'Гигантские грибы в пещерах и на поверхности.',
+            desc: 'Огромные грибы — гигантские версии обычных грибов, достигающие высоты до 13 блоков. Встречаются красные и коричневые варианты. Растут на грибных островах, в тёмных лесах, болотах и пышных пещерах.',
+            location: 'Грибные острова, тёмные леса, болота, пышные пещеры, а также в Незере (только огромные грибки).',
+            loot: 'Грибные блоки, красные и коричневые грибы.',
+            danger: 'Низкая.',
+            tips: 'Используй кирку с Шёлковым касанием для добычи блоков. На грибных островах не спаунятся враждебные мобы.'
+        },
+        {
+            id: 'huge-fungus',
+            name: 'Огромный грибок',
+            img: 'https://minecraft.wiki/images/thumb/Huge_Crimson_fungi.png/1200px-Huge_Crimson_fungi.png',
+            badge: 'nether',
+            badgeText: 'Незер',
+            short: 'Гигантский светящийся гриб из Незера.',
+            desc: 'Огромные грибки — гигантские незерские грибы, растущие в багровых и искажённых лесах Незера. Бывают красными (багровыми) и синими (искажёнными). Светятся и могут быть разных форм и размеров.',
+            location: 'Генерируются в багровых и искажённых лесах Незера.',
+            loot: 'Грибные блоки Незера, стебли, искажённые/багровые грибы.',
+            danger: 'Низкая. Вокруг пафосные леса — там разные мобы.',
+            tips: 'Багровые грибки — на них спаунятся хоглины. Искажённые — на них не спаунятся мобы, безопасно. Можно выращивать с помощью костной муки на соответствующих нилиях.'
+        },
+        {
+            id: 'ocean-ruins',
+            name: 'Подводные руины',
+            img: 'https://minecraft.wiki/images/thumb/Underwater_ruin_cold.png/1200px-Underwater_ruin_cold.png',
+            badge: 'overworld',
+            badgeText: 'Верхний мир',
+            short: 'Разрушенные постройки на дне океана.',
+            desc: 'Подводные руины — остатки древних построек на дне океана. Бывают двух типов: из каменного кирпича (в холодных океанах) и из песчаника (в тёплых океанах). Вокруг руин часто спаунятся утопленники.',
+            location: 'Генерируются во всех типах океанов и глубоких океанов.',
+            loot: 'Подозрительный песок/гравий (можно найти древние черепки), золотые яблоки, железные слитки, алмазы, изумруды, кремень.',
+            danger: 'Средняя. Утопленники могут атаковать, некоторые с трезубцами. Нужно следить за дыханием.',
+            tips: 'Возьми зелье подводного дыхания. Ищи подозрительный песок — из него можно вычистить редкие черепки и предметы.'
+        },
+        {
+            id: 'ruined-portal',
+            name: 'Разрушенный портал Нижнего мира',
+            img: 'https://minecraft.wiki/images/thumb/Overworld_portal_1.png/1200px-Overworld_portal_1.png',
+            badge: 'overworld',
+            badgeText: 'Верхний мир / Незер',
+            short: 'Повреждённый портал в Незер с сундуком.',
+            desc: 'Разрушенный портал — частично сломанный портал Нижнего мира, окружённый блоками из незерака или чернокамня. Бывает разных размеров и форм. Рядом всегда есть сундук с добычей и иногда несколько блоков золота.',
+            location: 'Генерируется в любых биомах Верхнего мира, Незера и даже в Крае.',
+            loot: 'Золотые слитки, золотые яблоки, зачарованное золотое снаряжение, огненные стержни, обсидиан, алмазы, седло.',
+            danger: 'Низкая. Нужно достроить портал обсидианом и зажечь его.',
+            tips: 'Собери обсидиан из портала для своего портала. Золотые блоки можно переплавить в слитки. Если достроишь портал — попадёшь в Незер!'
+        },
+        {
+            id: 'dungeon',
+            name: 'Сокровищница',
+            img: 'https://minecraft.wiki/images/thumb/Monster_Room_%28Dungeon%29.png/1200px-Monster_Room_%28Dungeon%29.png',
+            badge: 'overworld',
+            badgeText: 'Верхний мир',
+            short: 'Подземная комната со спаунером мобов и сундуками.',
+            desc: 'Сокровищница — небольшая подземная комната из булыжника и замшелого булыжника. Внутри находится спаунер мобов (50% зомби, 25% скелеты, 25% пауки) и до 2 сундуков с ценным лутом. Генерируется в полостях под землёй, часто рядом с пещерами.',
+            location: 'Генерируется под землёй в любых биомах Верхнего мира.',
+            loot: 'Кости, порох, гнилая плоть, нить, пшеница, хлеб, уголь, красная пыль, семена свёклы/арбуза/тыквы, ведро, железные и золотые слитки, бирка, седло, пластинки 13 и Cat, конская броня, золотые яблоки, зачарованные книги.',
+            danger: 'Средняя. Спаунер бесконечно создаёт мобов, пока его не уничтожить или не осветить.',
+            tips: 'Поставь факелы вокруг спаунера, чтобы мобы перестали появляться. Можно использовать спаунер для фермы опыта. Ищи сундуки вдоль стен.'
+        },
+        {
+            id: 'witch-hut',
+            name: 'Хижина ведьмы',
+            img: 'https://minecraft.wiki/images/thumb/Swamp_hut_JE4_BE2.png/1200px-Swamp_hut_JE4_BE2.png',
+            badge: 'overworld',
+            badgeText: 'Верхний мир',
+            short: 'Дом ведьмы на болоте с зельями.',
+            desc: 'Хижина ведьмы — небольшое деревянное строение на сваях, расположенное прямо над водой болота. Внутри находятся котёл, верстак и цветочный горшок с грибом. Ведьма и чёрная кошка появляются при генерации и не исчезают.',
+            location: 'Генерируется в болотах (Swamp).',
+            loot: 'Котёл (может содержать случайное зелье), красный гриб, верстак.',
+            danger: 'Средняя. Ведьма атакует брошенными зельями урона, замедления и слабости.',
+            tips: 'Ведьма пьёт зелья лечения, поэтому наноси много урона за раз. В хижине спаунятся ведьмы с кошками.'
+        },
+        {
+            id: 'jungle-temple',
+            name: 'Храм в джунглях',
+            img: 'https://minecraft.wiki/images/thumb/Jungle_pyramid_JE2_BE2.png/1200px-Jungle_pyramid_JE2_BE2.png',
+            badge: 'overworld',
+            badgeText: 'Верхний мир',
+            short: 'Древний храм с ловушками в джунглях.',
+            desc: 'Храм в джунглях — заросшее мохом каменное сооружение в джунглях, состоящее из нескольких уровней и помещений. Внутри есть ловушки с раздатчиками стрел, головоломка с рычагами и два сундука.',
+            location: 'Генерируется в джунглях (Jungle) и бамбуковых джунглях.',
+            loot: 'Алмазы, изумруды, железо, золото, зачарованные книги, кости, гнилая плоть, седло.',
+            danger: 'Средняя. Ловушки со стрелами наносят урон. Вокруг спаунятся мобы.',
+            tips: 'Чтобы открыть секретный сундук, нужно правильно переключить три рычага. Осторожно с нажимной пластиной в коридоре — она активирует раздатчики!'
+        },
+        {
+            id: 'desert-temple',
+            name: 'Храм в пустыне',
+            img: 'https://minecraft.wiki/images/thumb/Desert_Pyramid_JE3_BE3.png/1200px-Desert_Pyramid_JE3_BE3.png',
+            badge: 'overworld',
+            badgeText: 'Верхний мир',
+            short: 'Пирамида в пустыне с сокровищами в подвале.',
+            desc: 'Храм в пустыне — большая пирамидальная структура из песчаника, выделяющаяся на фоне пустыни. В центре наверху — вход в скрытую гробницу под полом. В гробнице — 4 сундука с лутом и ловушка из ТНТ под нажимной плитой.',
+            location: 'Генерируется в пустыне (Desert).',
+            loot: 'Алмазы, изумруды, железо, золото, кости, порох, гнилая плоть, алмазная конская броня, зачарованные книги, зелья.',
+            danger: 'Средняя. Ловушка с ТНТ может взорвать все сокровища! Мобы в тёмной гробнице.',
+            tips: 'ОСТОРОЖНО! В центре пола гробницы — синяя нажимная плита над ТНТ. Не наступай на неё! Обойди сундуки по бокам. Разбери плиту или убери ТНТ прежде чем грабить.'
+        }
+    ];
+
+    const dungeonsGrid = document.getElementById('dungeonsGrid');
+    if (dungeonsGrid) {
+        dungeonData.forEach(d => {
+            const card = document.createElement('div');
+            card.className = 'dungeon-card';
+            card.setAttribute('data-id', d.id);
+            card.innerHTML = `
+                <div class="dungeon-card-img">
+                    <img src="${d.img}" alt="${d.name}" loading="lazy">
+                </div>
+                <div class="dungeon-card-text">
+                    <span class="dungeon-badge ${d.badge}">${d.badgeText}</span>
+                    <h3>${d.name}</h3>
+                    <p class="dungeon-desc">${d.desc}</p>
+                    <div class="dungeon-info-grid">
+                        <div class="dungeon-info-item">
+                            <span class="dungeon-info-label">📍 Расположение</span>
+                            <span class="dungeon-info-value">${d.location}</span>
+                        </div>
+                        <div class="dungeon-info-item">
+                            <span class="dungeon-info-label">🎁 Лут</span>
+                            <span class="dungeon-info-value">${d.loot}</span>
+                        </div>
+                        <div class="dungeon-info-item">
+                            <span class="dungeon-info-label">⚠️ Опасность</span>
+                            <span class="dungeon-info-value">${d.danger}</span>
+                        </div>
+                        <div class="dungeon-info-item">
+                            <span class="dungeon-info-label">💡 Советы</span>
+                            <span class="dungeon-info-value">${d.tips}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            const imgEl = card.querySelector('img');
+            imgEl.addEventListener('error', function() {
+                this.onerror = null;
+                this.style.display = 'none';
+                const fallback = document.createElement('div');
+                fallback.style.cssText = 'width:100%;height:260px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,#2a2a2a,#1a1a1a);color:#555';
+                fallback.textContent = '🏚️';
+                this.parentElement.appendChild(fallback);
+            });
+            card.addEventListener('click', () => openDungeonModal(d.id));
+            dungeonsGrid.appendChild(card);
+        });
+    }
+
+    const overlay = document.getElementById('dungeonOverlay');
+    const modalImg = document.getElementById('dungeonModalImg');
+    const modalTitle = document.getElementById('dungeonModalTitle');
+    const modalBadge = document.getElementById('dungeonModalBadge');
+    const modalDesc = document.getElementById('dungeonModalDesc');
+    const modalLocation = document.getElementById('dungeonModalLocation');
+    const modalLoot = document.getElementById('dungeonModalLoot');
+    const modalDanger = document.getElementById('dungeonModalDanger');
+    const modalTips = document.getElementById('dungeonModalTips');
+
+    function openDungeonModal(id) {
+        const d = dungeonData.find(x => x.id === id);
+        if (!d) return;
+        modalImg.src = d.img;
+        modalImg.alt = d.name;
+        modalImg.style.transform = '';
+        modalImg.onerror = function() {
+            this.onerror = null;
+            this.style.display = 'none';
+            const wrap = this.parentElement;
+            const fb = document.createElement('div');
+            fb.style.cssText = 'width:100%;height:300px;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,#2a2a2a,#1a1a1a);color:#555';
+            fb.textContent = '🏚️';
+            wrap.appendChild(fb);
+        };
+        modalTitle.textContent = d.name;
+        modalBadge.className = 'dungeon-badge ' + d.badge;
+        modalBadge.textContent = d.badgeText;
+        modalDesc.textContent = d.desc;
+        modalLocation.textContent = d.location;
+        modalLoot.textContent = d.loot;
+        modalDanger.textContent = d.danger;
+        modalTips.textContent = d.tips;
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeDungeonModal() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    document.getElementById('dungeonClose').addEventListener('click', closeDungeonModal);
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeDungeonModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) closeDungeonModal();
+    });
+
+    // ===== AI ЧАТ =====
+    const CHAT_API_KEY = '__OPENROUTER_API_KEY__';
+    const CHAT_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions';
+    const CHAT_MODEL = 'openai/gpt-oss-120b:free';
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+    const chatSendBtn = document.getElementById('chat-send');
+    let chatHistory = [
+        { role: 'system', content: 'Ты дружелюбный ИИ-помощник по игре Minecraft. Отвечай на русском языке, кратко и по делу. Помогай с крафтами, мобами, биомами, строительством, редстоуном и всем что связано с Minecraft.' }
+    ];
+    let isSending = false;
+
+    function addMessage(text, type) {
+        const msg = document.createElement('div');
+        msg.className = `chat-message ${type}-message`;
+        const content = type === 'ai' ? marked.parse(text) : escapeHtml(text);
+        const iconSvg = type === 'user'
+            ? '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
+            : '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>';
+        msg.innerHTML = `
+            <span class="msg-icon">${iconSvg}</span>
+            <div class="msg-text">${content}</div>
+        `;
+        chatMessages.appendChild(msg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function addLoadingMessage() {
+        const msg = document.createElement('div');
+        msg.className = 'chat-message ai-message';
+        msg.id = 'chat-loading';
+        msg.innerHTML = `
+            <span class="msg-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg></span>
+            <div class="msg-text"><span class="loading-spinner"></span></div>
+        `;
+        chatMessages.appendChild(msg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function removeLoadingMessage() {
+        const loading = document.getElementById('chat-loading');
+        if (loading) loading.remove();
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML.replace(/\n/g, '<br>');
+    }
+
+    async function sendMessage() {
+        const text = chatInput.value.trim();
+        if (!text || isSending) return;
+        isSending = true;
+        addMessage(text, 'user');
+        chatInput.value = '';
+        chatInput.style.height = 'auto';
+        chatHistory.push({ role: 'user', content: text });
+        addLoadingMessage();
+        try {
+            const res = await fetch(CHAT_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${CHAT_API_KEY}`,
+                    'Content-Type': 'application/json',
+                    'HTTP-Referer': window.location.href,
+                    'X-Title': 'Minecraft World'
+                },
+                body: JSON.stringify({
+                    model: CHAT_MODEL,
+                    messages: chatHistory,
+                    max_tokens: 256
+                })
+            });
+            if (!res.ok) {
+                const errData = await res.json().catch(() => ({}));
+                removeLoadingMessage();
+                throw new Error(errData?.error?.message || `Ошибка ${res.status}`);
+            }
+            const data = await res.json();
+            removeLoadingMessage();
+            const reply = data?.choices?.[0]?.message?.content || 'Не удалось получить ответ';
+            chatHistory.push({ role: 'assistant', content: reply });
+            if (chatHistory.length > 20) {
+                chatHistory = [chatHistory[0], ...chatHistory.slice(-18)];
+            }
+            addMessage(reply, 'ai');
+        } catch (e) {
+            removeLoadingMessage();
+            addMessage('Ошибка: ' + e.message, 'ai');
+        }
+        isSending = false;
+        chatInput.focus();
+    }
+
+    chatSendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+    chatInput.addEventListener('input', () => {
+        chatInput.style.height = 'auto';
+        chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + 'px';
+    });
+</script>
+</body>
+</html>
