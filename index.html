@@ -3044,44 +3044,29 @@
         'броня': 'Iron Chestplate'
     };
 
-    // Runtime API image URL cache
-    const API_CACHE = {};
+    function makeItemUrl(enName) {
+        const p = enName.replace(/\s+/g, '_').replace(/'/g, '%27');
+        const vers = ['_JE5_BE3', '_JE4_BE3', '_JE3_BE3', '_JE2_BE2', ''];
+        return vers.map(v => `https://minecraft.wiki/images/thumb/${p}${v}.png/32px-${p}${v}.png`)
+            .concat(`https://minecraft.wiki/images/thumb/Invicon_${p}.png/32px-Invicon_${p}.png`);
+    }
 
-    async function resolveItemImage(russianName) {
-        const key = russianName.toLowerCase().trim();
-        if (ITEM_CACHE[key]) return ITEM_CACHE[key];
-        if (API_CACHE[key]) return API_CACHE[key];
-
+    function getItemImgHtml(itemName) {
+        const key = itemName.toLowerCase().trim();
+        if (ITEM_CACHE[key]) {
+            return `<img class="mc-item-inline" src="${ITEM_CACHE[key]}" alt="${itemName}" title="${itemName}">`;
+        }
         const en = RU_EN[key];
-        if (!en) return null;
-
-        const prefix = en.replace(/\s+/g, '_');
-        try {
-            const url = `https://minecraft.wiki/api.php?action=query&generator=allimages&gaiprefix=${encodeURIComponent(prefix)}&prop=imageinfo&iiprop=url&format=json&origin=*`;
-            const resp = await fetch(url, { mode: 'cors' });
-            const data = await resp.json();
-            if (data.query && data.query.pages) {
-                for (const id of Object.keys(data.query.pages)) {
-                    const page = data.query.pages[id];
-                    if (page.imageinfo && page.imageinfo.length > 0) {
-                        const fullUrl = page.imageinfo[0].url;
-                        const parts = fullUrl.split('/');
-                        const basename = parts[parts.length - 1];
-                        const hashPath = parts.slice(-3, -1).join('/');
-                        const thumbUrl = `https://minecraft.wiki/images/thumb/${hashPath}/${basename}/32px-${basename}`;
-                        API_CACHE[key] = thumbUrl;
-                        return thumbUrl;
-                    }
-                }
-            }
-        } catch (e) {}
-        return null;
+        if (!en) return itemName;
+        const urls = makeItemUrl(en);
+        const uq = itemName.replace(/"/g, '&quot;');
+        return `<img class="mc-item-inline" alt="${uq}" title="${uq}" src="${urls[0]}" onerror="var u=${JSON.stringify(urls)};var i=u.indexOf(this.src);if(i>-1&&i<u.length-1)this.src=u[i+1]">`;
     }
 
     function findItem(name) {
         if (!name) return null;
         const key = name.toLowerCase().trim();
-        return ITEM_CACHE[key] || API_CACHE[key] || null;
+        return ITEM_CACHE[key] || null;
     }
 
     function renderCraftGrid(jsonStr) {
@@ -3122,15 +3107,7 @@
 
     function processInlineItems(text) {
         return text.replace(/\[([^\]]+)\]/g, (match, itemName) => {
-            const imgUrl = findItem(itemName);
-            if (imgUrl) {
-                return `<img class="mc-item-inline" src="${imgUrl}" alt="${itemName}" title="${itemName}">`;
-            }
-            const key = itemName.toLowerCase().trim();
-            if (RU_EN[key]) {
-                return `<span class="mc-item-loading" data-item="${itemName.replace(/"/g, '&quot;')}">${itemName}</span>`;
-            }
-            return match;
+            return getItemImgHtml(itemName);
         });
     }
 
@@ -3145,30 +3122,6 @@
             }
         }
         return html;
-    }
-
-    async function resolveMessageItems(msgElement) {
-        const loaders = msgElement.querySelectorAll('.mc-item-loading');
-        if (!loaders.length) return;
-        const promises = [];
-        for (const span of loaders) {
-            const itemName = span.dataset.item;
-            promises.push(
-                resolveItemImage(itemName).then(url => {
-                    if (url) {
-                        const img = document.createElement('img');
-                        img.className = 'mc-item-inline';
-                        img.src = url;
-                        img.alt = itemName;
-                        img.title = itemName;
-                        span.replaceWith(img);
-                    } else {
-                        span.outerHTML = itemName;
-                    }
-                })
-            );
-        }
-        await Promise.all(promises);
     }
     let isSending = false;
 
@@ -3201,7 +3154,6 @@
         `;
         chatMessages.appendChild(msg);
         chatMessages.scrollTop = chatMessages.scrollHeight;
-        resolveMessageItems(msg);
     }
 
     function addLoadingMessage() {
