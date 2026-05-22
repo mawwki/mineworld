@@ -18,13 +18,19 @@ jobs:
         run: sed -i 's/__OPENROUTER_API_KEY__/${{ secrets.API_KEY }}/g' index.html
 
       - name: Deploy to GitHub Pages
+        shell: bash
         run: |
+          set -x
           mkdir -p deploy
           cp index.html style.css Monocraft.ttf deploy/
+          ls -la deploy/
           cd deploy
           git init
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
+          git status
           git commit -m "Deploy to GitHub Pages"
-          git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:gh-pages
+          echo "Pushing to gh-pages..."
+          git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:gh-pages 2>&1
+          echo "Done!"
