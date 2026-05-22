@@ -3045,21 +3045,25 @@
     };
 
     function makeItemUrl(enName) {
-        const p = enName.replace(/\s+/g, '_').replace(/'/g, '%27');
-        const vers = ['_JE5_BE3', '_JE4_BE3', '_JE3_BE3', '_JE2_BE2', ''];
-        return vers.map(v => `https://minecraft.wiki/images/thumb/${p}${v}.png/32px-${p}${v}.png`)
-            .concat(`https://minecraft.wiki/images/thumb/Invicon_${p}.png/32px-Invicon_${p}.png`);
+        const p = enName.toLowerCase().replace(/\s+/g, '_').replace(/'/g, '').replace(/-/g, '_');
+        const base = 'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.4/assets/minecraft/textures/';
+        const urls = [base + 'item/' + p + '.png', base + 'block/' + p + '.png'];
+        if (p.startsWith('block_of_')) {
+            const r = p.substring(9) + '_block';
+            urls.push(base + 'item/' + r + '.png', base + 'block/' + r + '.png');
+        }
+        for (const f of ['front', 'side', 'top', 'bottom']) {
+            urls.push(base + 'block/' + p + '_' + f + '.png');
+        }
+        return urls;
     }
 
     function getItemImgHtml(itemName) {
         const key = itemName.toLowerCase().trim();
-        if (ITEM_CACHE[key]) {
-            return `<img class="mc-item-inline" src="${ITEM_CACHE[key]}" alt="${itemName}" title="${itemName}">`;
-        }
+        const uq = itemName.replace(/"/g, '&quot;');
         const en = RU_EN[key];
         if (!en) return itemName;
         const urls = makeItemUrl(en);
-        const uq = itemName.replace(/"/g, '&quot;');
         return `<img class="mc-item-inline" alt="${uq}" title="${uq}" src="${urls[0]}" onerror="var u=${JSON.stringify(urls)};var i=u.indexOf(this.src);if(i>-1&&i<u.length-1)this.src=u[i+1]">`;
     }
 
