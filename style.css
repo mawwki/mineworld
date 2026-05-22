@@ -1784,6 +1784,14 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
     color: var(--text);
 }
 
+.msg-footer {
+    margin-top: 6px;
+    padding-top: 4px;
+    border-top: 1px solid #3a3a3a;
+    font-size: 0.65rem;
+    color: #666;
+}
+
 .chat-input-area {
     display: flex;
     gap: 0;
