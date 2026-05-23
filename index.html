@@ -3118,7 +3118,7 @@
 
     function findItem(name) {
         if (!name) return null;
-        const key = name.toLowerCase().trim();
+        const key = String(name).toLowerCase().trim();
         return ITEM_CACHE[key] || null;
     }
 
@@ -3131,7 +3131,7 @@
             let html = '<div class="craft-chat-wrapper">';
             html += '<div class="craft-chat-grid">';
             for (let i = 0; i < 9; i++) {
-                const itemName = grid[i] || '';
+                const itemName = grid[i];
                 const imgUrl = findItem(itemName);
                 if (imgUrl) {
                     html += `<div class="craft-chat-cell" title="${itemName}"><img src="${imgUrl}" alt="${itemName}" loading="lazy"><span class="cell-tip">${itemName}</span></div>`;
