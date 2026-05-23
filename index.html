@@ -1840,7 +1840,7 @@
         <p>© 2026 Minecraft World | Неофициальный фанатский сайт</p>
         <p>🌲 Добывай блоки, строй замки, побеждай дракона! 🐉</p>
         <p><a onclick="scrollToTop()">Вверх ▲</a></p>
-        <span class="footer-version">v0.9.73</span>
+        <span class="footer-version">v0.9.74</span>
     </div>
 </div>
 
@@ -3054,7 +3054,9 @@
             const res = await fetch('items.json');
             const data = await res.json();
             for (const [name, url] of Object.entries(data)) {
-                ITEM_IMG_MAP[name.toLowerCase()] = url;
+                const key = name.toLowerCase();
+                ITEM_IMG_MAP[key] = url;
+                if (!ITEM_CACHE[key]) ITEM_CACHE[key] = url;
             }
             ITEM_IMG_KEYS = Object.keys(ITEM_IMG_MAP).sort((a, b) => b.length - a.length);
             ITEM_MAP_LOADED = true;
@@ -3119,7 +3121,10 @@
     function findItem(name) {
         if (!name) return null;
         const key = String(name).toLowerCase().trim();
-        return ITEM_CACHE[key] || ITEM_IMG_MAP[key] || null;
+        if (ITEM_CACHE[key]) return ITEM_CACHE[key];
+        const en = RU_EN[key];
+        if (en) return makeItemUrl(en)[0];
+        return null;
     }
 
     function renderCraftGrid(jsonStr) {
