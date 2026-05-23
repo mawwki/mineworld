@@ -1840,7 +1840,7 @@
         <p>© 2026 Minecraft World | Неофициальный фанатский сайт</p>
         <p>🌲 Добывай блоки, строй замки, побеждай дракона! 🐉</p>
         <p><a onclick="scrollToTop()">Вверх ▲</a></p>
-        <span class="footer-version">v0.9.72</span>
+        <span class="footer-version">v0.9.73</span>
     </div>
 </div>
 
@@ -3119,7 +3119,7 @@
     function findItem(name) {
         if (!name) return null;
         const key = String(name).toLowerCase().trim();
-        return ITEM_CACHE[key] || null;
+        return ITEM_CACHE[key] || ITEM_IMG_MAP[key] || null;
     }
 
     function renderCraftGrid(jsonStr) {
