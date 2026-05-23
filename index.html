@@ -3044,6 +3044,42 @@
         'броня': 'Iron Chestplate'
     };
 
+    // ===== Загрузка карты предметов из items.txt =====
+    let ITEM_IMG_MAP = {};
+    let ITEM_IMG_KEYS = [];
+    let ITEM_MAP_LOADED = false;
+
+    async function loadItemImageMap() {
+        try {
+            const res = await fetch('items.json');
+            const data = await res.json();
+            for (const [name, url] of Object.entries(data)) {
+                ITEM_IMG_MAP[name.toLowerCase()] = url;
+            }
+            ITEM_IMG_KEYS = Object.keys(ITEM_IMG_MAP).sort((a, b) => b.length - a.length);
+            ITEM_MAP_LOADED = true;
+        } catch (e) {
+            console.warn('Не удалось загрузить карту предметов:', e);
+        }
+    }
+    loadItemImageMap();
+
+    function processPlainItemNames(text) {
+        if (!ITEM_MAP_LOADED || ITEM_IMG_KEYS.length === 0) return text;
+        let result = text;
+        for (const name of ITEM_IMG_KEYS) {
+            const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const re = new RegExp('(^|[\\s,.;:!?(){}"\'«»–—])(' + escaped + ')($|[\\s,.;:!?(){}"\'«»–—])', 'gi');
+            result = result.replace(re, (match, before, item, after) => {
+                const url = ITEM_IMG_MAP[item.toLowerCase()];
+                if (!url) return match;
+                const safe = item.replace(/"/g, '&quot;');
+                return before + '<img class="mc-item-inline" alt="' + safe + '" title="' + safe + '" src="' + url + '">' + after;
+            });
+        }
+        return result;
+    }
+
     function makeItemUrl(enName) {
         const toReg = {};
         toReg['redstone_dust'] = 'redstone'; toReg['nether_quartz'] = 'quartz';
@@ -3133,7 +3169,7 @@
         let html = '';
         for (let i = 0; i < parts.length; i++) {
             if (i % 2 === 0) {
-                html += processInlineItems(parts[i]);
+                html += processInlineItems(processPlainItemNames(parts[i]));
             } else {
                 html += renderCraftGrid(parts[i]);
             }
@@ -3154,13 +3190,13 @@
                     const json = part.replace('<craft>', '').replace('</craft>', '').trim();
                     html += renderCraftGrid(json);
                 } else {
-                    html += marked.parse(part);
+                    html += marked.parse(processPlainItemNames(part));
                 }
             }
             content = html.replace(/<p>/g, '').replace(/<\/p>/g, '<br>');
             content = processInlineItems(content);
         } else {
-            content = processInlineItems(escapeHtml(text));
+            content = processInlineItems(processPlainItemNames(escapeHtml(text)));
         }
         const iconSvg = type === 'user'
             ? '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
@@ -3285,7 +3321,7 @@
                 const json = part.replace('<craft>', '').replace('</craft>', '').trim();
                 html += renderCraftGrid(json);
             } else {
-                html += marked.parse(part);
+                html += marked.parse(processPlainItemNames(part));
             }
         }
         html = html.replace(/<p>/g, '').replace(/<\/p>/g, '<br>');
