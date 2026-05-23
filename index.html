@@ -1840,7 +1840,7 @@
         <p>© 2026 Minecraft World | Неофициальный фанатский сайт</p>
         <p>🌲 Добывай блоки, строй замки, побеждай дракона! 🐉</p>
         <p><a onclick="scrollToTop()">Вверх ▲</a></p>
-        <span class="footer-version">v0.9.75</span>
+        <span class="footer-version">v0.9.76</span>
     </div>
 </div>
 
@@ -3163,6 +3163,32 @@
         }
     }
 
+    function fixCraftJSON(text) {
+        // Fix common AI craft JSON issues: ( → {, > → }, Cyrillic keys, g string → array
+        let s = text;
+        if (s.startsWith('(')) s = '{' + s.slice(1);
+        let end = s.length - 1;
+        while (end >= 0 && (s[end] === '>' || s[end] === ')' || s[end] === ']')) end--;
+        if (end < s.length - 1) s = s.slice(0, end + 1) + '}';
+        s = s.replace(/"р"\s*:/g, '"r":').replace(/"с"\s*:/g, '"c":').replace(/"г"\s*:/g, '"g":');
+        // g key as string: "g":"item1","item2",... → "g":["item1","item2",...]
+        s = s.replace(/"g"\s*:\s*"([^"]+)"(\s*,\s*"[^"]+")/g, '"g":["$1"$2');
+        // g key as single string at end: "g":"item1"} → "g":["item1"]}
+        s = s.replace(/"g"\s*:\s*"([^"]+)"\s*}/g, '"g":["$1"]}');
+        return s;
+    }
+
+    function tryExtractCraft(text) {
+        const craftMatch = text.match(/<craft>([\s\S]*?)<\/craft>/);
+        if (craftMatch) return { json: craftMatch[1], original: craftMatch[0] };
+        const jsonMatch = text.match(/(?:[({]\s*"(?:[рr]|[сc]|[гg])"\s*:[\s\S]*?[>})])/);
+        if (jsonMatch) {
+            const fixed = fixCraftJSON(jsonMatch[0]);
+            try { JSON.parse(fixed); return { json: fixed, original: jsonMatch[0] }; } catch(e) {}
+        }
+        return null;
+    }
+
     function processInlineItems(text) {
         return text.replace(/\[([^\]]+)\]/g, (match, itemName) => {
             return getItemImgHtml(itemName);
@@ -3174,7 +3200,13 @@
         let html = '';
         for (let i = 0; i < parts.length; i++) {
             if (i % 2 === 0) {
-                html += processInlineItems(processPlainItemNames(parts[i]));
+                const extracted = tryExtractCraft(parts[i]);
+                if (extracted) {
+                    html += processInlineItems(processPlainItemNames(parts[i].replace(extracted.original, '')));
+                    html += renderCraftGrid(extracted.json);
+                } else {
+                    html += processInlineItems(processPlainItemNames(parts[i]));
+                }
             } else {
                 html += renderCraftGrid(parts[i]);
             }
@@ -3195,7 +3227,13 @@
                     const json = part.replace('<craft>', '').replace('</craft>', '').trim();
                     html += renderCraftGrid(json);
                 } else {
-                    html += marked.parse(processPlainItemNames(part));
+                    const extracted = tryExtractCraft(part);
+                    if (extracted) {
+                        html += marked.parse(processPlainItemNames(part.replace(extracted.original, '')));
+                        html += renderCraftGrid(extracted.json);
+                    } else {
+                        html += marked.parse(processPlainItemNames(part));
+                    }
                 }
             }
             content = html.replace(/<p>/g, '').replace(/<\/p>/g, '<br>');
@@ -3326,7 +3364,13 @@
                 const json = part.replace('<craft>', '').replace('</craft>', '').trim();
                 html += renderCraftGrid(json);
             } else {
-                html += marked.parse(processPlainItemNames(part));
+                const extracted = tryExtractCraft(part);
+                if (extracted) {
+                    html += marked.parse(processPlainItemNames(part.replace(extracted.original, '')));
+                    html += renderCraftGrid(extracted.json);
+                } else {
+                    html += marked.parse(processPlainItemNames(part));
+                }
             }
         }
         html = html.replace(/<p>/g, '').replace(/<\/p>/g, '<br>');
