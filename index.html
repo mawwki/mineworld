@@ -1840,7 +1840,7 @@
         <p>© 2026 Minecraft World | Неофициальный фанатский сайт</p>
         <p>🌲 Добывай блоки, строй замки, побеждай дракона! 🐉</p>
         <p><a onclick="scrollToTop()">Вверх ▲</a></p>
-        <span class="footer-version">v0.9.76</span>
+        <span class="footer-version">v0.9.78</span>
     </div>
 </div>
 
@@ -3058,6 +3058,9 @@
                 ITEM_IMG_MAP[key] = url;
                 if (!ITEM_CACHE[key]) ITEM_CACHE[key] = url;
             }
+            for (const [key, url] of Object.entries(ITEM_CACHE)) {
+                if (!ITEM_IMG_MAP[key]) ITEM_IMG_MAP[key] = url;
+            }
             ITEM_IMG_KEYS = Object.keys(ITEM_IMG_MAP).sort((a, b) => b.length - a.length);
             ITEM_MAP_LOADED = true;
         } catch (e) {
@@ -3112,6 +3115,10 @@
     function getItemImgHtml(itemName) {
         const key = itemName.toLowerCase().trim();
         const uq = itemName.replace(/"/g, '&quot;');
+        const cached = ITEM_CACHE[key] || ITEM_IMG_MAP[key];
+        if (cached) {
+            return `<img class="mc-item-inline" alt="${uq}" title="${uq}" src="${cached}">`;
+        }
         const en = RU_EN[key];
         if (!en) return itemName;
         const urls = makeItemUrl(en);
@@ -3124,6 +3131,24 @@
         if (ITEM_CACHE[key]) return ITEM_CACHE[key];
         const en = RU_EN[key];
         if (en) return makeItemUrl(en)[0];
+        // try stripping common Russian case endings
+        const stems = [
+            key.replace(/[ую]$/, 'а'),
+            key.replace(/[ы]$/, 'а'),
+            key.replace(/[и]$/, 'а'),
+            key.replace(/[её]$/, 'о'),
+            key.replace(/ой$/, 'ый'),
+            key.replace(/яя$/, 'ая'),
+            key.replace(/ые$/, 'ый'),
+            key.replace(/[ы]$/, ''),
+            key.replace(/[ая]$/, '')
+        ];
+        for (const stem of stems) {
+            if (stem === key) continue;
+            if (ITEM_CACHE[stem]) return ITEM_CACHE[stem];
+            const en2 = RU_EN[stem];
+            if (en2) return makeItemUrl(en2)[0];
+        }
         return null;
     }
 
@@ -3163,30 +3188,32 @@
         }
     }
 
-    function fixCraftJSON(text) {
-        // Fix common AI craft JSON issues: ( → {, > → }, Cyrillic keys, g string → array
-        let s = text;
-        if (s.startsWith('(')) s = '{' + s.slice(1);
-        let end = s.length - 1;
-        while (end >= 0 && (s[end] === '>' || s[end] === ')' || s[end] === ']')) end--;
-        if (end < s.length - 1) s = s.slice(0, end + 1) + '}';
-        s = s.replace(/"р"\s*:/g, '"r":').replace(/"с"\s*:/g, '"c":').replace(/"г"\s*:/g, '"g":');
-        // g key as string: "g":"item1","item2",... → "g":["item1","item2",...]
-        s = s.replace(/"g"\s*:\s*"([^"]+)"(\s*,\s*"[^"]+")/g, '"g":["$1"$2');
-        // g key as single string at end: "g":"item1"} → "g":["item1"]}
-        s = s.replace(/"g"\s*:\s*"([^"]+)"\s*}/g, '"g":["$1"]}');
-        return s;
-    }
-
     function tryExtractCraft(text) {
         const craftMatch = text.match(/<craft>([\s\S]*?)<\/craft>/);
         if (craftMatch) return { json: craftMatch[1], original: craftMatch[0] };
-        const jsonMatch = text.match(/(?:[({]\s*"(?:[рr]|[сc]|[гg])"\s*:[\s\S]*?[>})])/);
-        if (jsonMatch) {
-            const fixed = fixCraftJSON(jsonMatch[0]);
-            try { JSON.parse(fixed); return { json: fixed, original: jsonMatch[0] }; } catch(e) {}
+
+        const blockMatch = text.match(/[({]\s*[""]?\s*[рr]\s*[""]?\s*:[\s\S]*?[>})]/);
+        if (!blockMatch) return null;
+        const block = blockMatch[0];
+
+        const rMatch = block.match(/[""]?\s*[рr]\s*[""]?\s*:\s*[""]\s*([^""\n\r,}>\])]+)\s*[""]/);
+        if (!rMatch) return null;
+        const resultName = rMatch[1].trim();
+        if (!resultName) return null;
+
+        const cMatch = block.match(/[""]?\s*[сcoо]\s*[""]?\s*:\s*(\d+)/);
+        const count = cMatch ? parseInt(cMatch[1], 10) || 1 : 1;
+
+        const gSection = block.match(/[""]?\s*[гg]\s*[""]?\s*[:=]\s*([\s\S]*?)(?:[>})\]]|$)/);
+        let gridItems = [];
+        if (gSection) {
+            const itemMatches = gSection[1].match(/[""]\s*([^""]+?)\s*[""]/g);
+            if (itemMatches) gridItems = itemMatches.map(i => i.replace(/[""]/g, '').trim().replace(/\s+/g, ' '));
         }
-        return null;
+        while (gridItems.length < 9) gridItems.push('');
+
+        const json = JSON.stringify({ r: resultName, c: count, g: gridItems });
+        return { json, original: block };
     }
 
     function processInlineItems(text) {
