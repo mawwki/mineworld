@@ -1851,7 +1851,7 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
 
 .chat-model-modal {
     position: absolute;
-    inset: 0;
+    inset: 12px 12px 68px 12px;
     display: none;
     z-index: 50;
 }
@@ -1873,11 +1873,13 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
     top: 50%;
     transform: translate(-50%, -50%);
     max-width: 720px;
-    width: calc(100% - 32px);
+    width: 100%;
     background: linear-gradient(180deg, rgba(34, 34, 34, 0.98) 0%, rgba(24, 24, 24, 0.98) 100%);
     border: 2px solid rgba(255, 255, 255, 0.12);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
     padding: 14px;
+    max-height: 100%;
+    overflow: auto;
 }
 
 .chat-model-modal-header {
@@ -1918,6 +1920,8 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
     box-shadow: none;
     text-transform: uppercase;
     letter-spacing: 0.6px;
+    appearance: none;
+    font: inherit;
 }
 
 .chat-model-modal-close:hover {
@@ -1944,6 +1948,8 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
     padding: 10px 12px;
     cursor: pointer;
     box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.03);
+    appearance: none;
+    font: inherit;
 }
 
 .chat-model-item:hover {
@@ -1985,7 +1991,6 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
     }
 
     .chat-model-modal-panel {
-        width: calc(100% - 20px);
         padding: 12px;
     }
 
