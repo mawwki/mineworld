@@ -1800,6 +1800,42 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
     text-align: right;
 }
 
+.chat-model-strip {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-top: 3px solid #3a3a3a;
+    background: linear-gradient(180deg, #232323 0%, #1d1d1d 100%);
+    flex-wrap: wrap;
+}
+
+.chat-model-label {
+    color: var(--gold);
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.chat-model-select {
+    flex: 1;
+    min-width: 0;
+    background: #141414;
+    border: 2px solid #444;
+    color: var(--text);
+    font-family: 'Monocraft', 'Courier New', monospace;
+    font-size: 0.78rem;
+    padding: 10px 12px;
+    outline: none;
+    box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+.chat-model-select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px rgba(255, 170, 0, 0.18), inset 2px 2px 0 rgba(0, 0, 0, 0.35);
+}
+
 .chat-input-area {
     display: flex;
     gap: 0;
@@ -1851,6 +1887,20 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
 @media (max-width: 768px) {
     .chat-container {
         height: 350px;
+    }
+
+    .chat-model-strip {
+        gap: 8px;
+    }
+
+    .chat-model-label {
+        font-size: 0.68rem;
+    }
+
+    .chat-model-select {
+        width: 100%;
+        flex-basis: 100%;
+        font-size: 0.74rem;
     }
 
     .chat-message {
