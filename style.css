@@ -1803,37 +1803,41 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
 .chat-model-strip {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px 14px;
-    border-top: 3px solid #3a3a3a;
-    background: linear-gradient(180deg, #232323 0%, #1d1d1d 100%);
+    gap: 8px;
+    padding: 8px 12px 6px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: transparent;
     flex-wrap: wrap;
 }
 
 .chat-model-label {
-    color: var(--gold);
-    font-size: 0.72rem;
-    letter-spacing: 1px;
+    color: #8d8d8d;
+    font-size: 0.62rem;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     white-space: nowrap;
+    opacity: 0.85;
 }
 
 .chat-model-select {
     flex: 1;
     min-width: 0;
-    background: #141414;
-    border: 2px solid #444;
-    color: var(--text);
+    background: rgba(20, 20, 20, 0.78);
+    border: 1px solid #3c3c3c;
+    color: #f0f0f0;
     font-family: 'Monocraft', 'Courier New', monospace;
-    font-size: 0.78rem;
-    padding: 10px 12px;
+    font-size: 0.72rem;
+    padding: 8px 10px;
     outline: none;
-    box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.35);
+    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.28);
+    border-radius: 2px;
+    opacity: 0.88;
 }
 
 .chat-model-select:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 2px rgba(255, 170, 0, 0.18), inset 2px 2px 0 rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 170, 0, 0.65);
+    box-shadow: 0 0 0 1px rgba(255, 170, 0, 0.14), inset 1px 1px 0 rgba(0, 0, 0, 0.28);
+    opacity: 1;
 }
 
 .chat-input-area {
@@ -1890,17 +1894,19 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
     }
 
     .chat-model-strip {
-        gap: 8px;
+        gap: 6px;
+        padding: 6px 10px 4px;
     }
 
     .chat-model-label {
-        font-size: 0.68rem;
+        font-size: 0.58rem;
     }
 
     .chat-model-select {
         width: 100%;
         flex-basis: 100%;
-        font-size: 0.74rem;
+        font-size: 0.68rem;
+        padding: 7px 9px;
     }
 
     .chat-message {
