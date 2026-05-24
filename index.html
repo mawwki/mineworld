@@ -49,18 +49,18 @@
                     <textarea id="chat-input" class="chat-input" rows="2" placeholder="Введи вопрос о Minecraft..."></textarea>
                     <button id="chat-send" class="chat-send-btn"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="m22 2-11 11"/></svg></button>
                 </div>
-                <div id="chat-model-modal" class="chat-model-modal" aria-hidden="true">
-                    <div class="chat-model-modal-backdrop" data-chat-model-close></div>
-                    <div class="chat-model-modal-panel" role="dialog" aria-modal="true" aria-label="Выбор модели">
-                        <div class="chat-model-modal-header">
-                            <div>
-                                <div class="chat-model-modal-title">Выбор модели</div>
-                                <div class="chat-model-modal-subtitle">Команда <span>/model</span> без параметров тоже открывает это меню</div>
-                            </div>
-                            <button class="chat-model-modal-close" type="button" data-chat-model-close aria-label="Закрыть">×</button>
+            </div>
+            <div id="chat-model-modal" class="chat-model-modal" aria-hidden="true">
+                <div class="chat-model-modal-backdrop" data-chat-model-close></div>
+                <div class="chat-model-modal-panel" role="dialog" aria-modal="true" aria-label="Выбор модели">
+                    <div class="chat-model-modal-header">
+                        <div>
+                            <div class="chat-model-modal-title">Выбор модели</div>
+                            <div class="chat-model-modal-subtitle">Команда <span>/model</span> без параметров тоже открывает это меню</div>
                         </div>
-                        <div id="chat-model-list" class="chat-model-list"></div>
+                        <button class="chat-model-modal-close" type="button" data-chat-model-close aria-label="Закрыть">Закрыть</button>
                     </div>
+                    <div id="chat-model-list" class="chat-model-list"></div>
                 </div>
             </div>
         </div>
@@ -1853,7 +1853,7 @@
         <p>© 2026 Minecraft World | Неофициальный фанатский сайт</p>
         <p>🌲 Добывай блоки, строй замки, побеждай дракона! 🐉</p>
         <p><a onclick="scrollToTop()">Вверх ▲</a></p>
-        <span class="footer-version">v0.9.86</span>
+        <span class="footer-version">v0.9.88</span>
     </div>
 </div>
 
@@ -3655,7 +3655,8 @@
     });
     if (chatModelModal) {
         chatModelModal.addEventListener('click', (e) => {
-            if (e.target && e.target.matches('[data-chat-model-close]')) {
+            const closer = e.target && e.target.closest ? e.target.closest('[data-chat-model-close]') : null;
+            if (closer) {
                 closeChatModelModal();
             }
         });
