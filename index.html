@@ -3070,11 +3070,11 @@
     }
 
     function makeItemToken(url, alt) {
-        return `[[MCITEM:${encodeURIComponent(JSON.stringify({ url, alt }))}]]`;
+        return `@@MCITEM:${encodeURIComponent(JSON.stringify({ url, alt }))}@@`;
     }
 
     function materializeItemTokens(html) {
-        return String(html || '').replace(/\[\[MCITEM:([^\]]+)\]\]/g, (match, payload) => {
+        return String(html || '').replace(/@@MCITEM:([^@]+)@@/g, (match, payload) => {
             try {
                 const data = JSON.parse(decodeURIComponent(payload));
                 if (!data || !data.url) return match;
