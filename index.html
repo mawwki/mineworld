@@ -3048,6 +3048,90 @@
     let ITEM_IMG_MAP = {};
     let ITEM_IMG_KEYS = [];
     let ITEM_MAP_LOADED = false;
+    const ITEM_LOOKUP = {};
+
+    function normalizeItemName(value) {
+        return String(value || '')
+            .toLowerCase()
+            .trim()
+            .replace(/\u00a0/g, ' ')
+            .replace(/[\[\]{}()]/g, ' ')
+            .replace(/\s*[×xх]\s*\d+\s*$/g, '')
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
+    function registerItemLookup(name, url) {
+        const key = normalizeItemName(name);
+        if (!key || !url) return;
+        if (!ITEM_LOOKUP[key]) ITEM_LOOKUP[key] = url;
+        const compact = key.replace(/\s+/g, '');
+        if (compact && !ITEM_LOOKUP[compact]) ITEM_LOOKUP[compact] = url;
+    }
+
+    function makeItemToken(url, alt) {
+        return `[[MCITEM:${encodeURIComponent(JSON.stringify({ url, alt }))}]]`;
+    }
+
+    function materializeItemTokens(html) {
+        return String(html || '').replace(/\[\[MCITEM:([^\]]+)\]\]/g, (match, payload) => {
+            try {
+                const data = JSON.parse(decodeURIComponent(payload));
+                if (!data || !data.url) return match;
+                const safeAlt = String(data.alt || '').replace(/"/g, '&quot;');
+                return `<img class="mc-item-inline" alt="${safeAlt}" title="${safeAlt}" src="${data.url}">`;
+            } catch (e) {
+                return match;
+            }
+        });
+    }
+
+    function resolveItemUrl(itemName) {
+        if (!itemName) return null;
+        const key = normalizeItemName(itemName);
+        if (!key) return null;
+
+        if (ITEM_CACHE[key]) return ITEM_CACHE[key];
+        if (ITEM_IMG_MAP[key]) return ITEM_IMG_MAP[key];
+        if (ITEM_LOOKUP[key]) return ITEM_LOOKUP[key];
+
+        const compact = key.replace(/\s+/g, '');
+        if (ITEM_LOOKUP[compact]) return ITEM_LOOKUP[compact];
+
+        const en = RU_EN[key];
+        if (en) return makeItemUrl(en)[0];
+
+        // try stripping common Russian case endings
+        const stems = [
+            key.replace(/[ую]$/, 'а'),
+            key.replace(/[ы]$/, 'а'),
+            key.replace(/[и]$/, 'а'),
+            key.replace(/[её]$/, 'о'),
+            key.replace(/ок$/, 'ка'),
+            key.replace(/ек$/, 'ка'),
+            key.replace(/ней$/, 'ень'),
+            key.replace(/ей$/, ''),
+            key.replace(/ой$/, 'ый'),
+            key.replace(/яя$/, 'ая'),
+            key.replace(/ые$/, 'ый'),
+            key.replace(/[ы]$/, ''),
+            key.replace(/[ая]$/, '')
+        ];
+        for (const stem of stems) {
+            if (stem === key) continue;
+            if (ITEM_CACHE[stem]) return ITEM_CACHE[stem];
+            if (ITEM_IMG_MAP[stem]) return ITEM_IMG_MAP[stem];
+            if (ITEM_LOOKUP[stem]) return ITEM_LOOKUP[stem];
+            const en2 = RU_EN[stem];
+            if (en2) return makeItemUrl(en2)[0];
+        }
+
+        if (/^[a-z0-9 _-]+$/i.test(key)) {
+            return makeItemUrl(key)[0];
+        }
+
+        return null;
+    }
 
     async function loadItemImageMap() {
         try {
@@ -3057,11 +3141,13 @@
                 const key = name.toLowerCase();
                 ITEM_IMG_MAP[key] = url;
                 if (!ITEM_CACHE[key]) ITEM_CACHE[key] = url;
+                registerItemLookup(name, url);
             }
             for (const [key, url] of Object.entries(ITEM_CACHE)) {
                 if (!ITEM_IMG_MAP[key]) ITEM_IMG_MAP[key] = url;
+                registerItemLookup(key, url);
             }
-            ITEM_IMG_KEYS = Object.keys(ITEM_IMG_MAP).sort((a, b) => b.length - a.length);
+            ITEM_IMG_KEYS = Object.keys(ITEM_LOOKUP).sort((a, b) => b.length - a.length);
             ITEM_MAP_LOADED = true;
         } catch (e) {
             console.warn('Не удалось загрузить карту предметов:', e);
@@ -3076,10 +3162,10 @@
             const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             const re = new RegExp('(^|[\\s,.;:!?(){}"\'«»–—])(' + escaped + ')($|[\\s,.;:!?(){}"\'«»–—])', 'gi');
             result = result.replace(re, (match, before, item, after) => {
-                const url = ITEM_IMG_MAP[item.toLowerCase()];
+                const url = resolveItemUrl(item);
                 if (!url) return match;
                 const safe = item.replace(/"/g, '&quot;');
-                return before + '<img class="mc-item-inline" alt="' + safe + '" title="' + safe + '" src="' + url + '">' + after;
+                return before + makeItemToken(url, safe) + after;
             });
         }
         return result;
@@ -3113,43 +3199,14 @@
     }
 
     function getItemImgHtml(itemName) {
-        const key = itemName.toLowerCase().trim();
         const uq = itemName.replace(/"/g, '&quot;');
-        const cached = ITEM_CACHE[key] || ITEM_IMG_MAP[key];
-        if (cached) {
-            return `<img class="mc-item-inline" alt="${uq}" title="${uq}" src="${cached}">`;
-        }
-        const en = RU_EN[key];
-        if (!en) return itemName;
-        const urls = makeItemUrl(en);
-        return `<img class="mc-item-inline" alt="${uq}" title="${uq}" src="${urls[0]}" onerror="var u=${JSON.stringify(urls)};var i=u.indexOf(this.src);if(i>-1&&i<u.length-1)this.src=u[i+1]">`;
+        const url = resolveItemUrl(itemName);
+        if (!url) return itemName;
+        return makeItemToken(url, uq);
     }
 
     function findItem(name) {
-        if (!name) return null;
-        const key = String(name).toLowerCase().trim();
-        if (ITEM_CACHE[key]) return ITEM_CACHE[key];
-        const en = RU_EN[key];
-        if (en) return makeItemUrl(en)[0];
-        // try stripping common Russian case endings
-        const stems = [
-            key.replace(/[ую]$/, 'а'),
-            key.replace(/[ы]$/, 'а'),
-            key.replace(/[и]$/, 'а'),
-            key.replace(/[её]$/, 'о'),
-            key.replace(/ой$/, 'ый'),
-            key.replace(/яя$/, 'ая'),
-            key.replace(/ые$/, 'ый'),
-            key.replace(/[ы]$/, ''),
-            key.replace(/[ая]$/, '')
-        ];
-        for (const stem of stems) {
-            if (stem === key) continue;
-            if (ITEM_CACHE[stem]) return ITEM_CACHE[stem];
-            const en2 = RU_EN[stem];
-            if (en2) return makeItemUrl(en2)[0];
-        }
-        return null;
+        return resolveItemUrl(name);
     }
 
     function renderCraftGrid(jsonStr) {
@@ -3264,9 +3321,9 @@
                 }
             }
             content = html.replace(/<p>/g, '').replace(/<\/p>/g, '<br>');
-            content = processInlineItems(content);
+            content = materializeItemTokens(processInlineItems(content));
         } else {
-            content = processInlineItems(processPlainItemNames(escapeHtml(text)));
+            content = materializeItemTokens(processInlineItems(processPlainItemNames(escapeHtml(text))));
         }
         const iconSvg = type === 'user'
             ? '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
@@ -3370,7 +3427,7 @@
                             contentDiv.innerHTML = '';
                         }
                         fullContent += delta;
-                        contentDiv.innerHTML = processInlineItems(fullContent.replace(/\n/g, '<br>'));
+                        contentDiv.innerHTML = materializeItemTokens(processInlineItems(fullContent.replace(/\n/g, '<br>')));
                         chatMessages.scrollTop = chatMessages.scrollHeight;
                     } catch (e) {}
                 }
@@ -3401,7 +3458,7 @@
             }
         }
         html = html.replace(/<p>/g, '').replace(/<\/p>/g, '<br>');
-        html = processInlineItems(html);
+        html = materializeItemTokens(processInlineItems(html));
         html += `<div class="msg-footer">${elapsed}s</div>`;
         contentDiv.innerHTML = html;
 
