@@ -1801,13 +1801,7 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
 }
 
 .chat-model-strip {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px 6px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    background: transparent;
-    flex-wrap: wrap;
+    display: none;
 }
 
 .chat-model-label {
@@ -1891,22 +1885,6 @@ audio::-webkit-media-controls-timeline::-webkit-media-controls-timeline-thumb {
 @media (max-width: 768px) {
     .chat-container {
         height: 350px;
-    }
-
-    .chat-model-strip {
-        gap: 6px;
-        padding: 6px 10px 4px;
-    }
-
-    .chat-model-label {
-        font-size: 0.58rem;
-    }
-
-    .chat-model-select {
-        width: 100%;
-        flex-basis: 100%;
-        font-size: 0.68rem;
-        padding: 7px 9px;
     }
 
     .chat-message {
