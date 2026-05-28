@@ -49,19 +49,6 @@
                     <textarea id="chat-input" class="chat-input" rows="2" placeholder="Введи вопрос о Minecraft..."></textarea>
                     <button id="chat-send" class="chat-send-btn"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="m22 2-11 11"/></svg></button>
                 </div>
-                <div id="chat-model-modal" class="chat-model-modal" aria-hidden="true">
-                    <div class="chat-model-modal-backdrop" data-chat-model-close></div>
-                    <div class="chat-model-modal-panel" role="dialog" aria-modal="true" aria-label="Выбор модели">
-                        <div class="chat-model-modal-header">
-                            <div>
-                                <div class="chat-model-modal-title">Выбор модели</div>
-                                <div class="chat-model-modal-subtitle">Команда <span>/model</span> без параметров тоже открывает это меню</div>
-                            </div>
-                            <button class="chat-model-modal-close" type="button" data-chat-model-close aria-label="Закрыть">Закрыть</button>
-                        </div>
-                        <div id="chat-model-list" class="chat-model-list"></div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -1853,7 +1840,7 @@
         <p>© 2026 Minecraft World | Неофициальный фанатский сайт</p>
         <p>🌲 Добывай блоки, строй замки, побеждай дракона! 🐉</p>
         <p><a onclick="scrollToTop()">Вверх ▲</a></p>
-        <span class="footer-version">v0.9.89</span>
+        <span class="footer-version">v0.9.81</span>
     </div>
 </div>
 
@@ -2355,86 +2342,13 @@
     // ===== AI ЧАТ =====
     const CHAT_API_KEY = '__OPENROUTER_API_KEY__';
     const CHAT_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions';
-    const CHAT_MODEL_DEFAULT = 'openai/gpt-oss-120b:free';
-    const CHAT_MODEL_STORAGE_KEY = 'mineworld.chatModel';
-    const CHAT_MODELS = [
-        'nvidia/nemotron-3-super-120b-a12b:free',
-        'poolside/laguna-m.1:free',
-        'openai/gpt-oss-120b:free',
-        'z-ai/glm-4.5-air:free',
-        'deepseek/deepseek-v4-flash:free',
-        'arcee-ai/trinity-large-thinking:free',
-        'poolside/laguna-xs.2:free',
-        'nvidia/nemotron-3-nano-30b-a3b:free',
-        'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free',
-        'qwen/qwen3-next-80b-a3b-instruct:free',
-        'qwen/qwen3-coder:free',
-        'openrouter/free'
-    ];
-    let CHAT_MODEL = CHAT_MODEL_DEFAULT;
+    const CHAT_MODEL = 'openai/gpt-oss-120b:free';
     const chatMessages = document.getElementById('chat-messages');
     const chatInput = document.getElementById('chat-input');
     const chatSendBtn = document.getElementById('chat-send');
-    const chatModelModal = document.getElementById('chat-model-modal');
-    const chatModelList = document.getElementById('chat-model-list');
     let chatHistory = [
         { role: 'system', content: 'Ты дружелюбный ИИ-помощник по игре Minecraft. Отвечай на русском языке, кратко и по делу. Помогай с крафтами, мобами, биомами, строительством, редстоуном и всем что связано с Minecraft.\n\nВАЖНО: Используй спецсинтаксис для показа предметов:\n1. [название] — иконка в тексте. Пример: "Возьми [алмаз] и [палка]".\n2. <craft>{"r":"Результат","c":1,"g":["яч1","яч2","яч3","яч4","яч5","яч6","яч7","яч8","яч9"]}</craft> — сетка крафта 3×3 (9 ячеек, строка за строкой). Пустая ячейка = "".\n\nВАЖНО: Ключи JSON пиши ТОЛЬКО ЛАТИНИЦЕЙ (r, c, g), НЕ кириллицей. Внутри <craft> не сокращай предметы. Пиши либо полные русские названия, либо английские item IDs вроде gold_nugget, carrot, iron_ingot, stick, flint, oak_planks, cobblestone, gold_ingot. Нельзя писать обрезки вроде "зол", "мор", "жел", "крем", "пал".\n\nНазвания предметов в обычном тексте — ТОЛЬКО по-русски и ТОЧНО: булыжник, алмаз, палка, доски, железный слиток, золотой слиток, красная пыль, камень, обсидиан, уголь, стекло, песок, шерсть, кирпич, сундук, факел, редстоун, верстак, печь, кремень, огниво, железо, золото, дерево, плита, ступеньки, забор, нить, книга, бумага, кожа, кость, перо, пшеница, хлеб, сахар, яйцо, молоко, торт, арбуз, тыква, тростник, кактус, морковь, картофель, яблоко, мясо, рыба, слизь, изумруд, кварц, лазурит, незерит.\n\nПримеры:\nПечь (8 булыжника кольцом): <craft>{"r":"Печь","c":1,"g":["булыжник","булыжник","булыжник","булыжник","","булыжник","булыжник","булыжник","булыжник"]}</craft>\nВерстак (4 доски): <craft>{"r":"Верстак","c":1,"g":["доски","доски","","доски","доски","","","",""]}</craft>\nАлмазный меч: <craft>{"r":"Алмазный меч","c":1,"g":["","алмаз","","","алмаз","","","палка",""]}</craft>\nКаменная кирка: <craft>{"r":"Каменная кирка","c":1,"g":["булыжник","булыжник","булыжник","","палка","","","палка",""]}</craft>\nЗолотая морковь: <craft>{"r":"Золотая морковь","c":1,"g":["gold_nugget","gold_nugget","gold_nugget","gold_nugget","carrot","gold_nugget","gold_nugget","gold_nugget","gold_nugget"]}</craft>\nОгниво: <craft>{"r":"Огниво","c":1,"g":["","flint","","","iron_ingot","","","",""]}</craft>' }
     ];
-
-    function setChatModel(model, { persist = true, allowCustom = false } = {}) {
-        const nextModel = allowCustom || CHAT_MODELS.includes(model) ? model : CHAT_MODEL_DEFAULT;
-        CHAT_MODEL = nextModel;
-        if (persist && CHAT_MODELS.includes(nextModel)) {
-            try {
-                localStorage.setItem(CHAT_MODEL_STORAGE_KEY, nextModel);
-            } catch (e) {}
-        }
-    }
-
-    function renderChatModelList() {
-        if (!chatModelList) return;
-        chatModelList.innerHTML = '';
-        CHAT_MODELS.forEach((model) => {
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'chat-model-item' + (model === CHAT_MODEL ? ' active' : '');
-            btn.dataset.model = model;
-            btn.innerHTML = `<span class="chat-model-item-name">${model}</span>${model === CHAT_MODEL ? '<span class="chat-model-item-check">Текущая</span>' : ''}`;
-            btn.addEventListener('click', () => {
-                setChatModel(model);
-                closeChatModelModal();
-                addMessage(`Модель сменена на: ${CHAT_MODEL}`, 'ai');
-            });
-            chatModelList.appendChild(btn);
-        });
-    }
-
-    function openChatModelModal() {
-        if (!chatModelModal) return;
-        renderChatModelList();
-        chatModelModal.classList.add('active');
-        chatModelModal.setAttribute('aria-hidden', 'false');
-    }
-
-    function closeChatModelModal() {
-        if (!chatModelModal) return;
-        chatModelModal.classList.remove('active');
-        chatModelModal.setAttribute('aria-hidden', 'true');
-    }
-
-    function initChatModelSelect() {
-        let storedModel = CHAT_MODEL_DEFAULT;
-        try {
-            const savedModel = localStorage.getItem(CHAT_MODEL_STORAGE_KEY);
-            if (savedModel && CHAT_MODELS.includes(savedModel)) {
-                storedModel = savedModel;
-            }
-        } catch (e) {}
-        setChatModel(storedModel, { persist: false });
-        renderChatModelList();
-    }
-
-    initChatModelSelect();
 
     // ===== Minecraft предметы (для кастомных смайликов и крафтов) =====
     // === Static URL cache (pre-verified working URLs) ===
@@ -3514,17 +3428,8 @@
 
         // === /model command ===
         const modelMatch = text.match(/^\/model\s+(.+)/);
-        const modelOnly = text.match(/^\/model\s*$/i);
-        if (modelOnly) {
-            isSending = false;
-            chatInput.value = '';
-            chatInput.style.height = 'auto';
-            openChatModelModal();
-            chatInput.focus();
-            return;
-        }
         if (modelMatch) {
-            setChatModel(modelMatch[1].trim(), { persist: false, allowCustom: true });
+            CHAT_MODEL = modelMatch[1].trim();
             addMessage(`Модель сменена на: ${CHAT_MODEL}`, 'ai');
             isSending = false;
             chatInput.focus();
@@ -3652,19 +3557,6 @@
     chatInput.addEventListener('input', () => {
         chatInput.style.height = 'auto';
         chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + 'px';
-    });
-    if (chatModelModal) {
-        chatModelModal.addEventListener('click', (e) => {
-            const closer = e.target && e.target.closest ? e.target.closest('[data-chat-model-close]') : null;
-            if (closer) {
-                closeChatModelModal();
-            }
-        });
-    }
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && chatModelModal && chatModelModal.classList.contains('active')) {
-            closeChatModelModal();
-        }
     });
 </script>
 </body>
